@@ -28,6 +28,17 @@ git rm <filename> ： 删除文件
 git rm --cache <filename> : 删除暂存区文件
 git commit -m'explain' ： 添加某个文件到版本库 后面是注释信息
 git commit -u ： 添加所有未提交的文件到版本库
+git commit -am"explain": 产生的内容不存入暂存区，直接提交到commit中去。不推荐使用
 git reset <filename>： 删除暂存区的文件，   git  add 相反操作
 *** git reset --hard :  git暂存区中所有的改动都会被清理到
+
+git branch -av : 可以查看当前工作在那个分支下面，个人文件一般都是 master 分支
+git checkout <name> : 切换到某个分支
 ```
+
+### git中 comit  tree   blob 的关系
+![commit/tree/blob关系图](../resoucec/imgs/git04.png)
+- 一个commit代表一柯树，表示此刻文件的所有快照
+- 树中也可以包含其他树结构
+- 树中也包含了 blob（就是具体的文件）
+- blob 和文件名无关，相同的内容是同一个blob
