@@ -1,8 +1,8 @@
 # mybook
-学习笔记电子书，是用 Gitbook 的来整理，
+学习笔记电子书，是用 Gitbook 的来整理
 
 ### gitbook 使用流程
-```js
+```shell
 安装  
 yarn global add gitbook-cli
 

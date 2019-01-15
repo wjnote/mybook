@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>design-mode · wujun's Note</title>
+        <title>window进程查询 · wujun's Note</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -67,10 +67,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="观察者模式.html" />
     
-    
-    <link rel="prev" href="../" />
+    <link rel="prev" href="git学习资料.html" />
     
 
     
@@ -128,9 +126,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2" data-path="./">
+        <li class="chapter " data-level="1.2" data-path="../designmode/">
             
-                <a href="./">
+                <a href="../designmode/">
             
                     
                     design-mode
@@ -142,9 +140,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="观察者模式.html">
+        <li class="chapter " data-level="1.2.1" data-path="../designmode/观察者模式.html">
             
-                <a href="观察者模式.html">
+                <a href="../designmode/观察者模式.html">
             
                     
                     观察者模式
@@ -160,9 +158,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="../accumulation/">
+        <li class="chapter " data-level="1.3" data-path="./">
             
-                <a href="../accumulation/">
+                <a href="./">
             
                     
                     accumulation
@@ -174,9 +172,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="../accumulation/git学习资料.html">
+        <li class="chapter " data-level="1.3.1" data-path="git学习资料.html">
             
-                <a href="../accumulation/git学习资料.html">
+                <a href="git学习资料.html">
             
                     
                     git
@@ -187,9 +185,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="../accumulation/windowport.html">
+        <li class="chapter active" data-level="1.3.2" data-path="windowport.html">
             
-                <a href="../accumulation/windowport.html">
+                <a href="windowport.html">
             
                     
                     window进程查询
@@ -235,7 +233,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >design-mode</a>
+        <a href=".." >window进程查询</a>
     </h1>
 </div>
 
@@ -250,7 +248,19 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#design-mode"><b>1. </b>design-mode</a></li></ul></div><a href="#design-mode" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="design-mode"><a name="design-mode" class="anchor-navigation-ex-anchor" href="#design-mode"><i class="fa fa-link" aria-hidden="true"></i></a>1. design-mode</h1>
+                                <h3 id="window&#x8FDB;&#x7A0B;&#x67E5;&#x8BE2;"><a name="window&#x8FDB;&#x7A0B;&#x67E5;&#x8BE2;" class="anchor-navigation-ex-anchor" href="#window&#x8FDB;&#x7A0B;&#x67E5;&#x8BE2;"><i class="fa fa-link" aria-hidden="true"></i></a><a name="window&#x8FDB;&#x7A0B;&#x67E5;&#x8BE2;" class="plugin-anchor" href="#window&#x8FDB;&#x7A0B;&#x67E5;&#x8BE2;"><i class="fa fa-link" aria-hidden="true"></i></a>window&#x8FDB;&#x7A0B;&#x67E5;&#x8BE2;</h3>
+<p>&#x5728;&#x65E5;&#x5E38;&#x5DE5;&#x4F5C;&#x4E2D;&#xFF0C;&#x7ECF;&#x5E38;&#x4F1A;&#x78B0;&#x5230;&#x542F;&#x52A8;&#x67D0;&#x4E2A;&#x5E94;&#x7528;&#x65F6;&#xFF0C;&#x63D0;&#x793A;xxx&#x7AEF;&#x53E3;&#x5DF2;&#x7ECF;&#x5E76;&#x5360;&#x7528;&#xFF0C;&#x5BFC;&#x81F4;&#x5F53;&#x524D;&#x5E94;&#x7528;&#x65E0;&#x6CD5;&#x6B63;&#x5E38;&#x542F;&#x52A8;&#x3002; &#x5982;&#x4F55;&#x627E;&#x5230;&#x5360;&#x7528;&#x7279;&#x5B9A;&#x7AEF;&#x53E3;&#x7684;&#x5E94;&#x7528;&#x5E76;&#x5C06;&#x5176;&#x91CA;&#x653E;&#x5462;&#xFF1F;</p>
+<ol>
+<li>&#x67E5;&#x627E;&#x5F53;&#x524D;&#x7CFB;&#x7EDF;&#x7684;&#x7AEF;&#x53E3;&#x4F7F;&#x7528;&#x60C5;&#x51B5; <code>netstat -ano</code>
+<img src="../resouce/imgs/windowport.png" alt="&#x67E5;&#x770B;&#x7AEF;&#x53E3;&#x4F7F;&#x7528;"></li>
+<li>&#x663E;&#x793A;&#x592A;&#x591A;&#x7684;&#x8BDD;&#x8FD8;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x67D0;&#x4E00;&#x4E2A;&#x5177;&#x4F53;&#x7684;&#x7AEF;&#x53E3; <code>netstat -ano | findstr xxx</code> &#x6362;&#x4F4D;&#x4F60;&#x8981;&#x67E5;&#x8BE2;&#x7684;&#x7AEF;&#x53E3;&#x53F7;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x662F;&#x90A3;&#x4E2A;&#x7A0B;&#x5E8F;&#x5728;&#x5360;&#x7528;&#x7AEF;&#x53E3;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x672B;&#x5C3E;&#x7684; PID  &#x503C;&#x3002;&#x5728; &#x4EFB;&#x52A1;&#x7BA1;&#x7406;&#x5668; =&#x300B; &#x8BE6;&#x7EC6;&#x4FE1;&#x606F;&#x4E2D; &#x67E5;&#x770B;&#x5BF9;&#x5E94;&#x7684;&#x7A0B;&#x5E8F;&#xFF0C;&#x4EE5;&#x53CA;&#x505C;&#x6B62;&#x7A0B;&#x5E8F;
+<img src="../resouce/imgs/windowport01.png" alt="&#x67E5;&#x770B;&#x5177;&#x4F53;&#x7AEF;&#x53E3;&#x4F7F;&#x7528;"></li>
+<li>&#x4E0A;&#x9762;&#x53EA;&#x662F;&#x67E5;&#x8BE2;&#x4E86;&#x7AEF;&#x53E3;&#x5BF9;&#x5E94;&#x7684;&#x7A0B;&#x5E8F; PID &#x4FE1;&#x606F;&#xFF0C;&#x6267;&#x884C; <code>tasklist | findstr PID</code> &#x53EF;&#x4EE5;&#x67E5;&#x8BE2;&#x662F;&#x90A3;&#x4E2A;&#x6267;&#x884C;&#x7A0B;&#x5E8F;
+<img src="../resouce/imgs/windowport02.png" alt="&#x67E5;&#x770B;&#x5177;&#x4F53;&#x7AEF;&#x53E3;&#x4F7F;&#x7528;&#x7A0B;&#x5E8F;"></li>
+<li>&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x5230;&#x4EFB;&#x52A1;&#x7BA1;&#x7406;&#x5668;&#x4E2D;&#x505C;&#x6B62;&#x7A0B;&#x5E8F;&#x6216;&#x8005;&#x4F7F;&#x7528;&#x547D;&#x4EE4;&#x505C;&#x6B62;&#x7A0B;&#x5E8F; <code>taskkill /f /t /im &quot;name&quot;</code> &#x540E;&#x9762; name &#x6839;&#x636E;&#x4E0A;&#x9762;&#x67E5;&#x8BE2;&#x51FA;&#x6765;&#x7684;&#x7A0B;&#x5E8F;&#x6765;&#x6D88;&#x9664;&#xFF0C;&#x4E0B;&#x9762;&#x4F8B;&#x5B50;&#x662F;&#x5220;&#x9664; &#x4E16;&#x754C;&#x4E4B;&#x7A97;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x6D4B;&#x8BD5;
+<img src="../resouce/imgs/windowport03.png" alt="&#x5173;&#x95ED;&#x8FDB;&#x7A0B;"></li>
+<li>&#x7136;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x542F;&#x52A8;&#x81EA;&#x5DF1;&#x7684;&#x7A0B;&#x5E8F;&#x4E86;&#x3002;</li>
+</ol>
 
                                 
                                 </section>
@@ -278,14 +288,10 @@
 
             
                 
-                <a href="../" class="navigation navigation-prev " aria-label="Previous page: Introduction">
+                <a href="git学习资料.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: git">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="观察者模式.html" class="navigation navigation-next " aria-label="Next page: 观察者模式">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -294,7 +300,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"design-mode","level":"1.2","depth":1,"next":{"title":"观察者模式","level":"1.2.1","depth":2,"path":"designmode/观察者模式.md","ref":"designmode/观察者模式.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","splitter","expandable-chapters-small","anchors","github","github-buttons","sharing-plus","anchor-navigation-ex","favicon","livereload"],"styles":{"website":"./resouce/style/normalize.8.0.1.css"},"pluginsConfig":{"github":{"url":"https://github.com/wjnote"},"livereload":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"favicon":{},"github-buttons":{"buttons":[{"user":"wjnote","repo":"mybook","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"sharing":{"qq":false,"all":["google","facebook","weibo","twitter","qq","qzone","linkedin","pocket"],"douban":false,"facebook":false,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":false,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","author":"wujun","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"wujun's Note","language":"zh-hans","links":{},"gitbook":"3.2.3","description":"select * from learn"},"file":{"path":"designmode/README.md","mtime":"2019-01-11T03:23:56.818Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-15T03:16:25.540Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"window进程查询","level":"1.3.2","depth":2,"previous":{"title":"git","level":"1.3.1","depth":2,"path":"accumulation/git学习资料.md","ref":"accumulation/git学习资料.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","splitter","expandable-chapters-small","anchors","github","github-buttons","sharing-plus","anchor-navigation-ex","favicon","livereload"],"styles":{"website":"./resouce/style/normalize.8.0.1.css"},"pluginsConfig":{"github":{"url":"https://github.com/wjnote"},"livereload":{},"splitter":{},"search":{},"sharing-plus":{"qq":false,"all":["facebook","google","twitter","instapaper","linkedin","pocket","stumbleupon"],"douban":false,"facebook":true,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":true,"messenger":false,"line":false,"vk":false,"pocket":true,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"favicon":{},"github-buttons":{"buttons":[{"user":"wjnote","repo":"mybook","type":"star","size":"small","count":true}]},"expandable-chapters-small":{},"sharing":{"qq":false,"all":["google","facebook","weibo","twitter","qq","qzone","linkedin","pocket"],"douban":false,"facebook":false,"weibo":false,"instapaper":false,"whatsapp":false,"hatenaBookmark":false,"twitter":false,"messenger":false,"line":false,"vk":false,"pocket":false,"google":false,"viber":false,"stumbleupon":false,"qzone":false,"linkedin":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","author":"wujun","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"wujun's Note","language":"zh-hans","links":{},"gitbook":"3.2.3","description":"select * from learn"},"file":{"path":"accumulation/windowport.md","mtime":"2019-01-15T03:14:45.858Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-01-15T03:16:25.540Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
