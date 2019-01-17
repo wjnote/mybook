@@ -37,8 +37,11 @@ git checkout <name> : 切换到某个分支
 ```
 
 ### git中 comit  tree   blob 的关系
-![commit/tree/blob关系图](../resoucec/imgs/git04.png)
+![commit/tree/blob关系图](../resouce/imgs/git04.png)
 - 一个commit代表一柯树，表示此刻文件的所有快照
 - 树中也可以包含其他树结构
 - 树中也包含了 blob（就是具体的文件）
 - blob 和文件名无关，相同的内容是同一个blob
+
+
+### 理解其中分支的概念和运行在分支上的作用
