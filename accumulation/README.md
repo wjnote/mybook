@@ -10,9 +10,13 @@
 3. 点击左上角录制按钮（实心圆状）
 4. 在页面上进行正常操作
 5. 一段时间后，点击 stop 看面板上的数据
-![Memory](../../resouce/imgs/Memory.png)
+![Memory](../resouce/imgs/Memory.png)
 6. 如果是像上面这样平稳的，就表示内存没有泄漏，如果是像下面这样就是内存泄漏
-![Memory](../../resouce/imgs/Memory01.png)
+![Memory](../resouce/imgs/Memory01.png)
 7. 下方内存图点击对应的内存异常处，然后点击下方面板内的Event Log面板，可以查看代码内具体发生了什么，来接触引用
-![Memory](../../resouce/imgs/Memory02.png)
+![Memory](../resouce/imgs/Memory02.png)
 
+
+
+
+1. 每当打开一个页面的时候就会产生一个session，

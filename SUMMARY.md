@@ -6,4 +6,7 @@
 * [accumulation](accumulation/README.md)
     * [git](accumulation/git学习资料.md)
     * [window进程查询](accumulation/windowport.md)
+    * [网页加载优化](accumulation/加载优化.md)
+* [node](node/README.md)
+    * [node测试](node/test.md)
 
