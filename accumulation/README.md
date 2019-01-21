@@ -17,6 +17,6 @@
 ![Memory](../resouce/imgs/Memory02.png)
 
 
-
-
-1. 每当打开一个页面的时候就会产生一个session，
+#### 在项目中写css的时候需要注意的两个点
+1. padding-top、margin-top、padding-bottom、margin-bottom取值为百分比时，是相对于父元素的宽度。
+2. position:fixed，相对于浏览器窗口定位。例外：父代元素中，有元素设置了transform，则postion:fixed相对于设置了transform的父元素定位。
