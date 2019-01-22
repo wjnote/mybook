@@ -1,4 +1,5 @@
 # Summary
+
 * [Introduction](README.md)
 * [design-mode](designmode/README.md)
     * [观察者模式](designmode/观察者模式.md)
@@ -10,3 +11,6 @@
     * [node测试](node/test.md)
 * [webpack](webpack/README.md)
     * [webpack-dev-server](webpack/dev.server.md)
+* [ES 6](es6/README.md)
+    * [notice](es6/notice.md)
+

@@ -1,5 +1,3 @@
-# accumulation
-
 ## 平常工作中的积累
 
 **内存泄漏**：指程序中己动态分配的堆内存由于某种原因程序未释放或无法释放，造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。
@@ -10,9 +8,13 @@
 3. 点击左上角录制按钮（实心圆状）
 4. 在页面上进行正常操作
 5. 一段时间后，点击 stop 看面板上的数据
-![Memory](../../resouce/imgs/Memory.png)
+![Memory](../resouce/imgs/Memory.png)
 6. 如果是像上面这样平稳的，就表示内存没有泄漏，如果是像下面这样就是内存泄漏
-![Memory](../../resouce/imgs/Memory01.png)
+![Memory](../resouce/imgs/Memory01.png)
 7. 下方内存图点击对应的内存异常处，然后点击下方面板内的Event Log面板，可以查看代码内具体发生了什么，来接触引用
-![Memory](../../resouce/imgs/Memory02.png)
+![Memory](../resouce/imgs/Memory02.png)
 
+
+#### 在项目中写css的时候需要注意的两个点
+1. padding-top、margin-top、padding-bottom、margin-bottom取值为百分比时，是相对于父元素的宽度。
+2. position:fixed，相对于浏览器窗口定位。例外：父代元素中，有元素设置了transform，则postion:fixed相对于设置了transform的父元素定位。
