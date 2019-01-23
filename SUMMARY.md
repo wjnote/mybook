@@ -13,4 +13,5 @@
     * [webpack-dev-server](webpack/dev.server.md)
 * [ES 6](es6/README.md)
     * [notice](es6/notice.md)
+    * [模块加载](es6/moduleupload.md)
 
