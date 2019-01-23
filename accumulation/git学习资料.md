@@ -22,18 +22,22 @@ $ git config --list --global
 ```shell
 git init ： 初始化 git 项目，然后就需要配置最小的配置参数
 git status ： 当前文件的 git 状态
-git log ： 展示git的日志
+git log --oneline： 展示git的日志
 git add <filename> ： 添加文件到暂存区
 git rm <filename> ： 删除文件
 git rm --cache <filename> : 删除暂存区文件
 git commit -m'explain' ： 添加某个文件到版本库 后面是注释信息
-git commit -u ： 添加所有未提交的文件到版本库
+git commit -a ： 添加所有未提交的文件到版本库
 git commit -am"explain": 产生的内容不存入暂存区，直接提交到commit中去。不推荐使用
 git reset <filename>： 删除暂存区的文件，   git  add 相反操作
 *** git reset --hard :  git暂存区中所有的改动都会被清理到
 
-git branch -av : 可以查看当前工作在那个分支下面，个人文件一般都是 master 分支
+分支信息
+git branch -a : 可以查看当前工作在那个分支下面，个人文件一般都是 master 分支
+git branch -v  可以查看当前各个分支的状态，也可以查看当前工作在那个分支下
 git checkout <name> : 切换到某个分支
+git log --oneline --decorate  可以查看各个分支当前所指的对象
+git log --oneline --decorate --graph --all  输出你的提交历史、各个分支的指向以及项目的分支分叉情况。
 ```
 
 ### git中 comit  tree   blob 的关系
