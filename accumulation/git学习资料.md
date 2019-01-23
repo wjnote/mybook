@@ -24,10 +24,14 @@ git init ： 初始化 git 项目，然后就需要配置最小的配置参数
 git status ： 当前文件的 git 状态
 git log ： 展示git的日志
 git add <filename> ： 添加文件到暂存区
+git add -A  添加所有未添加的文件到暂存区
 git rm <filename> ： 删除文件
 git rm --cache <filename> : 删除暂存区文件
 git commit -m'explain' ： 添加某个文件到版本库 后面是注释信息
 git commit -u ： 添加所有未提交的文件到版本库
 git reset <filename>： 删除暂存区的文件，   git  add 相反操作
 *** git reset --hard :  git暂存区中所有的改动都会被清理到
+
+git branch name  创建一个分支
+git branch -a  可以查看所有的分支名字和当前工作的分支
 ```
