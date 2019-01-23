@@ -1,2 +1,3 @@
 ﻿# Ignore build files
 node_modules/
+_book/
