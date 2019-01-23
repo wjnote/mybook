@@ -137,7 +137,19 @@ setTimeout(()=> console.log(foo), 500);
 ### Node加载
 Node 对 ES6 模块的处理比较麻烦，因为它有自己的 CommonJS 模块格式，与 ES6 模块格式是不兼容的。目前的解决方案是，将两者分开，ES6 模块和 CommonJS 采用各自的加载方案，关键字**require 与 exports**。**一个模块首先要判断是 CommonJS模块还是 ES6 模块，加载方式就不同，暴露接口的方式也不同**。
 
-node中的exports和module.exports的区别一句话概括就是：require方法能看到的只有module.exports这个对象，它是看不到exports对象的，而我们写模块的时候用到的exports对象实际上只是对module.exports的引用，exports和module.exports都属于Object类型，属于引用类型
+node中的exports和module.exports的区别一句话概括就是：require方法能看到的只有module.exports这个对象，它是看不到exports对象的，而我们写模块的时候用到的exports对象实际上只是对module.exports的引用，exports和module.exports都属于Object类型，属于引用类型，在node中，module.exports初始的设置为{},exports也指向这个对象。
+```js
+// 下面两种写法是一样的
+exports.name = function(){}
+
+module.exports.name = function(){} 
+
+// 这个funtion是一块新的内存地址，导致exports和module.exports不存在关系
+// 而require这个对象只能看到 module.exports这个对象，导致导不出去对象
+exports = function(){}
+
+module.exports = function(){}   // 这样就是正确的
+```
 
 > Node 要求 ES6 模块采用.mjs后缀文件名。也就是说，只要脚本文件里面使用import或者export命令，那么就必须采用.mjs后缀名。require命令不能加载.mjs文件，会报错，只有import命令才可以加载.mjs文件。反过来，.mjs文件里面也不能使用require命令，必须使用import。
 
