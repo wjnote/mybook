@@ -50,4 +50,5 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
 * [ES 6](es6/README.md)
     * [notice](es6/notice.md)
     * [模块加载](es6/moduleupload.md)
+    
 
