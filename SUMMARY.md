@@ -4,6 +4,7 @@
 * [design-mode](designmode/README.md)
     * [观察者模式](designmode/观察者模式.md)
 * [accumulation](accumulation/README.md)
+    * [深拷贝](accumulation/deepclone.md)
     * [git](accumulation/git学习资料.md)
     * [window进程查询](accumulation/windowport.md)
     * [网页加载优化](accumulation/加载优化.md)
@@ -18,4 +19,3 @@
     * [mobile适配](mobile/mobileAdaptive.md)
     * [mobile-1px](mobile/mobile1px.md)
     * [css-learn](mobile/csslearn.md)
-

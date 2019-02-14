@@ -1,7 +1,7 @@
 ## 主要是ES6 开发中记录的一些点
-对象的扩展运算符（...），ES2018将这个运算符引入了对象
+对象的扩展运算符（...），ES2018 将这个运算符引入了对象。
 
-### 扩展运算符作为解构复制 用法
+### 扩展运算符作为解构赋值 用法
 **对象的解构赋值用于从一个对象取值，相当于将目标对象自身的所有可遍历的（enumerable）、但尚未被读取的属性，分配到指定的对象上面。所有的键和它们的值，都会拷贝到新对象上面。扩展运算符一般在等号左边**
 ```js
 let {x, y, ...z} = {x:1,y:2,c:3,d:4}
@@ -89,4 +89,28 @@ a = list[0] ,rest = list.slice(1)
 const [first, ...rest] = [] 
 first // undefined
 res // []
+```
+
+### Object.assign 多个对象合并
+- Object.assign 是浅拷贝，应用类型的值，拷贝的是它的引用
+- 可以拷贝 Symbol 属性
+- 不能拷贝不可枚举的属性
+- Object.assign保证第一个参数是对象，如果是基本类型会转换为基本包装类型，null/undefined没有基本包装类型就会报错
+- 使用等号赋值，如果被赋值的对象的属性有setter函数会触发setter函数,同理如果有getter函数,也会调用赋值对象的属性的getter函数(这就是为什么Object.assign无法合并对象属性的访问器,因为它会直接执行对应的getter/setter函数而不是合并它们,如果需要合并对象属性的getter/setter函数,可以使用ES7提供的Object.getOwnPropertyDescriptors和Object.defineProperties这2个API实现)
+
+> 需要特别注意的一点是，第一个参数如果是字符串，内部会转换为基本包装类型，而字符串基本包装类型的属性是只读的，不能修改 `Object.assign('abc','cfs')` 这样就会报错
+
+#### `Object.assign()` 函数会触发 setters，而展开运算符不会，但是并不是所有都能替换assign函数，有时会不能得到想要的结果
+```js
+// 需求是实现对象的合并
+var obj1 = { foo: 'bar', x: 42 };
+var obj2 = { foo: 'baz', y: 13 };
+const merge = ( ...objects ) => ( { ...objects } );
+
+var mergedObj = merge ( obj1, obj2);
+// { 0: { foo: 'bar', x: 42 }, 1: { foo: 'baz', y: 13 } }
+
+var mergedObj = merge ( {}, obj1, obj2);
+// { 0: {}, 1: { foo: 'bar', x: 42 }, 2: { foo: 'baz', y: 13 } }
+
 ```

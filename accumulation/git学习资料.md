@@ -24,10 +24,10 @@ git add <filename> ： 开始跟踪一个文件(使用文件或目录的路径�
 git status ： 当前文件的 git 状态
 git log --oneline： 展示git的日志
 git rm <filename> ： 删除文件
-git rm --cache <filename> : 删除暂存区文件
+git rm --cached <filename> : 删除暂存区文件,但是保留在当前工作目录中,并且git之后都不再跟踪该文件(和 .gitignore作用一样)
 git commit -m'explain' ： 添加某个文件到版本库 后面是注释信息
 git commit -a ： 添加所有未提交的文件到版本库
-git commit -am"explain": 产生的内容不存入暂存区，直接提交到commit中去。不推荐使用
+git commit -a -m"explain": 产生的内容不存入暂存区，直接提交到commit中去。不推荐使用
 git reset <filename>： 删除暂存区的文件，   git  add 相反操作
 *** git reset --hard :  git暂存区中所有的改动都会被清理到
 

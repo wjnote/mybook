@@ -37,9 +37,12 @@ gitbook build
 GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和本地，全局安装命令： `npm install plugin_name` 本地安装则可以使用 GitBook 自带的命令 `gitbook install` 完成，将自动安装 book.json 中所配置的插件，不需要任何参数，默认的安装目录是文档目录下的 ./node_modules/ 目录。
 
 ### 文件列表
+
+* [Introduction](README.md)
 * [design-mode](designmode/README.md)
     * [观察者模式](designmode/观察者模式.md)
 * [accumulation](accumulation/README.md)
+    * [深拷贝](accumulation/deepclone.md)
     * [git](accumulation/git学习资料.md)
     * [window进程查询](accumulation/windowport.md)
     * [网页加载优化](accumulation/加载优化.md)
@@ -50,5 +53,7 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
 * [ES 6](es6/README.md)
     * [notice](es6/notice.md)
     * [模块加载](es6/moduleupload.md)
-    
-
+* [mobile](mobile/README.md)
+    * [mobile适配](mobile/mobileAdaptive.md)
+    * [mobile-1px](mobile/mobile1px.md)
+    * [css-learn](mobile/csslearn.md)
