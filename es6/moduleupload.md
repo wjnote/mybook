@@ -89,10 +89,13 @@ const mymodule = require(path)
 
 ### ES6 模块和CommonJS 模块的差异
 ES6 模块与 CommonJS 模块完全不同。
-1. CommonJS模块加载输出的是一个值的拷贝，ES6模块输出的是值的引用
-2. CommonJS模块是运行时加载，ES6模块是编译时输出接口
-3. ES6 模块和CommonJS模块的运行机制不一样，ES6模块中JS引擎遇到import命令，就会生成一个只读引用，等到脚本执行了再去引用值，不会存在缓存行为，而CommonJS模块是会缓存基本类型的值
+
+1. CommonJS 模块加载输出的是一个值的拷贝，ES6模块输出的是值的引用
+2. CommonJS 模块是运行时加载，ES6模块是编译时输出接口
+3. ES6 模块和 CommonJS 模块的运行机制不一样，ES6模块中JS引擎遇到import命令，就会生成一个只读引用，等到脚本执行了再去引用值，不会存在缓存行为，而CommonJS模块是会缓存基本类型的值
 4. export 导出的是同一个值，不同的脚本加载这个接口，得到的都是同一个实例，一个脚本改变了这个实例，在另一个脚本加载的就是改变后的实例了。
+5. CommonJS 支持动态导入，也就是 `require(${path}/xx.js)`，后者目前不支持，但是已有提案
+6. CommonJS 是同步导入，因为用于服务端，文件都在本地，同步导入即使卡住主线程影响也不大。而后者是异步导入，因为用于浏览器，需要下载文件，如果也采用同步导入会对渲染有很大影响
 
 **第二个差异是因为 CommonJS 加载的是一个对象(即module.exports属性)**，require 命令第一次执行的时候就会执行整个脚本，然后在内存中生成一个对象,而ES6模块不是对象，它的对外接口只是一种静态定义，在代码静态解析阶段就会生成
 ```js
@@ -150,7 +153,7 @@ setTimeout(()=> console.log(foo), 500);
 ### Node加载(Node使用了CommonJS 规范)
 Node 对 ES6 模块的处理比较麻烦，因为它有自己的 CommonJS 模块格式，与 ES6 模块格式是不兼容的。目前的解决方案是，将两者分开，ES6 模块和 CommonJS 采用各自的加载方案，**关键字require 与 exports**。**一个模块首先要判断是 CommonJS模块还是 ES6 模块，加载方式就不同，暴露接口的方式也不同**。
 
-node中的exports和module.exports的区别一句话概括就是：require方法能看到的只有module.exports这个对象，它是看不到exports对象的，而我们写模块的时候用到的exports对象实际上只是对module.exports的引用，exports和module.exports都属于Object类型，属于引用类型，在node中，module.exports初始的设置为{},exports也指向这个对象。
+node中的exports和module.exports的区别一句话概括就是：**require方法能看到的只有module.exports这个对象，它是看不到exports对象的，而我们写模块的时候用到的exports对象实际上只是对module.exports的引用，exports和module.exports都属于Object类型，属于引用类型，在node中 module.exports 初始的设置为{},exports也指向这个对象**。
 ```js
 // 下面两种写法是一样的
 exports.name = function(){}
@@ -162,6 +165,14 @@ module.exports.name = function(){}
 exports = function(){}
 
 module.exports = function(){}   // 这样就是正确的
+
+var exports = module.exports 
+var load = function (module) {
+    // 导出的东西
+    var a = 1
+    module.exports = a
+    return module.exports
+};
 ```
 
 > Node 要求 ES6 模块采用.mjs后缀文件名。也就是说，只要脚本文件里面使用import或者export命令，那么就必须采用.mjs后缀名。require命令不能加载.mjs文件，会报错，只有import命令才可以加载.mjs文件。反过来，.mjs文件里面也不能使用require命令，必须使用import。

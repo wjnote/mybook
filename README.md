@@ -1,5 +1,5 @@
 # mybook
-学习笔记电子书，是用 Gitbook 的来整理
+学习笔记电子书，是用 Gitbook 的来整理，使以前学到的知识点不再零散。
 
 ### gitbook 使用流程
 ```shell
