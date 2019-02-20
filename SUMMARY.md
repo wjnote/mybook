@@ -7,6 +7,7 @@
     * [notice](es6/notice.md)
     * [模块加载](es6/moduleupload.md)
     * [异步函数](es6/asynchronous.md)
+    * [async函数](es6/async.md)
 * [node](node/README.md)
     * [node测试](node/test.md)
 * [webpack](webpack/README.md)
