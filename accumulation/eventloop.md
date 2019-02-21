@@ -26,6 +26,7 @@ js是一门单线程语言，虽然在HTML5中提出了 Web-Worker，但是单�
 > js引擎存在 monitoring process 进程，会持续不断的检查主线程执行栈是否为空，一旦为空，就会去Event Queue那里检查是否有等待被调用的函数。
 
 **微任务包括 process.nextTick ，promise ，MutationObserver**
+
 **宏任务包括 script ， setTimeout ，setInterval ，setImmediate(node环境下) ，I/O ，UI交互事件**
 
 > 今日头条的一道面试题，测试执行顺序...有一个问题就是下面的代码在js文件执行和用webpack启动项目打印出来的结果不一致 ？？？
@@ -140,7 +141,7 @@ setTimeout(function() {  // setTimeout2
   })
 })
 ```
-上述代码总共执行了三次事件循环，
+上述代码总共执行了三次事件循环
 1. 第一次宏任务为script标签，微任务为 process.nextTick 和promise.then()
 2. 第二次宏任务为 setTimeout1， 微任务为延时器里面的代码
 3. 第三次宏任务为 setTimeout2， 微任务为延时器里面的代码
