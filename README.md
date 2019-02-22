@@ -7,7 +7,7 @@
 yarn global add gitbook-cli
 
 在目录中
-git init
+gitbook init
 
 编辑的时候查看 
 gitbook serve [--prot xxxx]

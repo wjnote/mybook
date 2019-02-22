@@ -20,6 +20,7 @@
 2. position:fixed，相对于浏览器窗口定位。例外：父代元素中，有元素设置了transform，则postion:fixed相对于设置了transform的父元素定位。
 
 ### 常用的屏幕分辨率
+[移动设备的常用尺寸](https://material.io/tools/devices/)
 PC端************
 
 按屏幕宽度大小排序（主流的用橙色标明）
