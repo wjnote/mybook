@@ -20,7 +20,7 @@ $ git config --list --global
 ##### git常用命令
 ```shell
 git init ： 初始化 git 项目，然后就需要配置最小的配置参数，不是必须的，会自动使用全局配置的参数
-git add <filename> ： 开始跟踪一个文件(使用文件或目录的路径作为参数) / 把已跟踪的文件放到暂存区 / 合并时把有冲突的文件标记为已解决状态
+git add <filename> ： 开始跟踪一个文件(文件目录) / 把已跟踪的文件放到暂存区 / 合并时把有冲突的文件标记为已解决状态
 git status ： 当前文件的 git 状态
 git log --oneline： 展示git的日志
 git rm <filename> ： 删除文件

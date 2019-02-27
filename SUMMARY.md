@@ -27,4 +27,5 @@
     * [window进程查询](work_accumulation/windowport.md)
     * [网页加载优化](work_accumulation/加载优化.md)
     * [web安全问题](work_accumulation/safely.md)
+    * [js开发中注意的点](work_accumulation/limelight.md)
 
