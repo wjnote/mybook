@@ -1,7 +1,8 @@
 ## js开发中注意的点
 总结一些在开发中需要注意点的点或者是隐藏的坑
 
-1. 数组的 sort 方法，注意返回的应该是 1/-1，而不是 true/false 的形式
+- 数组的 sort 方法，注意返回的应该是 1/-1，而不是 true/false 的形式
+
 ```js
 const arr = [ 0, 1, 5, 10, 15, 10, 100, 99, 100 ];
 arr.sort((v1,v2)=>{
@@ -19,7 +20,8 @@ arr.sort((v1,v2)=>{
 // 浏览器和node环境都能正确输出
 ```
 
-2. 数组中可以使用map和forEach、for来循环数组，但是应该使用forEach或者for来循环数组，而map作为数组关系的映射
+- 数组中可以使用map和forEach、for来循环数组，但是应该使用forEach或者for来循环数组，而map作为数组关系的映射
+
 ```js
 let sum = 0,arr = [];
 for (let i = 0; i < 10 * 1000 * 1000; i++) {
