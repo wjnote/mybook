@@ -95,7 +95,7 @@ module.exports = {
 
 #### 可以通过 node的方式
 
-1. webpack 的 entry 添加`webpack/hot/dev-server`
+1. webpack 的 entry 添加 `webpack/hot/dev-server`
 2. webpack 的 plugins 添加 new webpack.HotModuleReplacementPlugin()
 3. webpack-dev-server 添加 `hot: true`
 
@@ -114,14 +114,13 @@ let server = new WebpackDevServer(compiler, {
 
 ```js
 plugins: [
-        new HtmlWebpackPlugin({
-            template: './public/index.html'
-        }),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin(),
+  new HtmlWebpackPlugin({
+      template: './public/index.html'
+  }),
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NamedModulesPlugin(),
 ]
 ```
-
 
 
 ##### 额外阅读

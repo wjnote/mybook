@@ -28,7 +28,7 @@ babel-polyfill.js : 这种方式是在 shim + sham之后的一种方法，是引
 ```
 3. 然后打包的时候页面上引入的
 ```js
-// import "@babel/polyfill"  就被转变为下面的内容
+// import "@babel/polyfill"  就被转变为下面的内容 以chrome62为例
 import "core-js/modules/es7.string.pad-start";
 import "core-js/modules/es7.string.pad-end";
 ```
