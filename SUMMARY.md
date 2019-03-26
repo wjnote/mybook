@@ -1,4 +1,5 @@
 # Summary
+
 * [Introduction](README.md)
 * [javasript](javasript/README.md)
     * [观察者模式](javasript/观察者模式.md)
@@ -6,6 +7,7 @@
     * [深拷贝](javasript/deepclone.md)
     * [函数继承](javasript/inherit.md)
     * [Polyfill方案](javasript/polyfill.md)
+    * [深入理解JSON](javasript/json.md)
     * [js开发中注意的点](javasript/limelight.md)
 * [ES6](es6/README.md)
     * [notice](es6/notice.md)
@@ -17,6 +19,7 @@
 * [map](map/README.md)
 * [webpack](webpack/README.md)
     * [webpack-dev-server](webpack/dev.server.md)
+* [html/DOM](htmldom/README.md)
 * [mobile](mobile/README.md)
     * [mobile适配](mobile/mobileAdaptive.md)
     * [mobile-1px](mobile/mobile1px.md)
@@ -24,7 +27,7 @@
 * [浏览器如何工作](browser/README.md)
     * [浏览器加载渲染流程](browser/bworwseradd.md)
     * [http/http2/https](browser/http-networking.md)
-    * [html/DOM](htmldom/README.md)
+    * [浏览器多线程和js单线程](browser/thread.md)
 * [工作积累](accumulation/README.md)
     * [git](accumulation/git学习资料.md)
     * [window进程查询](accumulation/windowport.md)
