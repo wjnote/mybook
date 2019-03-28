@@ -1,6 +1,5 @@
 ## 函数继承
 
-
 ### 组合继承的方式
 ```js
 function Parent(value){

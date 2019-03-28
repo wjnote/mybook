@@ -6,8 +6,11 @@
 安装  
 yarn global add gitbook-cli
 
-在目录中
+在目录中：  创建README.md / SUMMARY.md 两个文件
 gitbook init
+
+页面有book.json 里面一般会有plugins插件,直接下载所有插件和主题
+gitbook install
 
 编辑的时候查看 
 gitbook serve [--prot xxxx]
@@ -42,9 +45,10 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
     * [观察者模式](javasript/观察者模式.md)
     * [事件循环](javasript/eventloop.md)
     * [深拷贝](javasript/deepclone.md)
-    * [函数继承](javasript/inherit.md)
     * [Polyfill方案](javasript/polyfill.md)
-    * [js开发中注意的点](javasript/limelight.md)
+    * [深入理解JSON](javasript/json.md)
+    * [函数继承](javasript/inherit.md)
+    * [js常用继承，多继承](javasript/extends.md)
 * [ES6](es6/README.md)
     * [notice](es6/notice.md)
     * [模块加载](es6/moduleupload.md)
@@ -55,6 +59,7 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
 * [map](map/README.md)
 * [webpack](webpack/README.md)
     * [webpack-dev-server](webpack/dev.server.md)
+* [html/DOM](htmldom/README.md)
 * [mobile](mobile/README.md)
     * [mobile适配](mobile/mobileAdaptive.md)
     * [mobile-1px](mobile/mobile1px.md)
@@ -62,7 +67,7 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
 * [浏览器如何工作](browser/README.md)
     * [浏览器加载渲染流程](browser/bworwseradd.md)
     * [http/http2/https](browser/http-networking.md)
-    * [html/DOM](htmldom/README.md)
+    * [浏览器多线程和js单线程](browser/thread.md)
 * [工作积累](accumulation/README.md)
     * [git](accumulation/git学习资料.md)
     * [window进程查询](accumulation/windowport.md)

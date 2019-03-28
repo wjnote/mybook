@@ -1,64 +1,70 @@
 {
-    "title": "wujun's Note",
-    "author": "wujun",
-    "description": "select * from learn",
-    "language": "zh-hans",
-    "gitbook": "3.2.3",
-    "styles": {
-        "website": "./resouce/style/normalize.8.0.1.css"
+  "title": "wujun's Note",
+  "author": "wujun",
+  "description": "select * from learn",
+  "language": "zh-hans",
+  "gitbook": "3.2.3",
+  "styles": {
+    "website": "./resouce/style/normalize.8.0.1.css"
+  },
+  "structure": {
+    "readme": "README.md"
+  },
+  "links": {},
+  "plugins": [
+    "-sharing",
+    "splitter",
+    "expandable-chapters-small",
+    "anchors",
+    "github",
+    "github-buttons",
+    "sharing-plus",
+    "anchor-navigation-ex",
+    "favicon"
+  ],
+  "pluginsConfig": {
+    "github": {
+      "url": "https://github.com/wjnote"
     },
-    "structure": {
-        "readme": "README.md"
-    },
-    "links": { },
-    "plugins": [
-        "-sharing",
-        "splitter",
-        "expandable-chapters-small",
-        "anchors",
-
-        "github",
-        "github-buttons",
-        "sharing-plus",
-        "anchor-navigation-ex",
-        "favicon"
-    ],
-    "pluginsConfig": {
-        "github": {
-            "url": "https://github.com/wjnote"
-        },
-        "github-buttons": {
-            "buttons": [{
-                "user": "wjnote",
-                "repo": "mybook",
-                "type": "star",
-                "size": "small",
-                "count": true
-                }
-            ]
-        },
-        "sharing": {
-            "douban": false,
-            "facebook": false,
-            "google": false,
-            "hatenaBookmark": false,
-            "instapaper": false,
-            "line": false,
-            "linkedin": false,
-            "messenger": false,
-            "pocket": false,
-            "qq": false,
-            "qzone": false,
-            "stumbleupon": false,
-            "twitter": false,
-            "viber": false,
-            "vk": false,
-            "weibo": false,
-            "whatsapp": false,
-            "all": [
-                "google", "facebook", "weibo", "twitter",
-                "qq", "qzone", "linkedin", "pocket"
-            ]
+    "github-buttons": {
+      "buttons": [
+        {
+          "user": "wjnote",
+          "repo": "mybook",
+          "type": "star",
+          "size": "small",
+          "count": true
         }
+      ]
+    },
+    "sharing": {
+      "douban": false,
+      "facebook": false,
+      "google": false,
+      "hatenaBookmark": false,
+      "instapaper": false,
+      "line": false,
+      "linkedin": false,
+      "messenger": false,
+      "pocket": false,
+      "qq": false,
+      "qzone": false,
+      "stumbleupon": false,
+      "twitter": false,
+      "viber": false,
+      "vk": false,
+      "weibo": false,
+      "whatsapp": false,
+      "all": [
+        "google",
+        "facebook",
+        "weibo",
+        "twitter",
+        "qq",
+        "qzone",
+        "linkedin",
+        "pocket"
+      ]
     }
+  }
 }
