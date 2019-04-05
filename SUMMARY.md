@@ -17,6 +17,7 @@
     * [async函数](es6/async.md)
 * [node](node/README.md)
     * [node测试](node/test.md)
+    * [babel](node/babel.md)
 * [map](map/README.md)
 * [webpack](webpack/README.md)
     * [webpack-dev-server](webpack/dev.server.md)
@@ -34,4 +35,5 @@
     * [window进程查询](accumulation/windowport.md)
     * [web安全问题](accumulation/safely.md)
     * [图片三种表现方式](accumulation/imgways.md)
+* [jQuery源码](jquery/README.md)
 
