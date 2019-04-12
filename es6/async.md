@@ -142,3 +142,5 @@ async function fn(db){
 ----
 参考链接：
 - [理解 JavaScript 的 async/await](https://segmentfault.com/a/1190000007535316)
+- [JavaScript异步编程](https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247489913&idx=1&sn=1871be99b1505ebddef0e6739c22c7dd&chksm=f951ac3ace26252ce604775aa5b088e755ec4db60239bd2f4cb75710b2bc1dc5f91069ced91a&mpshare=1&scene=24&srcid=&key=fc93c054c797e24a9825efe44e4162eb807b81e9e23def9ac5f9a48f69230bd5817458d62dc5485f10ea722dfb9a2fddbf7e9e48530a4237eb59bf7afdcf3b90af8b94748be8d5f608fc0dfaa235f0ff&ascene=14&uin=MTU0NjgxNDgyMQ%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=1lWRrrcw1iDMHByhDO4Uq%2B9V3ZN4YJZRJD5CN3C778ntyYlhyqSgD16d9tzM2DFm)
+

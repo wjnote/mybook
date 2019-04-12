@@ -21,7 +21,7 @@ gitbook build
 
 ### 快速生成目录结构，可以使用命令行的方式
 1. 直接在 SUMMARY.md 文件中建立好文件的目录
-2. 在命令行中执行 `gitbook init` 就会更具你写的目录自动生成响应的文件
+2. 在命令行中执行 `gitbook init` 会根据目录自动生成相应文件
 3. 但是不会覆盖你自己建立的文件目录结构
 
 
@@ -47,6 +47,7 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
     * [深拷贝](javasript/deepclone.md)
     * [Polyfill方案](javasript/polyfill.md)
     * [深入理解JSON](javasript/json.md)
+    * [proto和prototype](javasript/prototype.md)
     * [函数继承](javasript/inherit.md)
     * [js常用继承，多继承](javasript/extends.md)
 * [ES6](es6/README.md)
@@ -56,6 +57,8 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
     * [async函数](es6/async.md)
 * [node](node/README.md)
     * [node测试](node/test.md)
+    * [babel](node/babel.md)
+    * [Buffer/Stream/fs](node/stream.md)
 * [map](map/README.md)
 * [webpack](webpack/README.md)
     * [webpack-dev-server](webpack/dev.server.md)
@@ -73,3 +76,4 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
     * [window进程查询](accumulation/windowport.md)
     * [web安全问题](accumulation/safely.md)
     * [图片三种表现方式](accumulation/imgways.md)
+* [jQuery源码](jquery/README.md)
