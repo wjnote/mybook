@@ -18,7 +18,7 @@ let hw = test();
 ```
 函数执行之后不像普通函数直接执行，这个是返回一个指向内部状态的指针对象即遍历器对象(Iterator Object),如果要调用函数就需要调用 next 方法，使指针移向下一个状态，直到遇到下一个 yield表达式。next方法可以传参作为 yield表达式的返回值。
 
-### Promise 对象
+### [Promise 对象](./promise.md)
 Promise是异步编程的一种解决方案，比回调函数更加合理和强大，Promise可以理解为一个容器，保存着未来才会结束的事情(通常就是我们采用的异步操作)
 ```js
 const promise = new Promise(function(resolve,reject){

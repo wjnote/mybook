@@ -170,7 +170,7 @@ MyClass.prototyep.myMethod = function(){ // do something }
 ```
 > Object.assign 会把 OtherSuperClass 原型上的函数拷贝到 MyClass 原型上，使 MyClass 的原型实例都可用 OtherSuperClass 的方法
 
-8.   **ES6 类继承 extends**
+8. **ES6 类继承 extends**
 extends 关键字主要用于类声明或者类表达式中，以创建一个类，该类是另一个类的子类，其中 constructor 表示构造函数，一个类只能有一个构造函数，有多个会报错 - SyntaxError ,如果没有显示指定构造方法，则会添加默认的 constructor 方法。使用 super() 可以继承父类的全部方法
 ```javascript
 class SuperType{
@@ -186,8 +186,8 @@ class SuperType{
   }
 }
 const temp = new SuperType(10, 20)
--------------------------------------------------------
-*********  继承  *******
+--------------------
+*********  继承  ***
 class SubType extends SuperType{
   constructor(length){
     super(length, length)
