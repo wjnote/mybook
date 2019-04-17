@@ -1,10 +1,10 @@
 ## 模块加载
-在 ES6 之前，社区制定了一些模块加载方案，最主要的有 CommonJS  CMD和 AMD 两种。前者用于服务器，后2者用于浏览器。ES6 在语言标准的层面上，实现了模块功能，完全可以取代 CommonJS CMD  和 AMD 规范，成为浏览器和服务器通用的模块解决方案。
+在 ES6 之前，社区制定了一些模块加载方案，最主要的有 CommonJS  CMD和 AMD 。前者用于服务器，后2者用于浏览器。ES6 在语言标准的层面上，实现了模块功能，完全可以取代 CommonJS CMD  和 AMD 规范，成为浏览器和服务器通用的模块解决方案。
 
 ES6 模块的设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量。CommonJS 和 AMD 模块，都只能在运行时确定这些东西。
 
 ### ES6的模块输出 export 命令
-**模块功能主要由两个命令构成：export和import。export命令用于规定模块的对外接口，import命令用于输入其他模块提供的功能。**
+**ES6 模块功能主要由两个命令构成：export 和 import。export 命令用于规定模块的对外接口，import 命令用于输入其他模块提供的功能。**
 
 ```js
 export const firstname = 'wujun'
@@ -26,10 +26,10 @@ export f; // 报错
 - export 可以对外暴露变量，函数，类class
 - export 规定对外的的接口，必须与模块内部的变量建议对应的关系
 - export 语句输出的值，与其对应的接口是动态绑定关系，可以取到模块内实时的值，也就是内部的值是可以变化的
-- export 可以位于模块的任何位置，但是必须在模块顶层作用域
+- export 可以位于模块的任何位置，但是必须在模块顶层作用域内
 
 ### ES6的模块默认输出 export default 命令
-上面的使用import命令的时候，用户需要知道所要加载的变量名或函数名，否则无法加载。为了给用户提供方便，让他们不用阅读文档就能加载模块，就要用到export default命令，为模块指定默认输出。
+export 输出方式使的用 import 命令的时候，用户需要知道所要加载的变量名或函数名，否则无法加载。为了给用户提供方便，让他们不用阅读文档就能加载模块，就要用到`export default`命令，为模块指定默认输出。
 ```js
 export default function(){ console.log('foo') }
 import allname from './moduleName'  
@@ -88,8 +88,6 @@ const mymodule = require(path)
 
 
 ### ES6 模块和CommonJS 模块的差异
-ES6 模块与 CommonJS 模块完全不同。
-
 1. CommonJS 模块加载输出的是一个值的拷贝，ES6模块输出的是值的引用
 2. CommonJS 模块是运行时加载，ES6模块是编译时输出接口
 3. ES6 模块和 CommonJS 模块的运行机制不一样，ES6模块中JS引擎遇到import命令，就会生成一个只读引用，等到脚本执行了再去引用值，不会存在缓存行为，而CommonJS模块是会缓存基本类型的值
@@ -107,7 +105,9 @@ ES6 模块与 CommonJS 模块完全不同。
     loaded: true,
     ...
 }
-// 这就是Node内部加载模块生成一个对象，该对象的id表示模块的名字，exports属性就是模块输出的各个接口，loaded表示脚本是否执行完毕，还有其他一些属性，只会在第一次加载时运行一次，以后需要用到就会从exports上取值，就返回第一次运行的结果
+// 这就是Node内部加载模块生成一个对象，该对象的id表示模块的名字，
+// exports属性就是模块输出的各个接口，loaded表示脚本是否执行完毕，还有其他一些属性，
+// 只会在第一次加载时运行一次，以后需要用到就会从 exports上取值，就返回第一次运行的结果(缓存)
 ```
 
 CommonJS 模块输出的是值的拷贝，也就是说，一旦输出一个值，模块内部的变化就影响不到这个值
@@ -151,9 +151,9 @@ setTimeout(()=> console.log(foo), 500);
 
 
 ### Node加载(Node使用了CommonJS 规范)
-Node 对 ES6 模块的处理比较麻烦，因为它有自己的 CommonJS 模块格式，与 ES6 模块格式是不兼容的。目前的解决方案是，将两者分开，ES6 模块和 CommonJS 采用各自的加载方案，**关键字require 与 exports**。**一个模块首先要判断是 CommonJS模块还是 ES6 模块，加载方式就不同，暴露接口的方式也不同**。
+Node 对 ES6 模块的处理比较麻烦，因为它有自己的 CommonJS 模块格式，与 ES6 模块标准是不兼容的。目前的解决方案是：将两者分开使用，ES6 模块和 CommonJS 采用各自的加载方案。一个模块首先要判断是 CommonJS 模块还是 ES6 模块，加载方式不同，暴露接口的方式也不同。
 
-node中的exports和module.exports的区别一句话概括就是：**require方法能看到的只有module.exports这个对象，它是看不到exports对象的，而我们写模块的时候用到的exports对象实际上只是对module.exports的引用，exports和module.exports都属于Object类型，属于引用类型，在node中 module.exports 初始的设置为{},exports也指向这个对象**。
+node 中的 exports 和 module.exports 的区别一句话概括就是：require 方法能看到的只有 module.exports 这个对象，它是看不到 exports 对象的，而我们写模块的时候用到的 exports 对象实际上只是对 module.exports 的引用，exports 和 module.exports 都属于 Object 类型，属于引用类型，在 node 中 module.exports 初始的设置为 {} , exports 也指向这个对象。
 ```js
 // 下面两种写法是一样的
 exports.name = function(){}
@@ -217,12 +217,12 @@ const Router = require('koa-router'); // 采用这种加载方式
 
 ### 内部变量
 ES6 模块应该设计为通用的，同一个模块可以适用于浏览器和服务器，所以Node规定ES6模块不能使用CommonJS的一些特有的内部变量
-1. 首先就是this关键字，ES6模块中顶层的this指向undefined；CommonJS顶层this指向当前模块，ES6模块不能使用
-2. arguments / require / module / exports 这些顶层变量
-3. __filename(当前模块文件的带有完整绝对路径的文件名)
-4. __dirname(当前文件所在目录的完整目录名),等同于 `path.dirname(__filename)`
+1. 首先就是this关键字，ES6模块中顶层的this指向undefined；CommonJS顶层this指向当前模块
+2. `arguments / require / module / exports` 这些顶层变量
+3. `__filename`(当前模块文件的带有完整绝对路径的文件名)
+4. `__dirname`(当前文件所在目录的完整目录名), 等同于 `path.dirname(__filename)`
 
-如果想在ES6 模块中是用这些顶层变量，可以写一个CommonJS模块输出这些变量，ES6模块再加载这个变量，但是这样一下，ES6模块就不能同时适用于浏览器和服务器了，不建议使用。
+>  如果想在ES6 模块中是用这些顶层变量，可以写一个 CommonJS 模块输出这些变量，ES6模块再加载这个变量，但是这样一下，ES6模块就不能同时适用于浏览器和服务器了，不建议使用。
 
 
 ### 循环加载(ES6模块和CommonJS模块)
@@ -298,3 +298,41 @@ console.log(foo)
 function bar(){return 'bar'}
 export {bar}
 ```
+
+
+
+### 一个模块适用于各种标准
+
+同一个模块可以运行在前后端，在开发过程中需要考虑兼容前后端问题
+
+```js
+;(function(name, definition) {
+  // 检测上下文环境是否为AMD或CMD
+  var hasDefine = typeof define === 'function',
+    // 检查上下文环境是否为Node
+    hasExports = typeof module !== 'undefined' && module.exports;
+
+  if (hasDefine) {
+    // AMD环境或CMD环境
+    define(definition);
+  } else if (hasExports) {
+    // 定义为普通Node模块
+    module.exports = definition();
+  } else {
+    // 将模块的执行结果挂在window变量中，在浏览器中this指向window对象
+    this[name] = definition();
+  }
+})('hello', function() {
+  var add = function(a, b) {
+    return a + b;
+  }
+  var subtraction = function(a, b) {
+    return a - b;
+  }
+  return { add, subtraction };
+});
+```
+
+1. 利用不同的标准都向环境中提供了几个不同的变量来判断适用什么标准
+2. 上面代码中的 `hello` 表示如果不是浏览器环境和服务器环境，就将暴露的方法挂载到window上（本地`script`的方式可以测试）
+3.  用 require  import 都可以引入
