@@ -1,7 +1,8 @@
-### javascript 常用的八种继承，多继承
+## javascript 常用的八种继承，多继承
 1. **原型链继承**
 构造函数，原型和实例之间的关系：每个构造函数都有一个原型对象，原型对象都包含了一个指向构造函数的指针，而实例都包含一个原型对象的指针，继承的本质就是复制，重写原型对象，代之以一个新类型的实例
-```javascript
+
+```js
 function Super(){}
 Super.prototype.name = function(){}
 
@@ -10,26 +11,31 @@ Chilren.prototype = new Super();
 Chilren.prototype.constructor = Children;
 // 这样有一个问题，写法只能是上面这种，不能使用 xxx.prototype = {} 的形式
 ```
+
 ![Alt text](./img/01.png)
+
 > 缺点： 多个实例对引用类型的操作会被篡改，因为复杂数据类型都是指向同一个地址，这是原型链通有的缺点，下面涉及到原型链继承都有的缺点
 
 2. **借用构造函数继承**
 使用父类的构造函数雷增强子类实例，等同于复制父类的实例给子类（不使用原型）
-```javascript
+
+```js
 function SuperType(){ this.color = ['res', 'green']};
 
 function SubType(){ 
 	Super.call(this) 
 };
 ```
+
 > 上面这种方式就不会产生第一种方式的引用类型的问题
 > 缺点：
 > - 只能继承父类的实例属性和方法，不能继承原型属性/方法
 > - 无法实现复用，每个子类都有父类实例函数的副本，影响性能
-	
+
 3. **组合继承**
 组合上述两种方式就是组合继承，用原型链实现对原型属性和方法的继承，借用构造函数技术实现实例属性的继承
-```javascript
+
+```js
 function SuperType(name, color){
   this.name = name
   this.color = ['res', 'green']
@@ -46,8 +52,10 @@ SubType.prototype = new SuperType();
 SubType.prototype.constructor = SubType; 
 SubType.prototype.fnname= function(){}; 
 ```
+
 **注意下面这种写法是有问题的**
-```javascript
+
+```js
 function SuperType(params) {
   // **其中会打印2次** 
   // 第一次就执行到 SubType.prototype = new SuperType(); 这里时，
@@ -73,7 +81,9 @@ const temp = {
 }
 var instance1 = new SubType("Nicholas", 29);
 ```
+
 ![Alt text](./img/02.png)
+
 > 缺点：
 > 第一次调用 SuperType() :   给 SubType.prototype 写入两个属性 name, color
 > 第二次调用 SuperType() ： 给 instance1 写入两个属性 name, color
@@ -81,21 +91,24 @@ var instance1 = new SubType("Nicholas", 29);
 
 4. **原型式继承**
 利用一个空对象作为中介，将某个对象直接赋值给空对象构造函数的原型
-```javascript
+ES 5 中提供了原生的 Object.create() 方法替代上面的方法
+
+```js
 function object(obj){
   function F(){}
   F.prototype = obj;
   return new F();
 }
 ```
-- ES 5 中提供了原生的 Object.create() 方法替代上面的方法
+
 > 缺点：
 > 原型链继承多个实例的引用类型属性指向相同，存在篡改的可能，和 第一点一样
 > 无法传递参数
 
 5. **寄生式继承**
 核心：在原型式继承的基础上，新增对象，返回构造函数
-```javascript
+
+```js
 function createAnother(params){
   var clone = object(params) // 通过调用 object() 函数创建一个新对象
   clone.sayHi = function(){  // 以某种方式增强对象
@@ -104,7 +117,9 @@ function createAnother(params){
   return clone;   // 返回这个对象
 }
 ```
+
 函数的主要作用是为构造函数新增属性和方法，以增强函数
+
 ```javascript
 var person = {
   name: 'wujun',
@@ -113,13 +128,15 @@ var person = {
 var anotherPerson = createAnother(person)
 anotherPerson.sayHi();   // hi
 ```
+
 > 缺点：
 > 原型链继承多个实例的引用类型属性指向相同，存在篡改可能，和第一种一样
 > 无法传递参数
 
 6. **寄生组合式继承 -- 目前最成熟的方法，现在普遍库实现方式**
 结合借用构造函数传递参数和寄生式模式实现继承
-```javascript
+
+```js
 function inheritPrototype(subType, superType){
   // 创建对象，创建父类原型的一个副本
   var prototype = Object.create(superType.prototype);
@@ -149,11 +166,14 @@ SubType.prototype.sayAge = function(){}
 let instance1 = new SubType('wujun', 26);
 let instance2 = new SubType('liyuan', 24);
 ```
+
 ![Alt text](./img/03.png)
+
 > 这个例子的高效率体现在它只调用了一次 SuperType 构造函数，并且因此避免了在 SubType.prototype 上创建不必要的，多余的属性，于此同时，原型链还能保持不变，所以还能够正常使用 instanceof 和 isPrototypeOf() 
 
 7. **混入方式继承多个对象**
 用一个子对象可以继承多个父类的原型，实现子类的组合
+
 ```javascript
 function MyClass(){
   SuperClass.call(this);
@@ -168,10 +188,12 @@ MyClass.prototype.constructor = MyClass
 
 MyClass.prototyep.myMethod = function(){ // do something }
 ```
+
 > Object.assign 会把 OtherSuperClass 原型上的函数拷贝到 MyClass 原型上，使 MyClass 的原型实例都可用 OtherSuperClass 的方法
 
 8. **ES6 类继承 extends**
 extends 关键字主要用于类声明或者类表达式中，以创建一个类，该类是另一个类的子类，其中 constructor 表示构造函数，一个类只能有一个构造函数，有多个会报错 - SyntaxError ,如果没有显示指定构造方法，则会添加默认的 constructor 方法。使用 super() 可以继承父类的全部方法
+
 ```javascript
 class SuperType{
   constructor(height, width){
@@ -198,7 +220,9 @@ class SubType extends SuperType{
   }
 }
 ```
+
 extends 继承的核心代码如下，其实现和上述的寄生组合式继承方式一样
+
 ```javascript
 function _inherits(subType, superType){
   subType.prototype = Object.create(superType && superType.prototype,{

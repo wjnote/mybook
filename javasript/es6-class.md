@@ -2,7 +2,7 @@
 在ES6中使用class实现继承，子类必须在 **constructor方法**中调用**super方法**，这是因为子类没有自己的this对象，而是继承父类的this对象，然后对其进行扩展。如果不调用super方法，子类就得不到this对象。必须在使用 this 之前调用super
 
 ### super 作为关键字的作用
-1. super当作函数使用时，代表父类的构造函数。作为函数，super 只能用在子类的构造函数中，用在其他地方就会报错
+- super当作函数使用时，代表父类的构造函数。作为函数，super 只能用在子类的构造函数中，用在其他地方就会报错
 
 ```js
 class A {
@@ -29,7 +29,7 @@ let b = new B();
 b.m()   // 2      虽然调用的是 A.prototype.print()   但是绑定了B对象的this 所以输出2 
 ```
 
-2. super 作为对象，在普通方法中，指向父类的原型对象，在静态方法中，指向父类（只能访问父类的静态方法）
+- super 作为对象，在普通方法中，指向父类的原型对象，在静态方法中，指向父类（只能访问父类的静态方法）
 
 ```js
 class Parent{
@@ -54,7 +54,7 @@ var child = new Child()
 child.method(2);   // instance  2
 ```
 
-3. **ES6 规定，通过super 调用父类的方法时，super 会绑定子类的 this**
+- **ES6 规定，通过super 调用父类的方法时，super 会绑定子类的 this**
 
 ### class继承的实现原理是基于原型继承
 ```js

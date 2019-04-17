@@ -2,8 +2,8 @@
 
 ### 箭头函数（ => ）定义函数
 1. 箭头函数没有arguments （可以使用剩余运算符替代）
-2. 箭头函数没有prototype属性，不能作为构造函数
-3. 没有this，它使用的this是词法的是引用的上下文的this（只是等于外层的上下文this，并不是固定不变的）
+2. 箭头函数没有prototype属性，不能作为构造函数，不能绑定自己的 `super` 或 `new.target`
+3. 没有this，它使用的this是词法的是引用的上下文的 this（只是等于外层的上下文this，并不是固定不变的）
 ```js
 let controller = {
     a:1,
@@ -19,6 +19,12 @@ let controller = {
     }
 }
 // testReturn 中的this指向的是window，所以为 undefined
+
+// 还需要注意箭头函数相比普通的函数，受操作符优先级影响
+let callback;
+callback = callback || function(){};    // 表达式成立
+callback = callback || ()=>{};  // Malformed arrow function parameter list 
+// 修改为 callback = callback || (()=>{}) 
 ```
 > 不要在可能改变this指向的函数中使用箭头函数，类似Vue中的methods,computed中的方法,生命周期函数，Vue将这些函数的this绑定了当前组件的vm实例，如果使用箭头函数会强行改变this，因为箭头函数优先级最高（无法再使用call,apply,bind改变指向）
 

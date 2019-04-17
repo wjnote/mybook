@@ -137,6 +137,23 @@ async function fn(db){
 }
 ```
 
+3. 按顺序完成异步操作
+
+```js
+async function login(urls){
+  const testPromise = urls.map(async url =>{
+    const response = await fetch(url);
+    return response.text();
+  })
+  for(let item of textPromise){
+    console.log(await item)
+  }
+}
+// 上面的map方法的参数是 async 函数，但是它是并发执行的，因为在 async函数内部是继发执行，外部不受影响，后面的for...of 循环内部使用了 await 因此实现了按顺序输出
+```
+
+
+
 ##### [async函数、promise函数和setTimeout函数执行顺序](../accumulation/eventloop.md)
 
 ----

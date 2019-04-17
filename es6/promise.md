@@ -69,6 +69,18 @@ Promise.resolve()
 Promise.all 接受一个数组为参数，当数组的所有promise状态都确定的时候才执行 .then方法，**每个promise的结果（resolve或reject时传递的参数值），和传递给 Promise.all 的promise数组的顺序是一致的，then方法中的参数也是数组**
 **Promise.all 中的 promise 并不是串行的，是同时执行的**
 
+```js
+var p1 = Promise.resolve(1),
+    p2 = Promise.resolve(2),
+    p3 = Promise.resolve(3);
+Promise.all([p1, p2, p3]).then(function (results) {
+    console.log(results);  // [1, 2, 3]
+});
+// 生成并返回一个新的promise对象。
+```
+
+
+
 ####  Promise.race
 Promise.race 只要有一个promise对象进入 FulFilled 或者 Rejected 状态的话，就会继续进行后面的处理。then方法中的参数就是最先完成的promise的结果，但是并不会取消后续的promise的执行。
 
