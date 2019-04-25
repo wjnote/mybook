@@ -29,6 +29,8 @@
     * [webpack-dev-server](webpack/dev.server.md)
 * [vue框架](vue/README.md)
     * [一些常见问题](vue/questions.md)
+    * [vue修饰符](vue/xiushifu.md)
+    * [vuex记录](vue/vuex.md)
 * [html/DOM](htmldom/README.md)
 * [mobile](mobile/README.md)
     * [mobile适配](mobile/mobileAdaptive.md)
@@ -43,6 +45,7 @@
     * [window进程查询](accumulation/windowport.md)
     * [web安全问题](accumulation/safely.md)
     * [图片三种表现方式](accumulation/imgways.md)
+    * [web页面图片加载优化](accumulation/imgload.md)
 * [jQuery源码](jquery/README.md)
 * [map](map/README.md)
 

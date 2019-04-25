@@ -56,3 +56,5 @@ method(para1, undefined, para2)
 // 在es6有了扩展运算符之后，可以利用 数组是松散的 结构来实现
 method(...[para1, , para2]);  
 ```
+
+- 简单数组的拷贝可以通过 slice方法 concat方法 [...arr] 来实现，对于多维数组的实现，必须通过`JSON.parse(JSON.stringify(obj))`方法来实现

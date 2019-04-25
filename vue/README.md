@@ -148,3 +148,25 @@ vue中的插槽有三种：单个插槽、具名插槽、作用域插槽，
 /><my-component>
 ```
 
+计算属性中依赖的数据必须是响应式数据才能生效
+
+
+
+vue组件中使用第三方的插件的时候，需要在组件销毁的时候销毁第三方插件的实例，可以在 `beforeDestroy` 声明周期中，还可以使用 **程序化的侦听器** 的方式来销毁插件实例
+
+```js
+mounted: function () {
+  var picker = new Pikaday({
+    field: this.$refs.input,
+    format: 'YYYY-MM-DD'
+  })
+
+  this.$once('hook:beforeDestroy', function () {
+    picker.destroy()
+  })
+}
+```
+
+
+
+vuex

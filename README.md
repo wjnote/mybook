@@ -69,6 +69,7 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
     * [webpack-dev-server](webpack/dev.server.md)
 * [vue框架](vue/README.md)
     * [一些常见问题](vue/questions.md)
+    * [vue修饰符](vue/xiushifu.md)
 * [html/DOM](htmldom/README.md)
 * [mobile](mobile/README.md)
     * [mobile适配](mobile/mobileAdaptive.md)

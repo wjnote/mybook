@@ -96,6 +96,7 @@ const mymodule = require(path)
 6. CommonJS 是同步导入，因为用于服务端，文件都在本地，同步导入即使卡住主线程影响也不大。而后者是异步导入，因为用于浏览器，需要下载文件，如果也采用同步导入会对渲染有很大影响
 
 **第二个差异是因为 CommonJS 加载的是一个对象(即module.exports属性)**，require 命令第一次执行的时候就会执行整个脚本，然后在内存中生成一个对象,而ES6模块不是对象，它的对外接口只是一种静态定义，在代码静态解析阶段就会生成
+
 ```js
 // CommonJS模块格式的加载原理
 
@@ -149,8 +150,19 @@ setTimeout(()=> console.log(foo), 500);
 // baz
 ```
 
+ES6 module 和 commonJS 在路径加载的时候，`import` 不能设置变量，因为`import`只能做静态导入不能动态的导入，如果是想在路径中增加变量，目前只能使用 `require`的方式
+
+```js
+const baseurl = 'xxx'
+const img = require( baseurl + '.png') 
+```
+
+> 注意： require 中不能是一个变量，必须是字符串拼接的形式
+
+
 
 ### Node加载(Node使用了CommonJS 规范)
+
 Node 对 ES6 模块的处理比较麻烦，因为它有自己的 CommonJS 模块格式，与 ES6 模块标准是不兼容的。目前的解决方案是：将两者分开使用，ES6 模块和 CommonJS 采用各自的加载方案。一个模块首先要判断是 CommonJS 模块还是 ES6 模块，加载方式不同，暴露接口的方式也不同。
 
 node 中的 exports 和 module.exports 的区别一句话概括就是：require 方法能看到的只有 module.exports 这个对象，它是看不到 exports 对象的，而我们写模块的时候用到的 exports 对象实际上只是对 module.exports 的引用，exports 和 module.exports 都属于 Object 类型，属于引用类型，在 node 中 module.exports 初始的设置为 {} , exports 也指向这个对象。
