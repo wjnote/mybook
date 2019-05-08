@@ -32,6 +32,7 @@
     * [vue修饰符](vue/xiushifu.md)
     * [vuex记录](vue/vuex.md)
 * [html/DOM](htmldom/README.md)
+    * [粘性页脚](htmldom/sticky-footer.md)
 * [mobile](mobile/README.md)
     * [mobile适配](mobile/mobileAdaptive.md)
     * [mobile-1px](mobile/mobile1px.md)

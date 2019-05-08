@@ -16,7 +16,7 @@ export function add(x,y){return x + y};
 
 function v1(){}
 function v2(){}
-export {v1 as namev1, v1 as namev2, v2 as thorenamev2} 
+export {v1 as namev1, v1 as namev2, v2 as thorenamev2}
 // 还可以改变暴露出去的名字, v2还可以用不同的名字暴露两次
 
 export 1 // 报错
@@ -32,7 +32,7 @@ export f; // 报错
 export 输出方式使的用 import 命令的时候，用户需要知道所要加载的变量名或函数名，否则无法加载。为了给用户提供方便，让他们不用阅读文档就能加载模块，就要用到`export default`命令，为模块指定默认输出。
 ```js
 export default function(){ console.log('foo') }
-import allname from './moduleName'  
+import allname from './moduleName'
 // 加载上面的模块可以指定任意的名字
 
 export function fnname(){}
@@ -45,7 +45,7 @@ export default var a = 1;
 
 // 可以同时输入默认方法和其他接口,下面的模块写法
 import _, { each, forEach } from 'lodash';
-export default function(obj){} 
+export default function(obj){}
 export function each(){}
 export function forEach(){}
 ```
@@ -92,8 +92,9 @@ const mymodule = require(path)
 2. CommonJS 模块是运行时加载，ES6模块是编译时输出接口
 3. ES6 模块和 CommonJS 模块的运行机制不一样，ES6模块中JS引擎遇到import命令，就会生成一个只读引用，等到脚本执行了再去引用值，不会存在缓存行为，而CommonJS模块是会缓存基本类型的值
 4. export 导出的是同一个值，不同的脚本加载这个接口，得到的都是同一个实例，一个脚本改变了这个实例，在另一个脚本加载的就是改变后的实例了。
-5. CommonJS 支持动态导入，也就是 `require(${path}/xx.js)`，后者目前不支持，但是已有提案
+5. CommonJS 支持动态导入，也就是 `require(${path}/xx.js)`，后者目前不支持，但是已有提案, import 语句必须位于顶层作用域中
 6. CommonJS 是同步导入，因为用于服务端，文件都在本地，同步导入即使卡住主线程影响也不大。而后者是异步导入，因为用于浏览器，需要下载文件，如果也采用同步导入会对渲染有很大影响
+7. ES6 模块中顶层的 this 指向 undefined，CommonJS 模块的顶层 this 指向当前模块。
 
 **第二个差异是因为 CommonJS 加载的是一个对象(即module.exports属性)**，require 命令第一次执行的时候就会执行整个脚本，然后在内存中生成一个对象,而ES6模块不是对象，它的对外接口只是一种静态定义，在代码静态解析阶段就会生成
 
@@ -123,7 +124,7 @@ module.exports ={
 }
 
 var mod = require('./name') //上面代码
-console.log(mod.counter)   //3 
+console.log(mod.counter)   //3
 mod.inCounter();
 console.log(mod.counter)  //3
 ```
@@ -154,7 +155,7 @@ ES6 module 和 commonJS 在路径加载的时候，`import` 不能设置变量�
 
 ```js
 const baseurl = 'xxx'
-const img = require( baseurl + '.png') 
+const img = require( baseurl + '.png')
 ```
 
 > 注意： require 中不能是一个变量，必须是字符串拼接的形式
@@ -170,7 +171,7 @@ node 中的 exports 和 module.exports 的区别一句话概括就是：require 
 // 下面两种写法是一样的
 exports.name = function(){}
 
-module.exports.name = function(){} 
+module.exports.name = function(){}
 
 // 这个funtion是一块新的内存地址，导致exports和module.exports不存在关系
 // 而require这个对象只能看到 module.exports这个对象，导致导不出去对象
@@ -178,7 +179,7 @@ exports = function(){}
 
 module.exports = function(){}   // 这样就是正确的
 
-var exports = module.exports 
+var exports = module.exports
 var load = function (module) {
     // 导出的东西
     var a = 1

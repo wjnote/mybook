@@ -3,7 +3,7 @@
 
 ### gitbook 使用流程
 ```shell
-安装  
+安装
 yarn global add gitbook-cli
 
 在目录中：  创建README.md / SUMMARY.md 两个文件
@@ -12,7 +12,7 @@ gitbook init
 页面有book.json 里面一般会有plugins插件,直接下载所有插件和主题
 gitbook install
 
-编辑的时候查看 
+编辑的时候查看
 gitbook serve [--prot xxxx]
 
 最后打包的
@@ -70,7 +70,9 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
 * [vue框架](vue/README.md)
     * [一些常见问题](vue/questions.md)
     * [vue修饰符](vue/xiushifu.md)
+    * [vuex记录](vue/vuex.md)
 * [html/DOM](htmldom/README.md)
+    * [粘性页脚](htmldom/sticky-footer.md)
 * [mobile](mobile/README.md)
     * [mobile适配](mobile/mobileAdaptive.md)
     * [mobile-1px](mobile/mobile1px.md)
@@ -84,5 +86,7 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
     * [window进程查询](accumulation/windowport.md)
     * [web安全问题](accumulation/safely.md)
     * [图片三种表现方式](accumulation/imgways.md)
+    * [web页面图片加载优化](accumulation/imgload.md)
 * [jQuery源码](jquery/README.md)
 * [map](map/README.md)
+

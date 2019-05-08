@@ -69,7 +69,7 @@ module.exports = {
 
 - quiet 控制台中不输出打包的信息
 - compress 开启gzip压缩
-- progress 显示打包的进度 
+- progress 显示打包的进度
 - open 可以自动打开浏览器，好像参数只限于命令行使用。
 
 ### webpack-dev-server实现模块热替换(HMR)
@@ -78,9 +78,10 @@ module.exports = {
 3. 调整CSS样式的速度更快
 
 #### 非Node方式
-非Node方式有关`webpack-dev-server`的配置都在devServer参数里，首先开启HMR，添加配置参数hot: true，并且一定要指定output.publicPath，如果不指定会导致HMR无法工作，建议devServer.publicPath和output.publicPath一样,而且还要添加 `HotModuleReplacementPlugin` 到plugins中否则会报错
+非Node方式有关`webpack-dev-server`的配置都在`devServer`参数里，首先开启HMR，添加配置参数`hot: true`，并且一定要指定`output.publicPath`，如果不指定会导致HMR无法工作，建议`devServer`.`publicPath和output.publicPath`一样,而且还要添加 `HotModuleReplacementPlugin` 到plugins中否则会报错
 
 ![webpack报错](./img/webpack01.png)
+
 ```js
 module.exports = {
     plugins: [
@@ -99,12 +100,13 @@ module.exports = {
 2. webpack 的 plugins 添加 new webpack.HotModuleReplacementPlugin()
 3. webpack-dev-server 添加 `hot: true`
 
-采用Node方式做不到自动将webpack/hot/dev-server添加到entry里面，这和前面的自动刷新是一样的。然后！！使用Node方式启动也不能在命令行里面添加启动参数了，所以我们需要手动添加HotModuleReplacementPlugin，还有,--open自然也没法用了
+采用Node方式做不到自动将 `webpack/hot/dev-server` 添加到`entry`里面，这和前面的自动刷新是一样的。
+使用Node方式启动也不能在命令行里面添加启动参数了，所以我们需要手动添加`HotModuleReplacementPlugin`，还有`--open`自然也没法用
 
 ```js
 config.entry.unshift("webpack-dev-server/client?http://localhost:8080/", 'webpack/hot/dev-server');
 let server = new WebpackDevServer(compiler, {
-    contentBase: config.output.path,  
+    contentBase: config.output.path,
     publicPath: config.output.publicPath,
     hot: true
     ...
@@ -124,4 +126,4 @@ plugins: [
 
 
 ##### 额外阅读
-在启动热更新的时候，React有时候想查询更新前的状态，这是办不到的。所以才有了react-hot-loader这个东西，可以帮助我们查看更新前的状态。
+在启动热更新的时候，React有时候想查询更新前的状态，这是办不到的。所以才有了`react-hot-loader`这个东西，可以帮助我们查看更新前的状态。
