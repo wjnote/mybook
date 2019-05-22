@@ -89,4 +89,3 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
     * [web页面图片加载优化](accumulation/imgload.md)
 * [jQuery源码](jquery/README.md)
 * [map](map/README.md)
-
