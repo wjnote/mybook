@@ -14,7 +14,7 @@ DOM节点通常对应于一个标签，一个文本或者是一个HTML属性，D
 ```js
 let ele = document.createElement('div')
 // 下面是一个文本节点 它的nodeType : 3
-let docNode = document.createTextNode('hello world') 
+let docNode = document.createTextNode('hello world')
 
 ele.appendChild(docNode);
 
@@ -70,7 +70,7 @@ while (element.firstElementChild) {
   element.removeChild(element.firstElementChild);
 }
 ```
-> 在某一个元素之后插入元素需要自己实现，js原生没有，可以参考jQuery的 after方法，一个简单实现 `parentDiv.insertBefore(sp1, sp2.nextSibling);` 
+> 在某一个元素之后插入元素需要自己实现，js原生没有，可以参考jQuery的 after方法，一个简单实现 `parentDiv.insertBefore(sp1, sp2.nextSibling);`
 
 
 #### 属性操作
@@ -103,11 +103,36 @@ classLists.replace(oldClass, newClass) // 用新类替换已有类
 #### 直接访问元素样式，是元素的属性，而不是方法访问
 ```js
 var myDiv = document.getElementById("myDiv");
-//设置背景颜色 
+//设置背景颜色
 myDiv.style.backgroundColor = "red";
 //改变大小
-myDiv.style.width = "100px"; 
+myDiv.style.width = "100px";
 myDiv.style.height = "200px";
 //指定边框
 myDiv.style.border = "1px solid black";
+```
+
+#### 事件绑定
+目前主要使用的是DOM2级的事件绑定事件，在`addEventListener` 中有一个事件参数 `event`,里面保存了触发事件相关的内容
+- `event.target`: 指向触发事件监听的对象。
+- `event.currentTarget`: 指向添加监听事件的对象, 一般等于在方法中的`this`,在方法中一般不建议使用 this
+```html
+<ul>
+  <li>hello 1</li>
+  <li>hello 2</li>
+  <li>hello 3</li>
+  <li>hello 4</li>
+</ul>
+<script>
+  let ul = document.querySelectorAll('ul')[0]
+  let aLi = document.querySelectorAll('li')
+  ul.addEventListener('click',function(e){
+      let oLi1 = e.target
+      let oLi2 = e.currentTarget
+      console.log(oLi1)   //  被点击的li
+      console.log(oLi2)   // ul
+      console.log(oLi1===oLi2)  // false
+      console.log(this===oLi2)  // true
+  })
+</script>
 ```
