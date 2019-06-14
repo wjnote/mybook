@@ -136,3 +136,8 @@ myDiv.style.border = "1px solid black";
   })
 </script>
 ```
+
+### html的meta标签
+meta标签共有两个属性，分别是`http-equiv`属性和`name`属性。meta标签用来描述一个HTML网页文档的属性，但却是文档的最基本的元数据
+- name属性主要用于描述网页，与之对应的属性值为content，content中的内容主要是便于搜索引擎机器人查找信息和分类信息用的。
+- http-equiv顾名思义，相当于http协议中文件头的作用，它可以向浏览器传回一些有用的信息，以帮助正确和精确地显示网页内容，与之对应的属性值为content，content中的内容其实就是各个参数的变量值
