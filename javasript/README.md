@@ -50,11 +50,13 @@ console.timeEnd('p')
 method(para1, , para2) // 这样的形式就会报错
 
 // 我们之前可以使用 null 、 undefined , 这两种形式都是可以的
-method(para1, null, para2)  
+method(para1, null, para2)
 method(para1, undefined, para2)
 
 // 在es6有了扩展运算符之后，可以利用 数组是松散的 结构来实现
-method(...[para1, , para2]);  
+method(...[para1, , para2]);
 ```
 
 - 简单数组的拷贝可以通过 slice方法 concat方法 [...arr] 来实现，对于多维数组的实现，必须通过`JSON.parse(JSON.stringify(obj))`方法来实现
+
+- 对象转基本类型，调用优先级 `Symbol.toPrimitive > valueOf() > toString()` 几个方法都可以重写

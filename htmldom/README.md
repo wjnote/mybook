@@ -115,7 +115,7 @@ myDiv.style.border = "1px solid black";
 #### 事件绑定
 目前主要使用的是DOM2级的事件绑定事件，在`addEventListener` 中有一个事件参数 `event`,里面保存了触发事件相关的内容
 - `event.target`: 指向触发事件监听的对象。
-- `event.currentTarget`: 指向添加监听事件的对象, 一般等于在方法中的`this`,在方法中一般不建议使用 this
+- `event.currentTarget`: 指向添加监听事件的对象, 一般等于在方法中的`this`,在方法中一般不建议使用 `this`
 ```html
 <ul>
   <li>hello 1</li>
