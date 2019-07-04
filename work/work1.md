@@ -1,15 +1,5 @@
 ## 编程小技巧
 
-1. 快速将数字转换为字符串：可以使用连接符 + 后面跟一组空引号 “”
-2. 字符串转为数字，可以使用 加法运算符 + 或者是 -0 两种方式
-
-```js
-let int = '15'
-int = +int;
-// or
-int = int - 0;
-```
-
 3. 判断一个数组中有一个特定的值，可以使用find函数，但是IE中需要使用 `indexOf` 来判断返回值和 `-1` 的关系，还可以使用 `~index`的方式来判断
 
 ```js
@@ -86,3 +76,41 @@ function Func(){
 }
 ```
 
+11. 过滤数组中的`false`值，比如`0, false , null, undefined`等可以使用简易方法
+```js
+const arr = [0,1,'0','1',undefined, null, '1'+0];
+arr.filter(Boolean);
+// [1,'0','1','10'];
+```
+> 其中 Boolean 是一个函数，会判断传入的值返回 true 、 false；
+
+
+12. 过滤数组的重复的值,利用了`indexOf`返回的是第一次出现的位置
+```js
+arr.filter((key,index)=>arr.indexOf(key) === index)
+```
+
+
+13. 利用扩展运算符，将多维数组变为一维数组
+```js
+//  如果只是二维数组
+let arr = [1, [2,3,4], 5, [6,7]];
+[].concat(...arr) // [1,2,3,4,5,6,7]
+
+// 如果是多维数组 可以利用递归调用的方式, 一次一次的降维 直到一维数组
+function flattenArray(arr) {
+  const flattened = [].concat(...arr);
+  return flattened.some(item => Array.isArray(item)) ? flattenArray(flattened) : flattened;
+}
+```
+
+14. 利用`...`运算符来产生根据条件的不同的对象，下面的方式，不用`...`会报格式错误 ？？
+```js
+const getUser = (temp)={
+  return {
+    name: 'wuj',
+    ...temp && {age: 26}
+  }
+}
+//  结果就是传入为true时，返回两个属性
+```

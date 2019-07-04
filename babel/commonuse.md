@@ -1,10 +1,9 @@
 # babel常用插件
-babel7的使用方式和之前的有一些不一样，一般的使用都需要添加`@babel/core
-@babel/cli   @babel-loader`
+babel7的使用方式和之前的有一些不一样，一般的使用都需要添加`@babel/core 、babel-loader 、 @babel/cli`这三个包前两个是必装
 
 
 ### `@babel/cli`
-cli就是工具，安装了该插件就能在命令行中使用babel来编译文件
+cli就是工具，安装了该插件就能在命令行中使用babel来编译文件,一般使用webpack打包工具，不用安装此包
 
 ### `@babel/node`
 `babel-node` 是 `@babel/cli` 的一部分，不需要特别安装，可以直接执行一个使用ES6编写的js文件
@@ -31,8 +30,8 @@ babel 默认只转换 js 语法，而不转换新的 API，比如 `Iterator、Ge
 *因为上面的第二个缺点，我们一般开发中更加倾向于使用 `@babel/plugin-transform-runtime`  但是如果代码中包含了高版本的jS方法，还是要使用`@babel/polyfill`*
 
 
-## babel-runtime 和 `@babel/plugin-transform-runtime` (重点)
-我们时常在项目中看到 .babelrc 中使用`@babel/plugin-transform-runtime`，而 package.json 中的 dependencies (注意不是 devDependencies) 又包含了 `babel-runtime`，那这两个是不是成套使用的呢？他们又起什么作用呢？
+## `@babel/runtime` 和 `@babel/plugin-transform-runtime` (重点)
+我们时常在项目中看到 .babelrc 中使用`@babel/plugin-transform-runtime`，而 package.json 中的 dependencies (注意不是 devDependencies) 又包含了 `@babel/runtime`，那这两个是不是成套使用的呢？他们又起什么作用呢？
 
 先说 `@babel/plugin-transform-runtime`。
 
@@ -47,7 +46,7 @@ var _ref = _asyncToGenerator(function* (arg1, arg2) {
 });
 ```
 
-不用过于纠结具体的语法，只需看到，这个 _asyncToGenerator 在当前文件被定义，然后被使用了，以替换源代码的 await。但每个被转化的文件都会插入一段 _asyncToGenerator 这就导致重复和浪费了。使用了 `@babel/plugin-transform-runtime` 了之后，转化后的代码会变成
+不用过于纠结具体的语法，只需看到，这个` _asyncToGenerator `在当前文件被定义，然后被使用了，以替换源代码的 await。但每个被转化的文件都会插入一段 `_asyncToGenerator `这就导致重复和浪费了。使用了 `@babel/plugin-transform-runtime` 了之后，转化后的代码会变成
 ```js
 // 从直接定义改为引用，这样就不会重复定义了。
 var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
@@ -62,9 +61,12 @@ var _ref = _asyncToGenerator3(function* (arg1, arg2) {
 
 从定义方法改成引用，那重复定义就变成了重复引用，就不存在代码重复的问题了。
 
-但在这里，我们也发现 `babel-runtime` 出场了，它就是这些方法的集合处，也因此，在使用 `@babel/plugin-transform-runtime` 的时候必须把 `babel-runtime` 当做依赖。
+但在这里，我们也发现 `@babel/runtime` 出场了，它就是这些方法的集合处，也因此，在使用 `@babel/plugin-transform-runtime` 的时候必须把 `@babel/runtime` 当做依赖，
 
-再说 babel-runtime，它内部集成了
+**`@babel/runtime` 是生产依赖，而不是开发的依赖，必须要安装，不然打包会报错**
+
+
+再说 `@babel/runtime`，它内部集成了
 
 **core-js:** 转换一些内置类 (Promise, Symbols等等) 和静态方法 (Array.from 等)。绝大部分转换是这里做的。自动引入。
 **regenerator:** 作为 core-js 的拾遗补漏，主要是 generator/yield 和 async/await 两组的支持。当代码中有使用 generators/async 时自动引入。
