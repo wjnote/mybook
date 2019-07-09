@@ -36,10 +36,7 @@ babel 插件一般拆成很小的力度，开发中可以按需引进，例如ES
 3. 多个preset，按照声明次序逆序执行
 
 ```js
-var profile = <div>
-    <img src="avatar.png">
-    </div>
-var foo = ()=> 'foo'
+const foo = ()=>{return <div>this is react template!</div>}
 ```
 
 上面的代码要需要先执行 jsx 转换为 js 然后在转为 ES5识别的代码，
