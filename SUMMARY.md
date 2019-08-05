@@ -11,6 +11,7 @@
     * [函数继承](javasript/inherit.md)
     * [js常用继承，多继承](javasript/extends.md)
     * [es6-class继承使用和原理](javasript/es6-class.md)
+    * [js数据加密](javasript/data-encryption.md)
 * [ES6](es6/README.md)
     * [notice](es6/notice.md)
     * [模块加载](es6/moduleupload.md)

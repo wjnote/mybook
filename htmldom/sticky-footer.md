@@ -20,8 +20,7 @@
 ```html
 <div class="container">
   <div class="header"></div>
-  <div class="section">
-  </div>
+  <div class="section"></div>
 </div>
 <div class="footer">Copyright© 1994-2019 切图妞</div>
 ```
