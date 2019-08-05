@@ -48,7 +48,7 @@
     * [浏览器多线程和js单线程](browser/thread.md)
 * [工作积累](work/README.md)
     * [编程小技巧1](work/work1.md)
-    * [编程技巧-类型转换](work/work2.md)
+    * [编程小技巧2](work/work2.md)
     * [JS编程中常见的错误](work/errorlist.md)
     * [git](work/git学习资料.md)
     * [window进程查询](work/windowport.md)
