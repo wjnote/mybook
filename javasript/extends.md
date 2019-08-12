@@ -22,8 +22,8 @@ Chilren.prototype.constructor = Children;
 ```js
 function SuperType(){ this.color = ['res', 'green']};
 
-function SubType(){ 
-	Super.call(this) 
+function SubType(){
+	Super.call(this)
 };
 ```
 
@@ -49,18 +49,18 @@ function SubType(name,age){
 }
 // 继承方法 构建原型
 SubType.prototype = new SuperType();
-SubType.prototype.constructor = SubType; 
-SubType.prototype.fnname= function(){}; 
+SubType.prototype.constructor = SubType;
+SubType.prototype.fnname= function(){};
 ```
 
 **注意下面这种写法是有问题的**
 
 ```js
 function SuperType(params) {
-  // **其中会打印2次** 
+  // **其中会打印2次**
   // 第一次就执行到 SubType.prototype = new SuperType(); 这里时，
-  // 但是这个时候 params 是为空的，给 sex  
-  console.log(params) //{name: "wujun", sex: "man"}  
+  // 但是这个时候 params 是为空的，给 sex
+  console.log(params) //{name: "wujun", sex: "man"}
   this.color = ['res', 'green']
   this.sex = params.sex
 };
@@ -169,7 +169,7 @@ let instance2 = new SubType('liyuan', 24);
 
 ![Alt text](./img/03.png)
 
-> 这个例子的高效率体现在它只调用了一次 SuperType 构造函数，并且因此避免了在 SubType.prototype 上创建不必要的，多余的属性，于此同时，原型链还能保持不变，所以还能够正常使用 instanceof 和 isPrototypeOf() 
+> 这个例子的高效率体现在它只调用了一次 SuperType 构造函数，并且因此避免了在 SubType.prototype 上创建不必要的，多余的属性，于此同时，原型链还能保持不变，所以还能够正常使用 instanceof 和 isPrototypeOf()
 
 7. **混入方式继承多个对象**
 用一个子对象可以继承多个父类的原型，实现子类的组合

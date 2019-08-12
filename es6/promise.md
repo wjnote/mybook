@@ -5,13 +5,13 @@ Promise 就是一个容器，其中保存了某个未来才会结束的事件（
 
 **Promise 与回调函数方式相比有哪些不同：**
 1.  在使用Promise 进行一步处理的时候，我们必须按照接口规定的方法编写处理代码。
-> 除了Promise对象规定的 then / catch 等方法外其他方法都不可使用，而不会像回调函数那样可以自由的定义回调函数，必须严格遵守固定，统一的编程方式来编写
+  > 除了Promise对象规定的 then / catch 等方法外其他方法都不可使用，而不会像回调函数那样可以自由的定义回调函数，必须严格遵守固定，统一的编程方式来编写
 2. 因为Promise 的统一接口的做法，就可以形成基于接口的各种各样的异步处理模式
 3. Promise 可以将复杂的异步处理轻松的进行模式化
 ```javascript
 var promise = new Promise(function(resolve, reject){
 	// 其中 resolve / reject 是浏览器内置的，不需要自己设置函数
-}); 
+});
 promise.then(onFulfilled, onRejected);
 // 成功和失败都可以调用,且只会调用一次 下面的方式是同样的效果
 promise.then(function(val){}).catch(function(err){})   // 推荐使用
@@ -126,4 +126,31 @@ Deferred.prototype.reject = function(reason){
 	this._reject.call(this.promise, reason)
 }
 ```
-上面的代码实现了 Deferred ，在使用promise的地方都可以使用  
+上面的代码实现了 Deferred ，在使用promise的地方都可以使用
+
+
+### 代码实现
+```js
+class Promise {
+  result: any;
+  callbacks = [];
+  failbacks = [];
+  constructor(fn) {
+      fn(this.resolve.bind(this), this.reject.bind(this));
+  }
+  resolve(res) {
+      if (this.callbacks.length > 0) this.callbacks.shift()(res, this.resolve.bind(this), this.reject.bind(this));
+  }
+  reject(res) {
+      this.callbacks = [];
+      if (this.failbacks.length > 0) this.failbacks.shift()(res, this.resolve.bind(this), this.reject.bind(this));
+  }
+  catch(fn) {
+      this.failbacks.push(fn);
+  }
+  then(fn) {
+      this.callbacks.push(fn);
+      return this;
+  }
+}
+```
