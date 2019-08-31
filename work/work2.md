@@ -19,4 +19,27 @@ let num1 = -23.9 | 0;  // -23
 ```
 > 有一个变通使用就是可以从整数末尾删除任意数量的数字， `num / 10*n | 0`
 
-4.
+4. 函数传值的时候的时候可以使用默认值和解构赋值的简易形式，还可以有条件的构建对象
+```js
+function pick({id, name, age}){
+  return{
+    guid: id,
+    ...(name && {name}),
+    ...(age && {age})
+  }
+}
+// 其中的 ｛name｝  是ES6对象的简写方式
+```
+
+5. 双冒号运算符,是一个新的提案，“函数绑定”（function bind）运算符
+```js
+  foo::bar;
+  // 等同于
+  bar.bind(foo);
+
+  foo::bar(..arguments)
+  // 等同于
+  bar.apply(foo, arguments)
+```
+
+6. vue中可以监听元素值的变化，值的初始值一般在data中设置或者created 中确定值，一般初始值不要再methods方法中初始化

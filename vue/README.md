@@ -167,6 +167,4 @@ mounted: function () {
 }
 ```
 
-
-
-vuex
+在写法种，key可以增加我们比较虚拟DOM的性能，更加优化，最好不要使用`index`作为key的值，

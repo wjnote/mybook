@@ -30,6 +30,7 @@
     * [babel常用插件](babel/commonuse.md)
 * [webpack](webpack/README.md)
     * [webpack-dev-server](webpack/dev.server.md)
+    * [webpack多页面构建](webpack/morepage.md)
 * [vue框架](vue/README.md)
     * [一些常见问题](vue/questions.md)
     * [vue修饰符](vue/xiushifu.md)
@@ -37,6 +38,7 @@
 * [html/DOM/css](htmldom/README.md)
     * [动画](css/animation.md)
     * [粘性页脚](htmldom/sticky-footer.md)
+    * [css常用居中方式](htmldom/center.md)
 * [mobile](mobile/README.md)
     * [移动适配方案](mobile/shipei.md)
     * [mobile适配](mobile/mobileAdaptive.md)
@@ -49,6 +51,7 @@
 * [工作积累](work/README.md)
     * [编程小技巧1](work/work1.md)
     * [编程小技巧2](work/work2.md)
+    * [权限控制](work/accesscontrol.md)
     * [JS编程中常见的错误](work/errorlist.md)
     * [git](work/git学习资料.md)
     * [window进程查询](work/windowport.md)
@@ -59,3 +62,4 @@
     * [Ta404框架](work/Ta404.md)
 * [jQuery源码](jquery/README.md)
 * [map](map/README.md)
+
