@@ -4,7 +4,7 @@
 ES6 模块的设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量。CommonJS 和 AMD 模块，都只能在运行时确定这些东西。
 
 ### ES6的模块输出 export 命令
-**ES6 模块功能主要由两个命令构成：export 和 import。export 命令用于规定模块的对外接口，import 命令用于输入其他模块提供的功能。**
+**ES6 模块功能主要由两个命令构成：`export 和 import`。  `export` 命令用于规定模块的对外接口，，`import` 命令用于输入其他模块提供的功能。**
 
 ```js
 export const firstname = 'wujun'
@@ -19,19 +19,20 @@ function v2(){}
 export {v1 as namev1, v1 as namev2, v2 as thorenamev2}
 // 还可以改变暴露出去的名字, v2还可以用不同的名字暴露两次
 
-export 1 // 报错
+export 1 // 报错  因为没有指定对外的接口  如果加上 default 则是正确的，因为指定了对外的接口为 default
 function f(){}
 export f; // 报错
 ```
+
 - export 可以对外暴露变量，函数，类class
 - export 规定对外的的接口，必须与模块内部的变量建议对应的关系
-- export 语句输出的值，与其对应的接口是动态绑定关系，可以取到模块内实时的值，也就是内部的值是可以变化的
+- export 语句输出的值，与其对应的接口是动态绑定关系，**可以取到模块内实时的值，也就是内部的值是可以变化的**
 - export 可以位于模块的任何位置，但是必须在模块顶层作用域内
 
-### ES6的模块默认输出 export default 命令
-export 输出方式使的用 import 命令的时候，用户需要知道所要加载的变量名或函数名，否则无法加载。为了给用户提供方便，让他们不用阅读文档就能加载模块，就要用到`export default`命令，为模块指定默认输出。
+### ES6的模块默认输出 `export default` 命令
+`export` 输出方式使的用 `import` 命令的时候，用户需要知道所要加载的变量名或函数名，否则无法加载。为了给用户提供方便，让他们不用阅读文档就能加载模块，就要用到`export default`命令，为模块指定默认输出。
 ```js
-export default function(){ console.log('foo') }
+export default function fnname(){ console.log('foo') }    // 此时函数名fnname, 在外部是无效的，等同于匿名函数
 import allname from './moduleName'
 // 加载上面的模块可以指定任意的名字
 
@@ -40,8 +41,12 @@ import {fnname} from './fnname.js'
 
 // 正确
 export default 42;
+
+// 正确
+var a = 1;
+export default a;
 // 错误
-export default var a = 1;
+export default var a = 1;    // export default 表示输出一个默认的default变量，所以后面不能跟变量声明语句。
 
 // 可以同时输入默认方法和其他接口,下面的模块写法
 import _, { each, forEach } from 'lodash';
@@ -49,10 +54,11 @@ export default function(obj){}
 export function each(){}
 export function forEach(){}
 ```
-- export default 也可以用在非匿名函数
-- export default 一个模块只能由一个默认输出
-- export default 本质上就是输出一个 default 的变量，然后系统允许为它取任意名字
-- export default也可以用来输出类。 `export default class{}`
+
+- `export default` 主要用来输入匿名函数也可以用在非匿名函数
+- `export default` 一个模块只能有一个默认输出
+- `export default` 本质上就是输出一个 `default` 的变量，然后系统允许为它取任意名字
+- `export default` 也可以用来输出类。 `export default class{}`
 
 ### ES6的模块加载 import 命令
 ```js
@@ -63,14 +69,16 @@ import { lastName as surname } from './profile.js'; // 可以重命名
 foo();
 import {foo} from 'my_module' //是能够运行的
 ```
-- import 命令输入的变量是只读的，不允许在加载模块的脚本里面改写接口
-- 如果 `import {a} form './xxxx'` 其中的a是个对象，是可以改写的，但是不要在实际中使用，不易查错
-- import 命令具有提升效果，会提升到整个模块的头部，首先执行
-- import 命令是在编译阶段运行的，在代码运行之前（提升的原因）
-- import 是静态执行，所以不能使用表达式和变量，这些只有在运行时才能确定结果的语法结构
-- import 语句会执行所加载的模块， `import 'lodash'` 是可以的
+
+- `import` 命令输入的变量是只读的，不允许在加载模块的脚本里面改写接口
+- 如果 `import {a} form './xxxx'` 其中 a是个对象，是可以改写 a 的属性，但是不要在实际中使用，不易查错
+- `import` 命令具有提升效果，会提升到整个模块的头部，首先执行
+- `import` 命令是在编译阶段运行的，在代码运行之前（提升的原因）
+- 在模块中 `import` 和 require 命令可以同时使用，但是 `import` 命令会最先执行
+- `import` 是静态执行，所以不能使用表达式和变量，这些只有在运行时才能确定结果的语法结构
+- `import` 语句会执行所加载的模块， `import 'lodash'` 是可以的
 - 如果多次重复执行加载同一模块，那么只会执行一次
-- 可以实现一个模块的整体加载,采用 * 号的方式
+- 可以实现一个模块的整体加载,采用 * 号的方式，但是开发中不能修改加载的那个对象
 
 ### import()
 前面介绍过，import命令会被 JavaScript 引擎静态分析，先于模块内的其他语句执行
@@ -86,6 +94,47 @@ const mymodule = require(path)
 // 上面就是动态加载，require加载那个模块只能运行时才知道
 ```
 
+### export 和 import 的复合写法
+如果在一个模块中，先输入后输出同一个模块，import 和 default 可以写在一起
+```js
+export {foo, bar} from 'my_module'
+
+// 可以简单理解为
+import {foo, bar} from 'my_module'
+export {foo, bar} ;
+```
+上面的写法表示 `foo, bar`实际上并没有被导入当前模块，只是相当于对外转发了这两个接口，导致当前模块不能直接使用`foo, bar`
+
+**export和import 的写法合并可以用于模块的继承，在子模块中先转发父模块的所有方法和属性，再导出自己本身的属性和方法**
+```js
+// parentModule.js
+export const nyname = 'wujun'
+export const temp = function(name) {
+  console.log(name)
+}
+
+export default 'wujun and liyuan'   // 该行是无效的，在最后的不会显示
+
+// childrenModule.js
+// import {nyname, temp} from './component/index'
+// export {nyname, temp}
+// 等同于上两行代码效果一致， 最好使用简写方式，可以导出 parentModule 所有属性和方法
+export * from './parentModule'  
+
+export let sex  = 'man'
+
+export function showName () {
+  console.log(nyname)
+}
+export default 40;   // 该行是有效果的，在使用时为 defalut 属性
+
+// index
+import * as test from './childrenModule'
+console.log(test)          // 整个对象, 其中有个 default 属性，值为 40
+console.log(test.nyname)   // wujun   来自 parentModule 的属性
+test.temp(test.sex)        // man  来自 childrenModule 的属性
+test.showName()            // wujun  来自 childrenModule 的方法，其中使用了 parentModule 的属性
+```
 
 ### ES6 模块和CommonJS 模块的差异
 1. CommonJS 模块加载输出的是一个值的拷贝，ES6模块输出的是值的引用
@@ -96,7 +145,7 @@ const mymodule = require(path)
 6. CommonJS 是同步导入，因为用于服务端，文件都在本地，同步导入即使卡住主线程影响也不大。而后者是异步导入，因为用于浏览器，需要下载文件，如果也采用同步导入会对渲染有很大影响
 7. ES6 模块中顶层的 this 指向 undefined，CommonJS 模块的顶层 this 指向当前模块。
 
-**第二个差异是因为 CommonJS 加载的是一个对象(即module.exports属性)**，require 命令第一次执行的时候就会执行整个脚本，然后在内存中生成一个对象,而ES6模块不是对象，它的对外接口只是一种静态定义，在代码静态解析阶段就会生成
+**另一个差异是因为 CommonJS 加载的是一个对象(即module.exports属性)**，`require` 命令第一次执行的时候就会执行整个脚本，然后在内存中生成一个对象，而ES6模块不是对象，它的对外接口只是一种静态定义，在代码静态解析阶段就会生成
 
 ```js
 // CommonJS模块格式的加载原理
