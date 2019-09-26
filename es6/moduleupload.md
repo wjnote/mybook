@@ -1,9 +1,9 @@
-## 模块加载
+# 模块加载
 在 ES6 之前，社区制定了一些模块加载方案，最主要的有 CommonJS  CMD和 AMD 。前者用于服务器，后2者用于浏览器。ES6 在语言标准的层面上，实现了模块功能，完全可以取代 CommonJS CMD  和 AMD 规范，成为浏览器和服务器通用的模块解决方案。
 
 ES6 模块的设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量。CommonJS 和 AMD 模块，都只能在运行时确定这些东西。
 
-### ES6的模块输出 export 命令
+## ES6的模块输出 export 命令
 **ES6 模块功能主要由两个命令构成：`export 和 import`。  `export` 命令用于规定模块的对外接口，，`import` 命令用于输入其他模块提供的功能。**
 
 ```js
@@ -29,7 +29,7 @@ export f; // 报错
 - export 语句输出的值，与其对应的接口是动态绑定关系，**可以取到模块内实时的值，也就是内部的值是可以变化的**
 - export 可以位于模块的任何位置，但是必须在模块顶层作用域内
 
-### ES6的模块默认输出 `export default` 命令
+## ES6的模块默认输出 `export default` 命令
 `export` 输出方式使的用 `import` 命令的时候，用户需要知道所要加载的变量名或函数名，否则无法加载。为了给用户提供方便，让他们不用阅读文档就能加载模块，就要用到`export default`命令，为模块指定默认输出。
 ```js
 export default function fnname(){ console.log('foo') }    // 此时函数名fnname, 在外部是无效的，等同于匿名函数
@@ -60,7 +60,8 @@ export function forEach(){}
 - `export default` 本质上就是输出一个 `default` 的变量，然后系统允许为它取任意名字
 - `export default` 也可以用来输出类。 `export default class{}`
 
-### ES6的模块加载 import 命令
+
+## ES6的模块加载 import 命令
 ```js
 import {firstName, lastName, year} from './profile.js';
 import  * as all from './profile.js'; //同上面的写法，整体加载
@@ -80,7 +81,7 @@ import {foo} from 'my_module' //是能够运行的
 - 如果多次重复执行加载同一模块，那么只会执行一次
 - 可以实现一个模块的整体加载,采用 * 号的方式，但是开发中不能修改加载的那个对象
 
-### import()
+## import()
 前面介绍过，import命令会被 JavaScript 引擎静态分析，先于模块内的其他语句执行
 ```js
 if(x ===3 ){
@@ -94,7 +95,7 @@ const mymodule = require(path)
 // 上面就是动态加载，require加载那个模块只能运行时才知道
 ```
 
-### export 和 import 的复合写法
+## export 和 import 的复合写法
 如果在一个模块中，先输入后输出同一个模块，import 和 default 可以写在一起
 ```js
 export {foo, bar} from 'my_module'
@@ -119,7 +120,7 @@ export default 'wujun and liyuan'   // 该行是无效的，在最后的不会�
 // import {nyname, temp} from './component/index'
 // export {nyname, temp}
 // 等同于上两行代码效果一致， 最好使用简写方式，可以导出 parentModule 所有属性和方法
-export * from './parentModule'  
+export * from './parentModule'
 
 export let sex  = 'man'
 
@@ -136,7 +137,8 @@ test.temp(test.sex)        // man  来自 childrenModule 的属性
 test.showName()            // wujun  来自 childrenModule 的方法，其中使用了 parentModule 的属性
 ```
 
-### ES6 模块和CommonJS 模块的差异
+---
+## ES6 模块和CommonJS 模块的差异
 1. CommonJS 模块加载输出的是一个值的拷贝，ES6模块输出的是值的引用
 2. CommonJS 模块是运行时加载，ES6模块是编译时输出接口
 3. ES6 模块和 CommonJS 模块的运行机制不一样，ES6模块中JS引擎遇到import命令，就会生成一个只读引用，等到脚本执行了再去引用值，不会存在缓存行为，而CommonJS模块是会缓存基本类型的值
@@ -147,19 +149,19 @@ test.showName()            // wujun  来自 childrenModule 的方法，其中使
 
 **另一个差异是因为 CommonJS 加载的是一个对象(即module.exports属性)**，`require` 命令第一次执行的时候就会执行整个脚本，然后在内存中生成一个对象，而ES6模块不是对象，它的对外接口只是一种静态定义，在代码静态解析阶段就会生成
 
-```js
-// CommonJS模块格式的加载原理
+    ```js
+    // CommonJS模块格式的加载原理
 
-{
-    id: 'modulename',
-    exports: {...},
-    loaded: true,
-    ...
-}
-// 这就是Node内部加载模块生成一个对象，该对象的id表示模块的名字，
-// exports属性就是模块输出的各个接口，loaded表示脚本是否执行完毕，还有其他一些属性，
-// 只会在第一次加载时运行一次，以后需要用到就会从 exports上取值，就返回第一次运行的结果(缓存)
-```
+    {
+        id: 'modulename',
+        exports: {...},
+        loaded: true,
+        ...
+    }
+    // 这就是Node内部加载模块生成一个对象，该对象的id表示模块的名字，
+    // exports属性就是模块输出的各个接口，loaded表示脚本是否执行完毕，还有其他一些属性，
+    // 只会在第一次加载时运行一次，以后需要用到就会从 exports上取值，就返回第一次运行的结果(缓存)
+    ```
 
 CommonJS 模块输出的是值的拷贝，也就是说，一旦输出一个值，模块内部的变化就影响不到这个值
 ```js
@@ -177,7 +179,9 @@ console.log(mod.counter)   //3
 mod.inCounter();
 console.log(mod.counter)  //3
 ```
+
 上面的模块加载之后，内部的变化就不会影响到外部的输出 mod.counter的值，因为它是一个原始类型的值，会被缓存起来，除非是函数才能得到变动后的值
+
 ```js
 module.exports={
     get counter(){
@@ -209,13 +213,14 @@ const img = require( baseurl + '.png')
 
 > 注意： require 中不能是一个变量，必须是字符串拼接的形式
 
+---
 
-
-### Node加载(Node使用了CommonJS 规范)
+## Node加载(Node使用了CommonJS 规范)
 
 Node 对 ES6 模块的处理比较麻烦，因为它有自己的 CommonJS 模块格式，与 ES6 模块标准是不兼容的。目前的解决方案是：将两者分开使用，ES6 模块和 CommonJS 采用各自的加载方案。一个模块首先要判断是 CommonJS 模块还是 ES6 模块，加载方式不同，暴露接口的方式也不同。
 
 node 中的 exports 和 module.exports 的区别一句话概括就是：require 方法能看到的只有 module.exports 这个对象，它是看不到 exports 对象的，而我们写模块的时候用到的 exports 对象实际上只是对 module.exports 的引用，exports 和 module.exports 都属于 Object 类型，属于引用类型，在 node 中 module.exports 初始的设置为 {} , exports 也指向这个对象。
+
 ```js
 // 下面两种写法是一样的
 exports.name = function(){}
@@ -274,7 +279,8 @@ var module1 = module_collection.module1;
 ```js
 const Router = require('koa-router'); // 采用这种加载方式
 ```
-不能使用 import ，因为import要求在编译时就指定引用，而 require 是运行时才加载，如果是Node中使用 import的话，文件的后缀名必须是 .mjs;
+
+不能使用 `import` ，因为`import`要求在编译时就指定引用，而 `require` 是运行时才加载，如果是Node中使用 `import` 的话，文件的后缀名必须是 `.mjs`;
 
 
 ### 内部变量
@@ -284,11 +290,12 @@ ES6 模块应该设计为通用的，同一个模块可以适用于浏览器和�
 3. `__filename`(当前模块文件的带有完整绝对路径的文件名)
 4. `__dirname`(当前文件所在目录的完整目录名), 等同于 `path.dirname(__filename)`
 
->  如果想在ES6 模块中是用这些顶层变量，可以写一个 CommonJS 模块输出这些变量，ES6模块再加载这个变量，但是这样一下，ES6模块就不能同时适用于浏览器和服务器了，不建议使用。
+>  如果想在ES6 模块中是用这些顶层变量，可以写一个 CommonJS 模块输出这些变量，ES6模块再加载这个变量，但是这样，ES6模块就不能同时适用于浏览器和服务器了，不建议使用。
 
 
 ### 循环加载(ES6模块和CommonJS模块)
-CommonJS 模块的重要特性就是加载时执行，即脚本代码在require的时候，就会全部执行，**一旦出现某个模块被循环加载，就只会输出已经执行的部分，还未执行的部分不会加载**
+**CommonJS 模块的重要特性就是加载时执行，脚本代码在require的时候，就会全部执行，一旦出现某个模块被循环加载，就只会输出已经执行的部分，还未执行的部分不会加载**
+
 ```js
 // a.js
 exports.done = false;
@@ -307,21 +314,32 @@ console.log(`b.js执行完毕`)
 // main.js
 var a = require('./a.js')
 var b = require('./b.js')
+console.log('在 main.js 之中, a.done=%j, b.done=%j', a.done, b.done);
+/*
+在 b.js 之中，a.done = false
+b.js 执行完毕
+在 a.js 之中，b.done = true
+a.js 执行完毕
+在 main.js 之中, a.done=true, b.done=true
+*/
 ```
-上面代码中执行 a.js 执行到第二行的时候，会去加载 b.js 的内容，b.js中执行到第二行就回去加载 a.js的内容，这样就是循环加载，在 b.js中系统会去 a.js模块中加载对应对象exports属性取值，可以是a.js还没执行完，只会加载已经执行的部分，而不是最后的值，所以在b.js中加载的 `a.done = false`, 然后b.js执行完了，再把执行权交还给a.js往下执行
-1. 在b.js之中。a.js还没能执行完，只执行了第一行
-2. 在main.js执行到第二行的时候，不会再去执行b.js了，会直接取缓存中的exports的值
+> 上面代码中执行 `a.js` 执行到第二行的时候，会去加载 `b.js` 的内容，`b.js`中执行到第二行就回去加载 `a.js`的内容，这样就是循环加载
+> 在 `b.js`中系统会去` a.js`模块中加载对应对象`exports`属性取值，可以是`a.js`还没执行完，只会加载已经执行的部分，而不是最后的值，所以在b.js中加载的 `a.done = false`, 
+> 然后`b.js`执行完了，再把执行权交还给`a.js`往下执行
+
+1. 在`b.js`之中。`a.js`还没能执行完，只执行了第一行,所以取值为 false
+2. 在main.js执行到第二行的时候，不会再去执行`b.js`了，会直接取缓存中的`exports`的值 即是 `exports.done = true`
 3. CommonJS输入的是被输出值的拷贝，不是引用，遇到模块加载时，返回的是已经执行的值，而不是代码全部执行的结果，两者可能会有差异
 
 ```js
 var a = require('a')  // 安全的写法
 var foo = require('a').foo;  // 危险的写法
 
-exports.good = function(arg){
-    return a.foo('good',arg)  // 使用a.foo的最新值
+exports.good = function(arg) {
+  return a.foo('good', arg) // 使用a.foo的最新值
 }
-exports.bad = function(arg){
-    return foo('bad',arg)  // 使用的是加载时已经执行的那部分的值，该值后面可能会被改写
+exports.bad = function(arg) {
+  return foo('bad', arg) // 使用的是加载时已经执行的那部分的值，该值后面可能会被改写
 }
 ```
 

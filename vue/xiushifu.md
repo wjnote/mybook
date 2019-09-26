@@ -18,7 +18,7 @@
 - `.passive` 监听元素滚动事件的时候，相当于给`onscroll`事件添加了 `.lazy`修饰符
 - `.native` 你可能想在某个组件的根元素上监听一个原生事件，可以使用 `v-on`的修饰符 `.native` ,通俗的将就是在父组件中给子组件绑定一个原生的事件，就将子组件变成了普通的HTML标签，不加`.native` 事件时无法触发的（可以理解为该修饰符的作用就是把一个vue组件转化为一个普通的HTML标签，并且该修饰符对普通HTML标签是没有任何作用的。）
 
-```vue
+```js
 <template>
   <div class="clastest">
     <basecheck @click.native="outclick"></basecheck>
@@ -56,7 +56,7 @@ export default {
 
 - ```
   //普通键
-  .enter 
+  .enter
   .tab
   .delete //(捕获“删除”和“退格”键)
   .space
@@ -88,7 +88,7 @@ export default {
 
   ```vue
   <comp :myMessage="bar" @update:myMessage="func"></comp>
-  
+
   func(e){
     this.bar = e
   }
@@ -96,11 +96,11 @@ export default {
   func2(){
     this.$emit('update:myMessage', params)
   }
-  
-  
-  //修饰符的写法 
+
+
+  //修饰符的写法
   <comp :myMessage.sync="bar"></comp>
-  
+
   this.$emit('update:myMessage', params)
   ```
 
@@ -132,7 +132,7 @@ export default {
   // input.attributes.index === undefined
    ```
 
-  
+
 
   - `.camel` 由于html不会区分大小写 `<svg :viewBox="viewBox"></svg>` 渲染的时候就变为全部小写了，不认识`viewbox`导致渲染失败， 使用该修饰符，它就会渲染为驼峰名， *使用字符串模版就没有这个限制*
   - native
