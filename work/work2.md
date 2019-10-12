@@ -42,4 +42,11 @@ function pick({id, name, age}){
   bar.apply(foo, arguments)
 ```
 
-6. vue中可以监听元素值的变化，值的初始值一般在data中设置或者created 中确定值，一般初始值不要再methods方法中初始化
+6. js 数字类型使用IEEE754格式来表示整数和浮点数值，所以计算的时候会有意料之外的值
+```js
+let sum = 62.27 - 33  // 29.270000000000003  在控制台会显示
+let temp = 62.27+3    // 65.27000000000001
+
+// 可以使用 四舍五入为指定位数的小数，我们开发的时候一般是最后的位，一般采用10位
+let parseNumber = parseFloat(temp.toFixed(10));
+```

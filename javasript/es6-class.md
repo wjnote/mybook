@@ -93,7 +93,7 @@ class Rabbit extends Animal{
 }
 ```
 
-### super 实现原理与 [[HomeObject]]
+### super 实现原理与 `[[HomeObject]]`
 当我们调用 `super.method()`是如何检索 method 的呢，也许可以从 this的 `[[Prototype]]` 中获得方法，`this.__proto__.method` 但是这样是行不通的，下面通过一个普通对象来解释
 ```js
 let animal ={
@@ -127,7 +127,7 @@ longear.eat();   // 报错  Maximum call stack size exceeded
 ```
 上面报错就是 this 指针的问题，在 *. ** 这两行中 this 指向的都是 longEar 这个对象 ，所有方法的 this 都是指向当前对象，而不是原型或者其他东西， 所以上面 *. ** 两行的 this.__proto__ 都执行了 rabbit ，然后会无线循环调用下去
 
-### [[HomeObject]]
+### `[[HomeObject]]`
 JS提供了一种特殊的内部属性`[[ HomeObject ]]`，当函数被指定为类或者对象方法时，其 `[[ HomeObject ]]` 数据为该对象，就是将对象名保存在内部的一个属性中，且不能变化，这种也是安全的，因为 `[[ HomeObject ]]` 仅用于在 super 中获取下一层，
 ```js
 let animal = {
@@ -203,3 +203,46 @@ arr.constructor === PowerArray   // true
 filterArr.constructor === PowerArray   // true
 ```
 filter map 等内置方法，返回新的继承类型的对象，他们依靠 constructor 属性来做到这一点的，所以当返回新的 fiteArr 数组时，就像 new PowerArray 一样，所以可以调用原型的方法
+
+
+### class 多继承的方式
+如果在开发中，我们一个类需要继承其他不同的类，并且相同的方法都是需要执行的
+```js
+class BaseModal {
+  close (){
+    console.log(`this is Basemodal close`)
+  }
+}
+let DragModal = (superClass) => class extends superClass{
+  hasLayer = true;
+  drag(){
+    console.log(`this is dragmodal drag fn`)
+  }
+}
+let ScaleModal = (superClass) => class extends superClass{
+  scale(){
+    console.log(`this is scalemodal fn`)
+  }
+  close(){
+    console.log(`this is scalemodal close fn`);
+    if(super.close){
+      super.close();
+    }
+  }
+}
+@DragModal
+@ScaleModal
+class ChildModal extends Basemodal{
+  close(){
+    console.log(`this is chidlren modal close`)
+    if(super.close){
+      super.close();
+    }
+  }
+}
+let  c = new ChildModal();
+```
+
+1. 使用高阶函数的形式，让一个类同时继承了多个类
+2. `ScaleModal` 是一个在 ChildModal 和 BaseModal 之间插入一个混入类，继承了 BaseModal 所有方法，接着子类再去继承这个混入类，达到混入方法的目的，也可以实现同时继承多个类的形式
+3. 装饰器的执行是先从外到内进入，然后由内向外执行

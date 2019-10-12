@@ -89,7 +89,6 @@ export default{
 
 ### 循环遍历
 当我们需要在循环遍历的时候做一个逻辑是否的判断，最好的方式是使用计算属性来计算，这样可以将计算和页面展示分开，不会耦合在一起,直接在html中使用 `showList` 而不是`showItems`
-
     ```js
     export default{
         computed:{
@@ -98,4 +97,30 @@ export default{
           }
         }
     }
+    ```
+
+### 组件复用意味着组件的生命周期钩子函数不会被调用
+router-view是复用的 有时候会有新闻列表的时候，只改变id值的情况，这是就不会刷新，不会执行组件的生命周期函数
+
+1. 使用watch方法，也是官方推荐的方式，当id值改变时，$route也会相应发生改变，可以通过watch的方法来操作
+    ```js
+      watch: {
+        '$route':function(to, from){
+          // dosomethings
+          // 将需要执行的内容写为 一个函数
+        }
+      }
+    ```
+2. 通过改变 <router-view>中的key来达到刷新的目的，
+    ```js
+      <router-view :key="activeDate"></router-view>
+      //我用了一个简单粗暴的方式来改变key，时间戳（捂脸）
+      //this.activeDate = new Date()
+    ```
+3. 官方文档，如果使用了 vue-router ,则在组件内直接使用`beforeRouteLeave`
+    ```js
+      beforeRouteLeave(to, from, next){
+        // 导航离开该组件的对应路由时调用
+        // 可以访问组件实例 this
+      }
     ```
