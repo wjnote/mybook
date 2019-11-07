@@ -33,6 +33,8 @@
     * [vue的ref属性](vue/ref.md)
     * [vue需要注意的问题](vue/attentionpoint.md)
     * [vue插件系统](vue/globalvariate.md)
+    * [vue地址栏输入URL无效](vue/inputurl.md)
+    * [elements使用技巧](vue/elements.md)
 * [node](node/README.md)
     * [node测试](node/test.md)
     * [babel](node/babel.md)
