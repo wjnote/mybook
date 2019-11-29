@@ -18,7 +18,7 @@ $emit 绑定一个自定义事件, 当这个语句被执行时, 就会将参数a
 
 ## 2. $children / $parent
 
-通过`$parent`和`$children`就可以访问组件的实例，拿到实例就可以访问组件上的方法和属性
+通过`$parent`和`$children`就可以访问组件的实例，拿到实例就可以访问组件上的方法和属性(`$data`上面)
 
 > 要注意边界情况，如在#app上拿$parent得到的是new Vue()的实例，在这实例上再拿$parent得到的是undefined，而在最底层的子组件拿$children是个空数组。也要注意得到$parent和$children的值不一样，$children 的值是数组，而$parent是个对象
 

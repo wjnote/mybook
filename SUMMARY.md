@@ -72,4 +72,5 @@
     * [moment常见使用](work/momentjs.md)
 * [jQuery源码](jquery/README.md)
 * [map](map/README.md)
+    * [GeoJSON](map/geojson.md)
 

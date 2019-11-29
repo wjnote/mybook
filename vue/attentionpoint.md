@@ -124,3 +124,15 @@ router-view是复用的 有时候会有新闻列表的时候，只改变id值的
         // 可以访问组件实例 this
       }
     ```
+
+
+### 在组件总引用其他组件的时候，引用组件的变量名不能和该组件的变量重复，否则会爆栈
+```js
+import companyInfo from '...';
+
+export default {
+  name: 'company-info',
+  components: { companyInfo },
+}
+// 这样的方式，就会产生超出调用栈的错误
+```
