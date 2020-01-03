@@ -1,4 +1,4 @@
-# js中的类型转换
+## 编程的技巧2
 
 1. 转换为字符串：可以使用运算符` + `后紧跟一组空引号` '' ` 快速将数字或布尔值转为字符串
 
@@ -43,12 +43,34 @@ function pick({id, name, age}){
 ```
 
 6. js 数字类型使用IEEE754格式来表示整数和浮点数值，所以计算的时候会有意料之外的值
-```js
-let sum = 62.27 - 33  // 29.270000000000003  在控制台会显示
-let temp = 62.27+3    // 65.27000000000001
 
-// 可以使用 四舍五入为指定位数的小数，我们开发的时候一般是最后的位，一般采用10位
-let parseNumber = parseFloat(temp.toFixed(10));
-```
+    ```js
+    let sum = 62.27 - 33  // 29.270000000000003  在控制台会显示
+    let temp = 62.27+3    // 65.27000000000001
+
+    // 可以使用 四舍五入为指定位数的小数，我们开发的时候一般是最后的位，一般采用10位
+    let parseNumber = parseFloat(temp.toFixed(10));
+    ```
 
 7.  css 的高度自适应问题，我们在一个容器中想让div充满容器的，设置了高度100%,，但是其中有一个子容器的高度超过了父元素的100%，这个时候另外的子元素设置了高度为100%的话，出现滚动条的时候就不会暂满父元素的全部高度，只是刚刚设置的100%的高度，所以这个时候可以给 父元素设置`display：flex;display:-webkit-flex;align-items:stretch;` 然后在子元素的 `height:inherit;`这个时候如果父元素的高度因为某个资源撑高了，其他的子元素也会占满父元素的高度
+
+8. `null 和 undefined` 的区别: `undefined` 是基本数据类型，表示未定义缺少的意思，`null` 是引用数据类型，是对象，表示空对象
+`undefined` 是从 null 派生出来的， 所以 `undefined == null // true`
+
+9. delete 删除操作符
+> delete 操作符用于从对象中删除属性，上面的 x 是一个局部对象，操作符不影响局部变量，如果删除对象的属性则会返回 undefined
+
+    ```js
+    var output = (function(x){
+      delete x;
+      return x;
+    })(0)
+    console.log(output) // 0
+
+    var x = {foo:1}
+    var resu = (function(x){
+      delete x.foo;
+      return x.foo;
+    })(x)
+    console.log(resu)  // undefined
+    ```

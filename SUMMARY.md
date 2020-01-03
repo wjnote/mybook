@@ -13,6 +13,7 @@
     * [es6-class继承使用和原理](javasript/es6-class.md)
     * [js数据加密](javasript/data-encryption.md)
     * [js对URL编码解码](javasript/encode.md)
+    * [js 数组去重](javasript/unique.md)
 * [ES6](es6/README.md)
     * [notice](es6/notice.md)
     * [模块加载](es6/moduleupload.md)

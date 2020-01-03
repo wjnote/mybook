@@ -5,28 +5,28 @@
 #### base64加密
 从IE10+ 浏览器开始，浏览器就原生提供了Base64编码解码的方法，不仅浏览器，Service Worker环境也可以用的，对于IE8/9 引入一个垫片脚本就可以了
 
-> 之前的方式是用的开源的 base64.js 
+> 之前的方式是用的开源的 base64.js
 
 1. Base64编码
-        ```js
+    ```js
         let encodedData = window.btoa('wujun');
         // 在js Worker线程中
         let encodedData = self.btoa('wujun');
         // d3VqdW4=
         let encodedData1 = window.btoa(decodeURI(encodeURIComponent('吴军')));
         // 5ZC05Yab
-        ```
+    ```
 2. Base64解码 使用 `atob` 方法
-        ```js
+    ```js
         let decodeData = window.atob(encodedData);
-        let decodeData = self.atob(encodedData); 
-        ```
+        let decodeData = self.atob(encodedData);
+    ```
 3. 如果需要兼容IE8 IE9 ，可以专门针对浏览器引入ployfill脚本
-        ```html
+    ```html
         <!--[if IE]>
         <script src="./base64-polyfill.js"></script>
         <![endif]-->
-        ```
+    ```
 > `[if IE]`表示所有IE浏览器，但是 IE10 已经放弃使用这种表达式，所以可以完美衔接IE9及以下
 
 
