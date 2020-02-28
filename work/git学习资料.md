@@ -120,3 +120,9 @@ $ git reset --hard  origin/[name]
     git remote add origin XXX
     ```
     4. 还是不行的话直接找到路径下的 .git 文件，打开 config 文件，删除 `[remote "origin"]` 下的信息，再重复 2.3 步骤
+
+
+
+### 学习博客
+
+- [常用Git命令](https://juejin.im/post/5e0f401f6fb9a047f164fc9f)

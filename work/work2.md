@@ -74,3 +74,14 @@ function pick({id, name, age}){
     })(x)
     console.log(resu)  // undefined
     ```
+
+10. 在使用前端框架的时候，一般引用css文件和js文件，最好的方式将前端框架整合在一个文件夹里面引入，而不是单独把`css js`文件单独放到项目中的css文件和js文件里面，有些框架在`all.css`中还会引用其他的css文件(如果框架是按照模块书写的，同级目录下会有个modules的css文件夹)，如果我们只是复制总的css文件，其他的文件就没引到，有时候可以解决一些不明原因的bug
+
+11. 在项目中加载图片的时候可能会加载失败，这时可以在` <img src='' alt='' onerror="defaultImg()">` 加载设置加载失败函数 ，但是函数必须在页面DOM加载之前声明，如果在文档后申请不会生效
+```js
+function defaultImg () {  
+  var img=event.srcElement;
+  img.src="../images/index/toutiao.png";
+  img.onerror=null; //控制不要一直跳动
+}
+```
