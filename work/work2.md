@@ -85,3 +85,34 @@ function defaultImg () {
   img.onerror=null; //控制不要一直跳动
 }
 ```
+
+
+12. layui 是一个PC端插件，其中表单的时间选择器，如果是2个不同的时间输入框的话，可以设置后面的时间必须大于前面的时间
+```js
+// 实现的效果就是 先选择开始时间，然后选择结束时间的时候，只能选择开始时间之后的时间
+var start = laydate.render({ // 开始时间
+  elem: '#startElemInput',
+  value: new Date(),  // 设置默认的为当前
+  done: function (value, date) {
+    endMax = end.config.max;
+    end.config.min = date;
+    end.config.min.month = date.month - 1;
+  }
+});
+var end = laydate.render({ // 结束时间
+  elem: '#endElemInput',
+  done: function (value, date) {
+    if ($.trim(value) == '') {
+      var curDate = new Date();
+      date = {
+        'date': curDate.getDate(),
+        'month': curDate.getMonth() + 1,
+        'year': curDate.getFullYear()
+      };
+    }
+    start.config.max = date;
+    start.config.max.month = date.month - 1;
+  }
+});
+form.render();
+```

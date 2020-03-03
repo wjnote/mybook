@@ -102,7 +102,7 @@ s文件模块是高阶模块，继承了EventEmitter、stream、path等底层模
 3. 同步文件操作方法，如fs.readFileSync、fs.writeFileSync
 4. 异步文件操作方法， fs.readFile和fs.writeFile
 
-![fs操作图解](./img/nodefs.jpg)
+![fs操作图解](./images/nodefs.jpg)
 
 ```js
 const fs = require('fs'); // 引入fs模块

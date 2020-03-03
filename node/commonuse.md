@@ -91,4 +91,4 @@ module: {
 // 也可以在配置的时候传递参数 options 但是一般将配置放到单独的配置文件更好
 ```
 
-![常用babel列表](./imgs/babel-list.jpg)
+![常用babel列表](./images/babel-list.jpg)
