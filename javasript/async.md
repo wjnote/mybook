@@ -1,5 +1,6 @@
 ## async函数
-async是'异步'的简写，而await可以认为是async wait的简写，async用于声明一个函数是异步的，而await用于等待一个异步方法执行完成。
+async是'异步'的简写，而await可以认为是async wait的简写，async用于声明一个函数是异步的，而await用于等待一个异步方法执行完成。 async函数的强大之处在于可以嵌套的，我们可以定义一批原子操作，然后利用函数组合出新的函数。
+
 > await只能出现在async函数中
 
 async 函数的所起的作用就是它处理返回值的方式：将返回值封装成一个 Promise 对象。如果在函数中直接返回一个变量，async 也会将这个变量用 `Promise.resolve()`封装成promise对象
@@ -35,7 +36,7 @@ console.log(222)
 */
 ```
 
-#### await 在等待什么
+## await 在等待什么
 await是在等待后面的表达式，这个表达式计算的结果是promise对象或者其他值，因为async是返回一个promise对象，可以说await是在等待一个async函数完成，但是await等待的是一个返回值，这个返回值可以是任意值的，不一定是promise对象。
 ```js
 // 下面就说明了await后面的代码不一定是异步函数
@@ -74,7 +75,7 @@ await 可以理解为一个运算符，用于组成表达式，这个表达式�
 > 这就是await必须用在async函数中的原因: async函数调用不会造成阻塞，遇到await的时候先执行右边的函数，然后交出函数的执行权，它内部的所有阻塞都被封装在一个promise对象中异步执行
 
 
-#### async/await函数和之前函数的比较
+## async/await函数和之前函数的比较
 ```js
 // 一般的异步写法
 function test(){
@@ -99,7 +100,7 @@ test2();
 test1 函数因为是直接返回的promise对象，所以可以不用申明为async函数。
 上面两种写法实现的效果是一样的，下面的写法看着代码还要多一些，但是下面的写法在处理多个promise对象的then链的时候就能体现优势，如果只是单一的一个promise，可以直接使用上面的写法实现。
 
-#### 注意点
+## 注意点
 1. await 命令后面的 Promise 对象，运行结果可能是 rejected，所以最好把 await 命令放在 try...catch 代码块中。
 ```js
 async function myFunction() {
@@ -153,8 +154,11 @@ async function login(urls){
 ```
 
 
+ `generator/iterator` 也常常被跟异步一起来讲，我们必须说明 `generator/iterator`  并非异步代码，只是在缺少 `async/await` 的时候，一些框架（最著名的要数 co ）使用这样的特性来模拟 `async/await`, 使用`async/await`之后，就应该让 `generator/iterator` 回归本来的遍历器功能
 
-##### [async函数、promise函数和setTimeout函数执行顺序](../accumulation/eventloop.md)
+
+
+## [async函数、promise函数和setTimeout函数执行顺序](../accumulation/eventloop.md)
 
 ----
 参考链接：

@@ -11,6 +11,8 @@ js是一门单线程语言，虽然在HTML5中提出了 Web-Worker，但是单�
 
 ![事件循环](./img/event2.png)
 
+**我们把宿主发起的任务称为宏观任务，把 JavaScript 引擎发起的任务称为微观任务。许多的微观任务的队列组成了宏观任务**
+
 不同类型的任务会进入对应的Event Queue，按任务源可以分为**微任务(microtask)和宏任务(macrotask)**，在 ES6 规范中，microtask 称为 jobs，macrotask 称为 task，**要注意宏任务每次只执行队列中的一个而微任务会把队列执行完**
 
 1. 先执行第一个宏任务 script 标签，每次宏任务只会拉出一个Task执行
@@ -19,6 +21,7 @@ js是一门单线程语言，虽然在HTML5中提出了 Web-Worker，但是单�
 4. 然后开始下一轮的Event Loop，执行宏任务，再执行微任务
 
 > js引擎存在 monitoring process 进程，会持续不断的检查主线程执行栈是否为空，一旦为空，就会去Event Queue那里检查是否有等待被调用的函数。
+
 
 **微任务包括 process.nextTick ，promise ，MutationObserver**
 

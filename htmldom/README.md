@@ -5,7 +5,7 @@
 
 DOM 就是浏览器为JavaScript提供的一系列接口（通过window.document提供）使我们可以操作DOM页面，DOM是文档模型该模型是独立于语言的，所有其他语言也可以操作，比如 Python...等
 
-#### DOM创建
+## DOM创建
 DOM节点通常对应于一个标签，一个文本或者是一个HTML属性，DOM有一个 nodeType 来表示当前元素的类型
 1. Element, 元素
 2. Attribute， 属性
@@ -21,7 +21,7 @@ ele.appendChild(docNode);
 <div>hello world</div> // 在页面显示的最终结果
 ```
 
-#### DOM查询
+## DOM查询
 ```js
 let ele = document.getElementById('xxx')
 let eles = document.getElementByClassName('classname')
@@ -53,7 +53,7 @@ let el = ele.previousElementSibling;
 ```
 > 注意其中使用的 firstElementChild 而不是 firstChild 因为在现代浏览器中，我们编写的空格会被解析成一个文本节点，firstElementChild 查询的是第一个子元素节点，更加准确
 
-#### DOM更改
+## DOM更改
 ```js
 // 添加删除子元素
 ele.appendChild(el)
@@ -73,7 +73,7 @@ while (element.firstElementChild) {
 > 在某一个元素之后插入元素需要自己实现，js原生没有，可以参考jQuery的 after方法，一个简单实现 `parentDiv.insertBefore(sp1, sp2.nextSibling);`
 
 
-#### 属性操作
+## 属性操作
 ```js
 // 获取的是一个 对象形式的数组  取具体的值需要使用 attrs[name].value
 let attrs = ele.attributes; // 该属性是只读的
@@ -86,7 +86,7 @@ ele.hasAttribute('class')
 ele.removeAttribute('class')
 ```
 
-#### class操作
+## class操作
 元素的class操作是一个常规的操作，
 ```js
 let classLists = ele.classList;   // 该属性是只读的，但是可以通过下面的方法修改
@@ -100,7 +100,7 @@ classLists.replace(oldClass, newClass) // 用新类替换已有类
 ```
 > ie9 不支持，IE10不支持方法操作，
 
-#### 直接访问元素样式，是元素的属性，而不是方法访问
+## 直接访问元素样式，是元素的属性，而不是方法访问
 ```js
 var myDiv = document.getElementById("myDiv");
 //设置背景颜色
@@ -112,7 +112,7 @@ myDiv.style.height = "200px";
 myDiv.style.border = "1px solid black";
 ```
 
-#### 事件绑定
+## 事件绑定
 目前主要使用的是DOM2级的事件绑定事件，在`addEventListener` 中有一个事件参数 `event`,里面保存了触发事件相关的内容
 - `event.target`: 指向触发事件监听的对象。
 - `event.currentTarget`: 指向添加监听事件的对象, 一般等于在方法中的`this`,在方法中一般不建议使用 `this`

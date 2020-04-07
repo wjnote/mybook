@@ -1,4 +1,6 @@
-## 编程的技巧1
+# 常用技巧1
+
+> 开发者常常忽略的问题，每个文件写15条内容
 
 1. 判断一个数组中有一个特定的值，可以使用find函数，但是IE中需要使用 `indexOf` 来判断返回值和 `-1` 的关系，还可以使用 `~index`的方式来判断
 ```js
@@ -42,7 +44,7 @@ if (~index) {
     }
   }
 
-  console.log(status)  // 'this is dev'
+  console.log(status[temp])  // 'this is dev'
   // 可以修改 temp的值来改变 status的结果值，这种在条件判断是可以适用的
 ```
 
@@ -62,14 +64,16 @@ if (~index) {
 
 8. 开发中函数内部有时候有很多比较复杂的分支，我们可以使用惰性载入函数，只是在第一次进入的时候进行判断，可以节省资源开支
 ```js
-function Func(){
-  if(a ===b ){
-    Func = function(){
-      console.log(x)
+function Func() {
+  let a = 10;
+  let b = 12;
+  if (a === b) {
+    Func = function() {
+      console.log(`x`)
     }
-  }else{
-    Func = function(){
-      console.log(Y)
+  } else {
+    Func = function() {
+      console.log(`Y`)
     }
   }
   return Func();
@@ -94,7 +98,6 @@ arr.filter((key,index)=>arr.indexOf(key) === index)
 //  如果只是二维数组
 let arr = [1, [2,3,4], 5, [6,7]];
 [].concat(...arr) // [1,2,3,4,5,6,7]
-
 // 如果是多维数组 可以利用递归调用的方式, 一次一次的降维 直到一维数组
 function flattenArray(arr) {
   const flattened = [].concat(...arr);
@@ -104,7 +107,7 @@ function flattenArray(arr) {
 
 12. 利用`...`运算符来产生根据条件的不同的对象，下面的方式，不用`...`会报格式错误 ？？
 ```js
-const getUser = (temp)={
+const getUser = (temp)=>{
   return {
     name: 'wuj',
     ...temp && {age: 26}
@@ -116,24 +119,23 @@ const getUser = (temp)={
 13. 在项目中使用select的时候一般是需要去除他本来的样式
 ```css
 select {
-  /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
-  border: solid 1px #000;
-  /*很关键：将默认的select选择框样式清除*/
-  appearance:none;
-  -moz-appearance:none;
-  -webkit-appearance:none;
+    /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+    border: solid 1px #000;
+    /*很关键：将默认的select选择框样式清除*/
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
 }
 /*清除ie的默认选择框样式清除，隐藏下拉箭头*/
 select::-ms-expand { display: none; }
 ```
 
-14. css的两端对齐，常常使用 `text-align: justify`的方式，但是`justify`对最后一行无效, 如果我们想整个文段两端对齐的话，可以使用`text-align-last: justify`, 但是该属性的方式需要兼容性，我们还可以新增一行，使该行文本不是最后一行。
-
-    **使用它实现两端对齐，需要注意在元素之间添加空白符(包括空格、换行符、制表符)才起作用**
-    **如果只有一行的话，需要添加两个样式，否则会认为这行是最后一行**
+14. css的两端对齐，常常使用 `text-align: justify`的方式，但是`justify`对最后一行无效, 如果我们想整个文段两端对齐的话，可以使用`text-align-last: justify`,但是该属性的方式需要兼容性，我们还可以新增一行，使该行文本不是最后一行。
+  
+    **使用它实现两端对齐，需要注意在元素之间添加空白符(包括空格、换行符、制表符)才起作用，如果只有一行的话，需要添加两个样式，否则会认为这行是最后一行**
 
     > 一般的左右格式的文办，左边需要两端对齐的话，如果有 ： 号的话，最好使用 after 伪类的形式 可以实现字数不同的几个字两端对齐
-
+   
     ```css
     .justify{
       text-align: justify;
@@ -151,16 +153,8 @@ select::-ms-expand { display: none; }
     }
     ```
 
-
-15. 利用`...`运算符来产生根据条件的不同的对象，下面的方式，不用`...`会报格式错误 ？？
-  ```js
-  const getUser = (temp)={
-    return {
-      name: 'wuj',
-      ...temp && {age: 26}
-    }
-  }
-  //  结果就是传入为true时，返回两个属性
-  ```
-
-16. 开发中我们有时候会在导航条旁边添加小三角形，我们一般使用 `::after` 加定位的方式来实现，三角形我们可以使用css的border来实现，也可以将一个正方形采用CSS旋转的方式来实现三角形的效果
+15. png / jpg / gif / webp
+    - png 是便携式网络图片，是一种无损数据压缩位图文件格式，优点是压缩比高，色彩好，大部分都可以使用
+    - jpg 是一种针对相片使用的一种失真压缩方式，是一种破坏性的压缩，在色调和颜色的平滑变化上做的不错，在网络上用来存储和传输照片的格式
+    - git 是一种位图文件格式，以8位色重现真色彩的图像，可以实现动画效果
+    - webp 是谷歌在2010年推出的图片格式，压缩了只有jpg的 2/3 ,大小比PNG小45% ，缺点是压缩时间长，兼容性不好

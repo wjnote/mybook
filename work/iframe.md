@@ -73,4 +73,6 @@ allowtransparency: true/false  // 是否允许iframe设置为透明 默认为fal
 allowfullscreen: true/false    // 是否允许iframe全屏，默认false
 ```
 
+
+完整的带有所有属性的 iframe 节点
 `<iframe id="google_ads_frame2" name="google_ads_frame2" width="160" height="600" frameborder="0" src="target.html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true"></iframe>`

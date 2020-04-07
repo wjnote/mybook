@@ -1,4 +1,6 @@
-## 编程的技巧2
+# 常用技巧2
+
+1. 在代码中设置HTML的内容一般会用 `val ? val : ''` 的形式加一层判断，但是这种需要注意的是，如果是数字的话这种方式有有一个特殊的 0 的形式
 
 1. 转换为字符串：可以使用运算符` + `后紧跟一组空引号` '' ` 快速将数字或布尔值转为字符串
 
@@ -66,7 +68,6 @@ function pick({id, name, age}){
       return x;
     })(0)
     console.log(output) // 0
-
     var x = {foo:1}
     var resu = (function(x){
       delete x.foo;
@@ -74,8 +75,6 @@ function pick({id, name, age}){
     })(x)
     console.log(resu)  // undefined
     ```
-
-10. 在使用前端框架的时候，一般引用css文件和js文件，最好的方式将前端框架整合在一个文件夹里面引入，而不是单独把`css js`文件单独放到项目中的css文件和js文件里面，有些框架在`all.css`中还会引用其他的css文件(如果框架是按照模块书写的，同级目录下会有个modules的css文件夹)，如果我们只是复制总的css文件，其他的文件就没引到，有时候可以解决一些不明原因的bug
 
 11. 在项目中加载图片的时候可能会加载失败，这时可以在` <img src='' alt='' onerror="defaultImg()">` 加载设置加载失败函数 ，但是函数必须在页面DOM加载之前声明，如果在文档后申请不会生效
 ```js
@@ -86,33 +85,12 @@ function defaultImg () {
 }
 ```
 
+12. 我们在chorme浏览器打断点的时候可以把变量在 `console` 中打印显示，然后可以使用 `copy(变量名)` 就可以将变量的内容复制到粘贴板中在其他地方复制使用
 
-12. layui 是一个PC端插件，其中表单的时间选择器，如果是2个不同的时间输入框的话，可以设置后面的时间必须大于前面的时间
-```js
-// 实现的效果就是 先选择开始时间，然后选择结束时间的时候，只能选择开始时间之后的时间
-var start = laydate.render({ // 开始时间
-  elem: '#startElemInput',
-  value: new Date(),  // 设置默认的为当前
-  done: function (value, date) {
-    endMax = end.config.max;
-    end.config.min = date;
-    end.config.min.month = date.month - 1;
-  }
-});
-var end = laydate.render({ // 结束时间
-  elem: '#endElemInput',
-  done: function (value, date) {
-    if ($.trim(value) == '') {
-      var curDate = new Date();
-      date = {
-        'date': curDate.getDate(),
-        'month': curDate.getMonth() + 1,
-        'year': curDate.getFullYear()
-      };
-    }
-    start.config.max = date;
-    start.config.max.month = date.month - 1;
-  }
-});
-form.render();
-```
+13. `let` 会产生新的块级作用域，在JavaScript中 `for  if  switch   try/catch/finally` 都会产生块级作用域
+
+14. Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示,可通过加入 CSS 属性 `-webkit-text-size-adjust: none;` 解决。
+
+15. 当一个元素的visibility属性被设置成collapse值后. chrome中，使用collapse值和使用hidden没有区别。 firefox，opera和IE，使用collapse值和使用display：none没有什么区别。
+> 其中 display：none 不显示元素，在文档布局中不再分配空间（回流+重绘）
+> visibility：hidden 隐藏元素，在文档布局中仍保留原来的空间（重绘）
