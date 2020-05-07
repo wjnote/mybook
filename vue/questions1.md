@@ -1,6 +1,6 @@
 # 常见问题列表-1
 
-#### 1. vue-router 的动态路由，只修改 `/detail/:id` 后面的id值，页面会缓存不会刷新，也不会执行生命周期函数
+### 1. vue-router 的动态路由，只修改 `/detail/:id` 后面的id值，页面会缓存不会刷新，也不会执行生命周期函数
 
 解决办法： 主要是针对路由的监听，
 ```vue
@@ -26,7 +26,7 @@
     2. 方式二中将直接就是不需要缓存的,用于嵌套了多个子组件的，但是会导致HTTP请求增多
 
 
-#### 2. keep-alive
+### 2. keep-alive
 keep-alive导致的问题，通常我们需要缓存一些静态页面，但是有时候我们也需要通过一些状态或者参数来刷新页面，这时我们就需要更新缓存
 
 **解决办法：** 在路由信息中配置 `keep-alive` 为true时，将会缓存当前页面，第一次进入一个缓存的页面时，vue的生命周期执行的顺序为`created() -> mounted() -> activated()`, 这里的`activated()`钩子只存在于keep-alive为true的路由页面，之后每次进入这个缓存页面的时候，都不会再去执行vue的生命周期，而是从缓存里面拿，只有`activated()`钩子在每次进入这个缓存页面是才会执行，当然还有一个钩子`deactivated()`是在离开页面的时候会执行.
@@ -41,7 +41,7 @@ beforeRouteLeave(to,from,next){
 }
 ```
 
-#### 3. echarts 图表不显示
+### 3. echarts 图表不显示
 在vue中使用UI框架tab切换时，如果隐藏的那个块有`echarts`图的内容，切换之后显示的DOM就不会显示图表，先显示的DOM中 `echarts` 是可以显示的
 **因为echarts只能在显示的容器中渲染,tab页面未展示的页面没有渲染，所以DOM没有宽高** 
 
@@ -65,8 +65,10 @@ element.on('tab(twoTabs)', function(elem){
 });
 ```
 
-#### 4. vuex 中要注意，如果state是数组的话，在外部直接应用了，然后直接改变了，就会报错
+### 4. vuex 中要注意，如果state是数组的话，在外部直接应用了，然后直接改变了，就会报错
 在`commit`之外修改state的值因为是引用数组，所以在使用的时候需要 `state.array.slice()` 这样相当于复制了一个副本来操作，如果state是一个对象的话，可以使用 `Object.assgin()` 或者是 `JSON.parse(JSON.stringify(stateObj))` 的方式来拷贝一份
 
-####  5. vue子组件在`router-view`中渲染不出来
+###  5. vue子组件在`router-view`中渲染不出来
 可能是父组件和子组件有`name`属性，把`name`属性去掉就可以了，这好像是设计的bug
+
+### 在vue文件中如果不想使用太多的DOM节点，可以使用 `<block></block>` 这只是一个包裹元素，在最后HTML节点中是不会被渲染出来的，可以使用在列表循环渲染

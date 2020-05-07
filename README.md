@@ -62,8 +62,23 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
 
 
 ## 文件列表
-
 * [Introduction](README.md)
+* [工作积累](work/README.md)
+    * [编程小技巧1](work/work1.md)
+    * [编程小技巧2](work/work2.md)
+    * [编程小技巧3](work/work3.md)
+    * [权限控制](work/accesscontrol.md)
+    * [JS常见的错误类型](work/errorlist.md)
+    * [git](work/git学习资料.md)
+    * [window进程查询](work/windowport.md)
+    * [web安全问题](work/safely.md)
+    * [图片三种表现方式](work/imgways.md)
+    * [web页面图片加载优化](work/imgload.md)
+    * [文件下载](work/upload.md)
+    * [moment常见使用](work/momentjs.md)
+    * [iframe解析](work/iframe.md)
+    * [layui使用记录](work/layui.md)
+    * [Terminal常用操作](work/terminal.md)
 * [javasript](javasript/README.md)
     * [观察者模式](javasript/观察者模式.md)
     * [事件循环](javasript/eventloop.md)
@@ -77,7 +92,6 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
     * [js数据加密](javasript/data-encryption.md)
     * [js对URL编码解码](javasript/encode.md)
     * [js 数组去重](javasript/unique.md)
-    * [ES6开发中记录](javasript/es6note.md)
     * [notice](javasript/notice.md)
     * [模块加载](javasript/moduleupload.md)
     * [CMD/AMD/ES module](javasript/cmd_amd.md)
@@ -101,10 +115,9 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
     * [elements使用技巧](vue/elements.md)
 * [node](node/README.md)
     * [node测试](node/test.md)
-    * [babel](node/babel.md)
     * [Buffer/Stream/fs](node/stream.md)
-* [babel](babel/README.md)
-    * [babel常用插件](babel/commonuse.md)
+    * [babel](node/babel.md)
+    * [babel常用插件](node/commonuse.md)
 * [webpack](webpack/README.md)
     * [webpack-dev-server](webpack/dev.server.md)
     * [webpack多页面构建](webpack/morepage.md)
@@ -113,6 +126,7 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
     * [粘性页脚](htmldom/sticky-footer.md)
     * [css常用居中方式](htmldom/center.md)
     * [css语法](htmldom/cssgrammar.md)
+    * [flex布局](htmldom/flex.md)
 * [mobile](mobile/README.md)
     * [移动适配方案](mobile/shipei.md)
     * [mobile适配](mobile/mobileAdaptive.md)
@@ -122,31 +136,10 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
     * [http/http2/https](browser/http-networking.md)
     * [浏览器多线程和js单线程](browser/thread.md)
     * [浏览器URL路由](browser/urlrouter.md)
-* [工作积累](work/README.md)
-    * [编程小技巧1](work/work1.md)
-    * [编程小技巧2](work/work2.md)
-    * [权限控制](work/accesscontrol.md)
-    * [JS编程中常见的错误](work/errorlist.md)
-    * [git](work/git学习资料.md)
-    * [window进程查询](work/windowport.md)
-    * [web安全问题](work/safely.md)
-    * [图片三种表现方式](work/imgways.md)
-    * [web页面图片加载优化](work/imgload.md)
-    * [文件下载](work/upload.md)
-    * [moment常见使用](work/momentjs.md)
-    * [iframe解析](work/iframe.md)
-* [jQuery源码](jquery/README.md)
+    * [chrome 调试技巧](browser/chromedebug.md)
+* [微信开发](wechat/readme.md)
+    * [小程序登陆鉴权](wechat/loginauthorization.md)
+    * [公众号配置](wechat/publicconfig.md)
 * [map](map/README.md)
     * [GeoJSON](map/geojson.md)
-
-
-
-
-> 一级引用
->> 二级引用
-
-
->> > sanjige
-
-
-> gehigwaew
+* [jQuery源码](jquery/README.md)

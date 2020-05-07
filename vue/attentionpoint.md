@@ -55,7 +55,7 @@ export default{
 
 箭头函数和普通函数最大的区别就是this的指向问题。 箭头函数this指向函数所在的域，普通函数this指向函数调用者或者是当前调用栈的上下文
 
-在vue中生命周期函数，methods , watch 自动绑定了 this到上下文实例中，所以可以在函数中访问到数据，如果用箭头函数，因为箭头函数会自动绑定上下文，因此this与你期待的vue实例不同，但是还是可以使用参数的形式，第一个参数就是当前vue实例
+在vue中生命周期函数，methods , watch 自动绑定了 this 为 vue实例，所以可以在函数中访问到数据，如果用箭头函数，箭头函数会自动绑定执行上下文，因此this与你期待的vue实例不同，但是还是可以使用参数的形式，第一个参数就是当前vue实例
 
 ### methods / computed / watch
 
@@ -89,15 +89,18 @@ export default{
 
 ### 循环遍历
 当我们需要在循环遍历的时候做一个逻辑是否的判断，最好的方式是使用计算属性来计算，这样可以将计算和页面展示分开，不会耦合在一起,直接在html中使用 `showList` 而不是`showItems`
-    ```js
-    export default{
+
+```js
+export default{
         computed:{
           showList:function(){
             this.showItems.filter(item=>item.isShow == true)
           }
         }
     }
-    ```
+```
+
+
 
 ### 组件复用意味着组件的生命周期钩子函数不会被调用
 router-view是复用的 有时候会有新闻列表的时候，只改变id值的情况，这是就不会刷新，不会执行组件的生命周期函数
