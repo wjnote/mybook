@@ -20,11 +20,10 @@
 1. 登录事件
 ```js
 dispatch('login')
-
 commit(name,data)
 ```
 
-2. 获取Token，经Base64编码后存至 sessionStorage
+2. 获取Token，经`Base64`编码后存至 `sessionStorage`
 
 3. 将所有HTTP Header Authorization 加上编码后的Token（这个需要和后端商议）
 ```js
@@ -39,7 +38,7 @@ axios.interceptors.request.use(req => {
   return Promise.reject(error)
 })
 ```
-![浏览器请求头](./img/header-request.png)
+<img src="./img/header-request.png" alt="浏览器请求头" style="zoom:80%;" />
 
 4. 请求拦截： 后台拿到Token后对每个请求进行验资，失败则返回 401， 前端 response 钩子里统一 catch error 跳转至登录页面
 ```js
@@ -79,5 +78,4 @@ router.beforeEach((to, from, next) =>{
 
 6. 登出logout： 清除本地sessionStorage的Token信息
 
-
-![流程图](./img/token.png)
+<img src="./img/token.png" alt="流程图" style="zoom: 67%;" />

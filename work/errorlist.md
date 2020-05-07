@@ -28,8 +28,8 @@ Rollbar.isAwesome();  // 直接使用这种方式是保险的
     - 数组中找到定义的长度，但是如果数组未初始化或者变量在另一个上下文中，则可能会遇到此错误。
 9. `Uncaught TypeError: Cannot set property` 访问一个未定义的变量时，它总是返回 undefined，我们不能获取或设置任何未定义的属性。
 
-ReferenceError 类型的错误 - 引用错误
+### ReferenceError 类型的错误 - 引用错误
 
-> 在所嵌套的作用域中遍寻不到所需的变量，引擎就会抛出 ReferenceError 即引用错误，这是说一个未申明的变量
+在所嵌套的作用域中遍寻不到所需的变量，引擎就会抛出 ReferenceError 即引用错误，说明使用了为申明的变量。
 
-1. ### `ReferenceError: event is not defined`  在使用 event 时遇到此错误，请确保使用传入的事件对象作为参数。像 IE 这样的旧浏览器提供了一个全局变量事件，但并不是所有浏览器都支持。
+1. `ReferenceError: event is not defined`  在使用 event 时遇到此错误，请确保使用传入的事件对象作为参数。像 IE 这样的旧浏览器提供了一个全局变量事件，但并不是所有浏览器都支持。

@@ -15,12 +15,11 @@
     "-sharing",
     "splitter",
     "expandable-chapters-small",
-    "anchors",
     "github",
     "github-buttons",
     "sharing-plus",
-    "anchor-navigation-ex",
-    "favicon"
+    "favicon",
+    "back-to-top-button"
   ],
   "pluginsConfig": {
     "github": {
@@ -34,6 +33,10 @@
         "size": "small",
         "count": true
       }]
+    },
+    "favicon": {
+      "shortcut": "./resouce/imgs/favicon.ico",
+      "bookmark": "./resouce/imgs/favicon.ico"
     }
   }
 }
