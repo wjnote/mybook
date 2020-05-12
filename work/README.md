@@ -13,11 +13,11 @@
 3. 点击左上角录制按钮（实心圆状）
 4. 在页面上进行正常操作
 5. 一段时间后，点击 stop 看面板上的数据
-![Memory](../resouce/imgs/Memory.png)
+<img src="../resouce/imgs/Memory.png" alt="Memory" style="zoom:67%;" />
 6. 如果是像上面这样平稳的，就表示内存没有泄漏，如果是像下面这样就是内存泄漏
-![Memory](../resouce/imgs/Memory01.png)
+<img src="../resouce/imgs/Memory01.png" alt="Memory" style="zoom:67%;" />
 7. 下方内存图点击对应的内存异常处，然后点击下方面板内的Event Log面板，可以查看代码内具体发生了什么，来接触引用
-![Memory](../resouce/imgs/Memory02.png)
+<img src="../resouce/imgs/Memory02.png" alt="Memory" style="zoom:67%;" />
 
 
 ### 在项目中写css的时候需要注意的两个点
@@ -128,7 +128,6 @@ data中的变量vue都会使用`object.defineproperty`设置set和get钩子，�
 
 
 ### OAuth2 原理及应用
-
 允许用户授权第三方移动应用访问他们存储在另外的服务提供者上的信息，而不需要把用户名和密码提供给第三方移动应用或分享他们数据的所有内容， OAuth2 是 OAuth 协议的延续版本，但是不向后兼容OAuth1.0
 
 应用场景包括：   
@@ -144,3 +143,16 @@ data中的变量vue都会使用`object.defineproperty`设置set和get钩子，�
 4. 客户端使用令牌，向资源服务器申请获取资源
 5. 资源服务器确认令牌无误，同意向客户端开发资源
 
+
+
+### 设计原则的五个基本原则
+
+1. 单一功能原则（Single Responsibility Principle）
+2. 开放封闭原则（Opened Closed Principle）
+3. 里式替换原则（Liskov Substitution Principle）
+4. 接口隔离原则（Interface Segregation Principle）
+5. 依赖反转原则（Dependency Inversion Principle）
+
+JS 设计模式中最主要试用的就是  单一功能原则 和 开放封闭原则 这两个原则
+
+> 设计模式的核心思想： 封装变化 ，将变与不变分离，确保变化的部分灵活、不变的部分稳定

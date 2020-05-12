@@ -4,7 +4,7 @@
 
 1. 判断一个数组中有一个特定的值，可以使用find函数，但是IE中需要使用 `indexOf` 来判断返回值和 `-1` 的关系，还可以使用 `~index`的方式来判断
 ```js
-let arrrvar arr = ['geag', 1, 'geagr']
+let arr = ['geag', 1, 'geagr']
 let temp = 'geag'
 let index = arr.indexOf(temp)
 if (index > -1) {
@@ -16,14 +16,14 @@ if (~index) {
 // 只有 ~-1 = 0 不会进入函数，其他的任何值都会进入函数
 ```
 
-2. 目前政府的项目中使用iframe的方式， iframe 的通信中，父子iframe通信的方法和属性只能存在html文件中，如果是存在js文件中的方法和属性是访问不到的
+2. 目前政府的项目中使用iframe的方式， iframe 的通信中，父子iframe通信的方法和属性只能存在html文件中，如果是存在js文件中的方法和属性是访问不到的，
 ```html
   <iframe name="myiframe" src="./iframe1.html" frameborder="0" class="myiframe"></iframe>
   iframeName.window.document.XXX // 调用子iframe的方法，
   parent.window.XXX  // 调用父iframe的方法
 ```
 
-3. 在 JS 文件中有时候使用开关的方式来作为判定条件，设置默认值的时候最好设置为 false ，如果设置为true的话，当有值且为 false 的时候，在 `||` 运算的时候会默认取后面的值，这样就不能达到想要的效果
+3. 在 JS 文件中有时候使用开关的方式来作为判定条件，设置默认值的时候最好设置为 false ，如果设置为true的话，当有值且值为 false 的时候，在 `||` 运算的时候会默认取后面的值，这样就不能达到想要的效果
 
 4. 页面中为一个元素绑定事件，事件执行后,页面未刷新且元素还在，然后你再次点击，元素又被绑定个一次点击事件，这样第二次点击就会执行两次，以此类推。如何解决累加绑定 ： 元素是已经存在页面上的则可以使用 off 取消绑定的事件。  如果是动态添加到页面上的元素呢 ：可以使用事件代理的方式代理到父元素上
 
@@ -35,10 +35,7 @@ if (~index) {
   const temptest = 'test';
   const status = {
     'dev': 'this is dev',
-    'prod': 'this is prod',
-    test: function(){
-      return 111;
-    }
+    'prod': 'this is prod'
   }
   console.log(status[temp])  // 'this is dev'
   // 可以修改 temp的值来改变 status的结果值，这种在条件判断是可以适用的

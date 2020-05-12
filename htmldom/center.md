@@ -7,7 +7,7 @@
 > 
 > css中的 `text-align: center` 可以将子元素内部的行内块左右居中，但是其中的文字也会居中
 
-    ![Alt text](./images/01.jpg)
+![Alt text](./imgs/01.jpg)
 
 3.  可以使用计算属性 `calc ` ,但是该属性需要注意兼容性
 

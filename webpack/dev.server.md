@@ -17,7 +17,7 @@
 <!DOCTYPE html><html><head><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta charset="utf-8"/><meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/><script type="text/javascript" charset="utf-8" src="/__webpack_dev_server__/live.bundle.js"></script></head><body></body></html>
 ```
 页面会请求live.bundle.js,其中里面会新建一个Iframe，你的应用就被注入到了这个Iframe当中。同时live.bundle.js中含有socket.io的client代码，这样它就能和webpack-dev-server建立的http server进行websocket通讯了。并根据返回的信息完成相应的动作。这样在 cmd 启动的时候就不需要额外的参数
-![iframe模式热替换](img/webpack02.png)
+<img src="imgs/webpack02.png" alt="iframe模式热替换" style="zoom:67%;" />
 
 
 第二种方式： Inline-mode模式，是`webpack-dev-server` 会在配置文件中再添加一个入口文件
@@ -80,7 +80,7 @@ module.exports = {
 #### 非Node方式
 非Node方式有关`webpack-dev-server`的配置都在`devServer`参数里，首先开启HMR，添加配置参数`hot: true`，并且一定要指定`output.publicPath`，如果不指定会导致HMR无法工作，建议`devServer`.`publicPath和output.publicPath`一样,而且还要添加 `HotModuleReplacementPlugin` 到plugins中否则会报错
 
-![webpack报错](./img/webpack01.png)
+<img src="./imgs/webpack01.png" alt="webpack报错" style="zoom:67%;" />
 
 ```js
 module.exports = {
