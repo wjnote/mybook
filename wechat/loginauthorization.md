@@ -17,7 +17,7 @@
 
 
 ## 调用 wx.login 生成code
-`wx.login()` 这个API的作用就是为当前用户生成一个 临时的登陆凭证，这个临时登陆凭证有效期只有五分钟，我们拿到这个凭证之后就可以进行下一个的操作 获取 openid 和 session_key
+`wx.login()` 这个API的作用就是为当前用户生成一个 临时的登陆凭证，这个临时登陆凭证有效期只有五分钟，我们拿到这个凭证之后就可以进行下一个的操作 获取 `openid 和 sessionKey`
 
 ## 获取 openid  和 session_key
 
@@ -85,7 +85,7 @@ function encryptSha1(data){
 
 我们一般讲checkSession这个步骤放在小程序启动的时候校验登录态
 
-![img2](./imgs/02.jpg)
+<img src="./imgs/02.jpg" alt="img2" style="zoom:50%;" />
 
 简单的流程图
 
@@ -104,3 +104,28 @@ if(loginFlag){
 ## 支持emoji表情存储
 
 如果需要将用户名存入数据表中，需要注意数据表的编码格式，用户名可能保存emoji图标，常用的UTF8 只支持1-3个字节，emoji图标刚好4个字节编码
+
+
+
+
+
+[@chunpu/http](https://github.com/chunpu/http#readme) 是一个专门为小程序设计的 http 请求库, 可以在小程序上像 axios 一样发请求, 支持拦截器等强大功能
+
+微信自带的异步接口都是 success 和 fail函数，这样很容易出现回调地狱，可以先将 wx 异步函数转换成 promise 函数
+
+```js
+const promisify = original => {
+  return function(opt){
+    return new Promise((resolve, reject)=>{
+      opt = Object.assign({
+        success: resolve,
+        fail: reject
+      }, opt)
+      original(opt)
+    })
+  }
+}
+// 后续就可以调用函数
+promisify(wx.getStorage)({key: 'key'}).then().catch()
+```
+

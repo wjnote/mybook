@@ -73,7 +73,7 @@ function Func() {
 }
 ```
 
-9. 过滤数组中的`false`值，比如`0, false , null, undefined`等可以使用简易方法
+9. 过滤数组中的`false`值，比如`0, false , null, undefined, NaN`等可以使用简易方法
 ```js
 const arr = [0,1,'0','1',undefined, null, '1'+0];
 arr.filter(Boolean);

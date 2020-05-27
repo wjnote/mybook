@@ -1,10 +1,9 @@
-
+# Summary
 
 ## gitbook 介绍
 * [Introduction](README.md)
 
----
-
+-----
 * [工作积累](work/README.md)
     * [开发中常用1](work/work1.md)
     * [开发中常用2](work/work2.md)
@@ -24,13 +23,13 @@
 * [javasript](javasript/README.md)
     * [观察者模式](javasript/观察者模式.md)
     * [事件循环](javasript/eventloop.md)
+    * [class继承使用和原理](javasript/class.md)
     * [深拷贝](javasript/deepclone.md)
     * [Polyfill方案](javasript/polyfill.md)
     * [深入理解JSON](javasript/json.md)
     * [proto和prototype](javasript/prototype.md)
     * [函数继承](javasript/inherit.md)
     * [js常用继承，多继承](javasript/extends.md)
-    * [es6-class继承使用和原理](javasript/es6-class.md)
     * [js数据加密](javasript/data-encryption.md)
     * [js对URL编码解码](javasript/encode.md)
     * [js 数组去重](javasript/unique.md)
@@ -79,9 +78,11 @@
     * [浏览器多线程和js单线程](browser/thread.md)
     * [浏览器URL路由](browser/urlrouter.md)
     * [chrome 调试技巧](browser/chromedebug.md)
+    * [浏览器存储方案](browser/borwserstorage.md)
 * [微信开发](wechat/readme.md)
     * [小程序登陆鉴权](wechat/loginauthorization.md)
     * [公众号配置](wechat/publicconfig.md)
+    * [测试号使用](wechat/testaccount.md)
 * [map](map/README.md)
     * [GeoJSON](map/geojson.md)
 * [jQuery源码](jquery/README.md)

@@ -4,7 +4,7 @@
 1. 父子组件之间的通信
 2. 非父子组件之间通信(兄弟组件、隔代关系组件等）
 
-![vue组件通讯](./images/tongxin.png)
+<img src="./imgs/tongxin.png" alt="vue组件通讯" style="zoom:70%;" />
 
 
 ## 1. props / $emit
@@ -62,7 +62,7 @@ eventBus 又称为事件总线，在vue中可以使用它来作为沟通桥梁�
           <addition-num-com></addition-num-com>
         </div>
       </template>
-
+    
       <script>
       import showNumCom from './showNum.vue'
       import additionNumCom from './additionNum.vue'
@@ -70,14 +70,14 @@ eventBus 又称为事件总线，在vue中可以使用它来作为沟通桥梁�
         components: { showNumCom, additionNumCom }
       }
       </script>
-
+    
       // addtionNum.vue 中发送事件
       <template>
         <div>
           <button @click="additionHandle">+加法器</button>
         </div>
       </template>
-
+    
       <script>
       import {EventBus} from './event-bus.js'
       console.log(EventBus)
@@ -87,7 +87,7 @@ eventBus 又称为事件总线，在vue中可以使用它来作为沟通桥梁�
             num:1
           }
         },
-
+    
         methods:{
           additionHandle(){
             EventBus.$emit('addition', {
@@ -97,12 +97,12 @@ eventBus 又称为事件总线，在vue中可以使用它来作为沟通桥梁�
         }
       }
       </script>
-
+    
       // showNum.vue 中接收事件
       <template>
         <div>计算和: {{count}}</div>
       </template>
-
+    
       <script>
       import { EventBus } from './event-bus.js'
       export default {
@@ -111,7 +111,7 @@ eventBus 又称为事件总线，在vue中可以使用它来作为沟通桥梁�
             count: 0
           }
         },
-
+    
         mounted() {
           EventBus.$on('addition', param => {
             this.count = this.count + param.num;
@@ -119,7 +119,7 @@ eventBus 又称为事件总线，在vue中可以使用它来作为沟通桥梁�
         }
       }
       </script>
-
+    
       // 如果想移除观察者
       import {EventBus} from './event-bus.js'
       EventBus.$off('addition',{})

@@ -8,7 +8,7 @@
 
 ### 适配终端
 以前的Flexible方案是通过JS来模拟 VW 的特性，现在这个属性已经被大多数浏览器支持，可以直接使用了。 VW 是基于 Viewport 视窗的长度单位，这里的视窗指的就是浏览器可视化区域，window.innerWidth / window.innerHeight 的大小
-![viewport视图](img/01.png)
+<img src="./imgs/01.png" alt="viewport视图" style="zoom:67%;" />
 
 在css3中和viewport 相关的单位有四个 Vw, Vh, Vmin, Vmax
 - Vw: 是viewport width 的简写，1vw 等于视窗宽度的1%
@@ -16,7 +16,7 @@
 - vmin: vmin的值是当前 vw和vh中较小的值
 - vmax: vmin的值是当前 vw和vh中较大的值
 
-![vmin比较图](img/vw-layout-5.png)
+<img src="./imgs/vw-layout-5.png" alt="vmin比较图" style="zoom:70%;" />
 
 所以现在的开发可以直接使用 vw来作为单位，目前我们的设计稿是使用的750px宽度的，`100vw = 750px; 1vw=7.5px`,我们在开发中不想自己计算值的话可以直接使用[postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport),这样我们就可以直接写设计稿上的像素，会自动转换，一般的配置如下(根目录下的post.config.js文件)，如果像素不是750而是1125的直接改变配置就可以了。
 ```shell
