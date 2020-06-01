@@ -10,15 +10,16 @@ $ git config --system // 对系统所有登录用户有效
 $ git config --list --local
 $ git config --list --global
 ```
-3. 在项目中初始化 `git init projectName` / `git init ` ，会出现一个 .git文件夹(默认隐藏)
-> 上面两种命令是两种不同的情况，第一个是在全新的文件下，第二种是在已经存在文件的文件夹中初始化Git仓库来版本控制，应该开始跟踪这些文件并提交。 你可通过`git add`命令来实现对指定文件的跟踪, 然后`git commit` 来提交
+3. 查看了配置之后，就可以在本地文件夹目录中初始化一个仓库 `git init projectName / git init` ，会出现一个 .git文件夹(默认隐藏)，但是此时所有的文件并没有添加到暂缓区
 
-4. 往仓库里添加文件
-  - 使用`git add [filename]/. `将本地文件先添加到暂存区中，被 git 监控，
-  - 再`git commit -m"xxx"` 将刚刚添加的文件添加注释 这样是单个文件添加不同的注释
-  - 如果是一次性提交所有文件并添加注释`git commit -a -m"xxx"` 可以直接将所有文件直接添加注释并添加到暂缓区
-  - `git fetch origin [name]` 更新远端代码到本地，选择某个具体的分支
-  - `git push origin [name]` 将本地暂缓区的代码上传到服务器
+> 上面两种命令是两种不同的情况，第一个是在全新的文件下初始化项目，第二种是在已经存在文件的文件夹中初始化Git仓库来版本控制，应该开始跟踪这些文件并提交。
+
+4. 往本地暂缓区 仓库里添加文件
+  - `git add [filename] `将本地文件先添加到暂存区中，被 git 监控，可以快速添加所有文件 `git add .`
+  - `git commit -m"xxx"` 将刚刚添加的文件添加注释 这样是单个文件添加不同的注释, 文件并没有被托管到GitHub上面
+  - `git commit -a -m"xxx"` 如果是一次性提交所有文件并添加注释, 可以直接将所有文件直接添加注释并添加到暂缓区
+  - `git remote add origin http://url ` 将本地的仓库关联到远程服务器的某个仓库
+  - `git push origin master` 将本地暂缓区的代码上传到服务器，可以选择某个用户上传
 5. 提交完成之后，`git log` 可以查看提交信息，用户和提交的文件，后面可以配置参数展示形式
 
 
@@ -30,7 +31,7 @@ git add -A  表示stages所有文件，最好不要使用'.'，后面的方式�
 git reset <filename>  删除暂存区的文件，   git  add 相反操作
 git status  当前文件的状态(未跟踪，未添加到暂缓区，未push等)
 
-git rm <filename>  删除文件
+git rm <filename>  删除文件 
 git rm --cached <filename>  删除暂存区文件,但是保留在当前工作目录中,并且git之后都不再跟踪该文件
 git commit -m'explain'  添加某个文件到版本库 后面是注释信息
 git commit -a  添加所有未提交的文件到版本库
@@ -121,7 +122,7 @@ $ git reset --hard  origin/[name]
     ```
     4. 还是不行的话直接找到路径下的 .git 文件，打开 config 文件，删除 `[remote "origin"]` 下的信息，再重复 2.3 步骤
 
-
+### Git的分支和 tag 操作，可以快速切换之前开发的某个时刻的代码
 
 ### 学习博客
 

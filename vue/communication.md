@@ -46,84 +46,12 @@ export default{
 ref 如果在普通的DOM元素上使用，则指向的是该DOM元素，如果用在子组件上，指向的就是子组件的实例，可以通过实例直接调用组件的方法或访问数据 `const refsName = this.$refs.refsName;`
 
 
-## 5.eventBus
+## 5.event Bus  是Vue1.0的方式，vue2.0已经移除
 eventBus 又称为事件总线，在vue中可以使用它来作为沟通桥梁的概念，就像是所有组件共用相同的事件中心，可以向该中心注册发送事件或者接收事件，所有组件都可以通知其他组件，实质就是利用了观察者模式实现
 
-    1. 初始化，先创建一个事件总线并将其导出，以便其他模块可以使用或者监听它
-    ```js
-      import Vue from 'vue'
-      export const EventBus = new Vue();
-    ```
-    2. 发送事件：假如有2个组件 additionNum 和 showNum ，这两个组件可以是兄弟组件或者是父子组件，以兄弟组件为例
-    ```js
-      <template>
-        <div>
-          <show-num-com></show-num-com>
-          <addition-num-com></addition-num-com>
-        </div>
-      </template>
-    
-      <script>
-      import showNumCom from './showNum.vue'
-      import additionNumCom from './additionNum.vue'
-      export default {
-        components: { showNumCom, additionNumCom }
-      }
-      </script>
-    
-      // addtionNum.vue 中发送事件
-      <template>
-        <div>
-          <button @click="additionHandle">+加法器</button>
-        </div>
-      </template>
-    
-      <script>
-      import {EventBus} from './event-bus.js'
-      console.log(EventBus)
-      export default {
-        data(){
-          return{
-            num:1
-          }
-        },
-    
-        methods:{
-          additionHandle(){
-            EventBus.$emit('addition', {
-              num:this.num++
-            })
-          }
-        }
-      }
-      </script>
-    
-      // showNum.vue 中接收事件
-      <template>
-        <div>计算和: {{count}}</div>
-      </template>
-    
-      <script>
-      import { EventBus } from './event-bus.js'
-      export default {
-        data() {
-          return {
-            count: 0
-          }
-        },
-    
-        mounted() {
-          EventBus.$on('addition', param => {
-            this.count = this.count + param.num;
-          })
-        }
-      }
-      </script>
-    
-      // 如果想移除观察者
-      import {EventBus} from './event-bus.js'
-      EventBus.$off('addition',{})
-    ```
+  1. 初始化，先创建一个事件总线并将其导出，以便其他模块可以使用或者监听它
+  2. 发送事件：假如有2个组件 additionNum 和 showNum ，这两个组件可以是兄弟组件或者是父子组件，以兄弟组件为例
+  3. 如果想移除观察者  执行 off 函数
 
 
 ## 6. vuex vue全家桶中的状态管理

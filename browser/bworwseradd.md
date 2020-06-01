@@ -42,7 +42,7 @@
 4. 布局render树（layout / reflow），负责各元素尺寸，位置信息
 5. 绘制render树（paint），绘制页面像素信息
 6. 浏览器将各层的信息发送给GPU，GPU将各层合成，显示在页面上
-![页面渲染流程](img/01.png)
+<img src="img/01.png" alt="页面渲染流程" style="zoom:67%;" />
 
 
 ### html解析构成DOM树
@@ -59,7 +59,7 @@
   </body>
 </html>
 ```
-![页面渲染流程](img/02.png)
+<img src="img/02.png" alt="页面渲染流程" style="zoom: 80%;" />
 
 
 ### css规则生成类似的
@@ -70,7 +70,8 @@ span { color: red }
 p span { display: none }
 img { float: right }
 ```
-![页面渲染流程](img/03.png)
+<img src="img/03.png" alt="页面渲染流程" style="zoom:80%;" />
+
 > css选择器有一个特点： 就是选择器的出现顺序必定和构建DOM树的顺序一致，这是css的设计原则。 即保证选择器在DOM树构建到当前节点时，已经可以准确判断是否匹配，不需要后续节点信息，所以不会出现 '父元素选择器'， 因为父节点会先于子节点构建
 
 css 的渲染过程：
@@ -82,7 +83,7 @@ css 的渲染过程：
 
 ### 构建渲染树
 将DOM树和CSSDOM构建成渲染树，这时有一些不可见DOM不会被插入渲染树中，如head这种不可见的，以及`display: none;`等
-![页面渲染流程](img/04.png)
+<img src="img/04.png" alt="页面渲染流程" style="zoom:80%;" />
 
 
 ### 渲染，有了render树，接下来就开始渲染
@@ -91,11 +92,11 @@ css 的渲染过程：
 2. 构建渲染树
 3. 布局，主要定位坐标和大小，是否换行，各种position, overflow, z-index等
 4. 绘制，将图像绘制出来
-![页面渲染流程](img/05.jpg)
+<img src="img/05.jpg" alt="页面渲染流程" style="zoom:80%;" />
 图中的线与箭头表示js动态修改了DOM和css，导致了重新布局(Layout) 或渲染(Repaint)
 
-
 ### 回流(Layout)和重绘(Repain)
+
 - layout 一般意味着元素的内容，结构，尺寸和位置发生了变化，需要重新计算样式和渲染树
 - repaint 意味着元素发生的改变只影响了元素的一些外观(背景，边框颜色，文字颜色)，此时只需要应用新样式绘制就好
 
