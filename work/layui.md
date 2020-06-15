@@ -36,3 +36,9 @@ var end = laydate.render({ // 结束时间
 });
 form.render();
 ```
+
+
+
+form表单中的select 如果是需要多选择下拉框的话    [formselect](https://hnzzmsf.github.io/example/example_v4.html) 
+
+后续有一个[改进的多选框版本](https://maplemei.gitee.io/xm-select/#/basic/language)

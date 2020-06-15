@@ -15,7 +15,7 @@
     * [web安全问题](work/safely.md)
     * [图片三种表现方式](work/imgways.md)
     * [web页面图片加载优化](work/imgload.md)
-    * [文件下载](work/upload.md)
+    * [文件上传下载](work/downloadAndUpload.md)
     * [moment常见使用](work/momentjs.md)
     * [iframe解析](work/iframe.md)
     * [layui使用记录](work/layui.md)

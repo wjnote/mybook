@@ -1,59 +1,45 @@
 # vue框架
-在初始化的时候，vue将遍历此对象所有属性，并使用 `Object.defineProperty` 做数据劫持把所有的属性变为 `getter/setter`. 因为 `Object.defineProperty` 在ES5中不能模拟，所以vue不能支持IE8
+在初始化的时候，vue将遍历此对象所有属性采用数据劫持结合发布-订阅模式，并通过 `Object.defineProperty` 做数据劫持把所有的属性变为 `getter/setter`，在数据变动时发布消息给订阅者，触发响应的监听回调
+
+<img src="./imgs/001.png" alt="vue响应式原理" style="zoom:80%;" />
+
+
+
+> Object.defineProperty 只能劫持对象的属性， vue2.x 需要对每个对象的每个属性进行遍历，是通过 递归 + 遍历data对象来实现数据监控的，如果属性也是对象，就需要深度遍历
+>
+> Object.defineProperty 在数组的状态下，将数组下标为属性的方式监听的话，性能开销会比较大，所以vue2.x没有实现对数组的动态监听
+>
+> vue3.x采用了 Proxy 来劫持整个对象，并返回一个新对象，Proxy不仅可以代理对象，也可以代理数组，还可以代理动态增加的属性
+
+```js
+// 最简单核心的代码  
+function defineReactive(obj, key){
+  let val = obj[key]
+  Object.defineProperty(obj,key,{
+    get(){  return val; },
+    set(newValue){ val = newValue;}
+  })
+}
+// 完整代码还需要考虑 对象的属性描述符是否可编辑， array的length 属性就不可编辑 
+// 本来是否设置了 getter setter方法
+// 属性的值也是对象，需要递归属性值，爆栈的处理
+```
+
+
+
+
+
+
 
 **指令的缩写只在其有参数的时候使用**
 
 每个组件实例（就是组件）都有对应的 watcher 对象，会在渲染的过程中把属性记录为依赖，当依赖的setter调用时，就通知`watcher`重新计算，从而使它关联的组件更新，而不是像 `React` 那样更新该组件及其所有子组件
 
-父组件给子组件传参 prop的时候，如果是非prop特性的值(即在子组件没有申明对应的接受变量) ，则该类的属性会被写到子组件的根元素上面。
+父组件给子组件传参 prop 的时候，如果是非prop特性的值(即在子组件没有申明对应的接受变量) ，则该类的属性会被写到子组件的根元素上面。
 
-因为vue在实例初始化的时候对属性执行了`getter / settter` ，属性必须在data对象上面才能变为属性依赖，在JS中不能将新添加的属性变为响应式的（`Object.observe` 被废弃了）。 **vue不允许动态添加根级响应式属性，必须在初始化的时候确定好**
-```js
-<template>
-  <div>
-    <ul>
-      <li
-        v-for="(v,i) in list"
-        :key="i"
-        v-if="v.status === '1'"
-      >{{v.text }}</li>
-    </ul>
-  </div>
-</template>
-<script>
-export default {
-  name: "responsive",
-  data() {
-    return { list: [] };
-  },
-  method() {
-    // vue会劫持data里面的属性，可是list成员内部的属性，也可以触发数据更新
-    // 所以在初始化设置的时候需要考虑到所有的数据情况
-    setTimeout(() => {
-      this.list = [{ text: 1 }, { text: 1 }, { text: 1 }];
-    }, 1000);
-    setTimeout(() => {
-      this.list.forEach((v, i) => {
-        v.text = i;
-        // 这样的方式是可以实现的，因为在给data设置值的时候
-        // vue会判断设置是赋值是否是一个对象，对象的话会对其中的属性也添加数据劫持
-      });
-      // this.list[i]={text:i}
-      // 这样的方式不会生效 数据可以更新但是视图不会
-      // 不支持通过索引设置数组成员。
-    }, 2000);
-    setTimeout(() => {
-      this.list.forEach((v, i) => {
-        v.text = i;
-        v.status = "1";
-        // 新增的属性 这样也不会生效
-        // vue不能检测到对象属性的增加和删除
-      });
-    }, 2000);
-  }
-};
-</script>
-```
+因为vue在实例初始化的时候对属性执行了`getter / settter` ，属性必须在data对象上面才能变为属性依赖，在JS中不能将新添加的属性变为响应式的（`Object.observe` 被废弃了）。 
+**vue不允许动态添加根级响应式属性，必须在初始化的时候确定好**
+
 
 异步更新队列： 在vue中更新DOM并不是同步立马更新的，而是vue开启一个队列，缓冲在同一事件循环中发生的所有数据变化（如果同一个watcher被多次触发，只会推入队列一次），然后在一个事件的 'tick' 中，一次性全部执行更新，在内部使用的是 `Promise.then`,如果想立马使用更新后的数据，就需要触发 `vm.$nextTick()`
 

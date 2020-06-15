@@ -1,3 +1,5 @@
+# 文件上传下载
+
 ## 文件下载
 1. HTML 与文件下载
 如果在页面上直接下载某些资源（jpg,txt,pdf等）最方便的方式就是使用 HTML5 的 `download` 属性
@@ -31,7 +33,6 @@ var funDownLoad = function(content, filename){
   eleLink.click()
   document.body.removeChild(eleLink)
   window.URL.revokeObjectURL(url);
-
 
 //  window.URL 里面有两个方法：
 // createObjectURL 用 blob 对象来创建一个 object URL(它是一个 DOMString)，我们可以用这个 object URL 来表示某个 blob 对象，这个 object URL 可以用在 href 和 src 之类的属性上。
