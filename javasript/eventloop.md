@@ -1,7 +1,7 @@
 ## js事件循环(Event Loop)
 js是一门单线程语言，虽然在HTML5中提出了 Web-Worker，但是单线程的本质还是没改变，如果前一个任务执行时间过长后面的任务一直得不到执行，就会引起阻塞。所以将任务分为了 **同步任务和异步任务**， 打开一个网页的时候，网页的渲染就是一大堆同步任务，页面骨架的渲染和页面元素的渲染等，加载图片和音频等就是异步任务
 
-![事件循环](./img/event3.png)
+<img src="./img/event3.png" alt="事件循环" style="zoom:65%;" />
 
 1. 同步任务和异步任务进入不同的执行线程，同步函数在主线程上执行，形成一个执行栈，异步的进入 Event Table并注册函数。
 2. 事件触发线程管理着一个任务队列，当指定的事件需要执行时(例如延时器等待了指定的时间)，Event Table会将函数移入 Event Queue中
@@ -9,7 +9,7 @@ js是一门单线程语言，虽然在HTML5中提出了 Web-Worker，但是单�
 
 > 上图中Event Queue 包括 macro task queue 和 micro task queue，
 
-![事件循环](./img/event2.png)
+<img src="./img/event2.png" alt="事件循环" style="zoom:67%;" />
 
 **我们把宿主发起的任务称为宏观任务，把 JavaScript 引擎发起的任务称为微观任务。许多的微观任务的队列组成了宏观任务**
 
@@ -84,7 +84,8 @@ setTimeout
 
 ### Node中的Event Loop
 事件循环是 Node.js 处理非阻塞 I/O 操作的机制——尽管 JavaScript 是单线程处理的——当有可能的时候，它们会把操作转移到系统内核中去。[node官网介绍](https://nodejs.org/zh-cn/docs/guides/event-loop-timers-and-nexttick/)
-![nodeevent](./img/nodeevent.png)
+<img src="./img/nodeevent.png" alt="nodeevent" style="zoom:73%;" />
+
 > node中Event Loop的执行顺序的简略图
 
 - timers: 执行被setTimeout() 和 setInterval()注册的回调函数.
@@ -94,7 +95,7 @@ setTimeout
 - check: 在这里调用setImmediate() 注册的回调.
 - close: 执行close事件的回调
 
-![nodeevent](./img/nodeevent1.png)
+<img src="./img/nodeevent1.png" alt="nodeevent" style="zoom:73%;" />
 > node 中 Event Loop 实现
 
 1. Node的Event Loop分阶段，阶段有先后，依次是
@@ -158,7 +159,6 @@ setTimeout(function() {  // setTimeout2
 1. 第一次宏任务为script标签，微任务微任务为 process.nextTick 和promise.then()
 2. 第二次宏任务为 2个setTimeout，微任务为其中的代码
 3. **process.nextTick注册的函数优先级高于Promise**
-
 
 ----
 参考文档:
