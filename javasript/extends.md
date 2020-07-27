@@ -29,6 +29,7 @@ function SubType(){
 
 > 上面这种方式就不会产生第一种方式的引用类型的问题
 > 缺点：
+>
 > - 只能继承父类的实例属性和方法，不能继承原型属性/方法
 > - 无法实现复用，每个子类都有父类实例函数的副本，影响性能
 
@@ -112,7 +113,7 @@ function object(obj){
 function createAnother(params){
   var clone = object(params) // 通过调用 object() 函数创建一个新对象
   clone.sayHi = function(){  // 以某种方式增强对象
-	console.log('hi')
+			console.log('hi')
   }
   return clone;   // 返回这个对象
 }

@@ -1,30 +1,28 @@
 # vue 插件系统
-所有的 Vue 插件都会暴露一个 install 方法，当执行 Vue.use 时，实质上 Vue 会执行插件的 install 方法， 在install 方法中第一个参数是vue实例
+所有的 Vue 插件都会暴露一个 `install` 方法，当执行 `Vue.use` 时，实质上 `Vue` 会执行插件的 `install` 方法， 方法中第一个参数是vue实例对象.
 
 
-
-# 获取vue全局变量
-
-关于如何在`.vue` 文件中访问Vue全局变量，全局js，一般是给`Vue.prototype` 添加实例方法，在 main.js 引入，全局配置路由导入
+插件系统的方法和属性一般是给 `Vue.prototype` 添加到原型链上， 然后在` main.js` 引入并执行，这样
 
 ```js
 // plugins.js
 export default {
   install(Vue, options){
     Vue.prototype.$myGlobalMethod = opts => {
-
       window.alert(JSON.stringify(opts))
     }
   }
 }
 ```
 
+
+页面加载的时候就会执行插件的方法, 这样就可以设置原型链的变量和方法，然后在 `.vue` 文件中直接访问vue实例就可以访问到，
 ```js
 // main.js
 import Vue from 'vue'
 import MyPlugins from 'plugins.js'
-
-Vue.use(MyPlugins)
+// 这样就把插件中的方法都挂载到vue实例的原型链上了，所有的子组件都可以直接访问原型链上的方法和属性
+Vue.use(MyPlugins);
 ```
 
 ```js
@@ -35,4 +33,3 @@ export default {
   },
 }
 ```
-页面加载的时候就会执行该方法,这样就可以设置全局的变量和方法

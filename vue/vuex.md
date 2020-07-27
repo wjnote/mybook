@@ -17,7 +17,7 @@ class Singleton {
 }
 ```
 
-vuex 插件是一个对象，他在内部实现了一个 install 方法，这个方法会在插件安装的时候被调用，从而把sotre注入到vue实例中，每install一次，都会尝试给vue实例注入一个Store，如果源码中没有实现单例模式，每次都是注入一个新的Store，这之前所有的操作都被清空了
+`vuex` 插件是一个对象，他在内部实现了一个 `install` 方法，这个方法会在插件安装的时候被调用，从而把`sotre注入到vue`实例中，每install一次，都会尝试给vue实例注入一个Store，如果源码中没有实现单例模式，每次都是注入一个新的Store，这之前所有的操作都被清空了
 
 ```js
 let Vue  
@@ -37,7 +37,7 @@ export function install(_Vue){
 
 
 
-
+`mapState`, `mapGetters`, `mapActions` 和 `mapMutations` 这些函数的作用和在绑定命名空间的的模块时区别
 
 #### 基本概念
 State:   this.$store.state.XXXX  /  mapState   取值
@@ -63,7 +63,7 @@ Action:  触发 mutation 方法
 Module:  Vue.set 动态添加到state到响应式数据中
 
 
-##### vuex的核心代码 将 state挂载到vue实例的上面，实现双向绑定
+##### vuex的核心代码 将 state 挂载到vue实例的上面，实现双向绑定
 ```js
 import vue from 'vue'
 
@@ -92,3 +92,28 @@ Object.defineProperties(Store.prototype, {
 })
 export default {Store}
 ```
+
+
+### vuex 持久化数据
+在开发中会发现如果刷新页面，就会导致js重新加载，vuex的Store是保存在JS内存中的，数据就重置了，为了防止这种情况，我们一般会将数据也存储在 localStorage 中，没改动一次手动存储一次的话比较麻烦，就可以使用vuex提供的插件功能
+
+```js
+// vuex插件写法
+const myPlugin = store = >{
+  // 当初始化Store 之后调用
+  store.subscribe((mutation, state)=>{
+    // 每次mutation修改数据后调用   mutation 格式为 {type: payload }
+    localStorage.setItem('store', JSON.stringify(state))
+  })
+}
+// 在vuex中都是通过mutation来修改数据的，同步的修改数据
+
+
+// 使用方式
+const store = new Vuex.Store({
+  // ...
+  plugins: [myPlugin]
+})
+```
+
+> 这个只是一个基本实现原理，网上有比较完善的npm包可以直接使用  例如  `vuex-persistedstate`

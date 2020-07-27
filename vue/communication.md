@@ -4,7 +4,7 @@
 1. 父子组件之间的通信
 2. 非父子组件之间通信(兄弟组件、隔代关系组件等）
 
-<img src="./imgs/tongxin.png" alt="vue组件通讯" style="zoom:70%;" />
+<img src="./imgs/tongxin.png" alt="vue组件通讯" style="zoom:60%;" />
 
 
 ## 1. props / $emit
@@ -61,7 +61,6 @@ Vuex 解决了多个视图依赖于同一状态和来自不同视图的行为需
 将数据保存在浏览器端，但是不容易管理，比较难维护
 
 > 用JSON.parse() / JSON.stringify() 做数据格式转换 localStorage / sessionStorage可以结合vuex, 实现数据的持久保存,同时使用vuex解决数据和状态混乱问题.
-
 
 ## 8. $attrs 与 $listeners
 在 `vue2.4` 中，引入了 `$attrs` `$listeners` ,新增了 `inheritAttrs` 选项，可以实现跨组件传递，虽然会降低代码的可读性，但有时候应该使用

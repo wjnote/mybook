@@ -1,15 +1,15 @@
 # vue框架
-在初始化的时候，vue将遍历此对象所有属性采用数据劫持结合发布-订阅模式，并通过 `Object.defineProperty` 做数据劫持把所有的属性变为 `getter/setter`，在数据变动时发布消息给订阅者，触发响应的监听回调
+当实例化一个Vue构造函数，会执行Vue 的init方法，在init方法中主要执行三部分内容，一是初始化环境变量，二是处理vue组件数据，三是解析挂载组件，这三个部分构成了Vue的整个执行过程
+
+在初始化的时候，vue将遍历此对象所有属性采用数据劫持结合发布-订阅模式，并通过 `Object.defineProperty` 做数据劫持把所有的属性变为 `getter/setter`，在数据变动时发布消息给订阅者，触发响应的监听回调，属于上述的第二个部分。在生命周期init 和 created 之间执行，`options.data  $options.props  $options.computed  $options.methods  $options.events  $options.watch` 对方法的处理
 
 <img src="./imgs/001.png" alt="vue响应式原理" style="zoom:80%;" />
 
+Object.defineProperty 只能劫持对象的属性， vue2.x 需要对每个对象的每个属性进行遍历，是通过递归 + 遍历data对象来实现数据监控的，如果属性也是对象，就需要深度遍历
 
+Object.defineProperty 在数组的状态下，将数组下标为属性的方式监听的话，性能开销会比较大，所以vue2.x没有实现对数组的动态监听
 
-> Object.defineProperty 只能劫持对象的属性， vue2.x 需要对每个对象的每个属性进行遍历，是通过 递归 + 遍历data对象来实现数据监控的，如果属性也是对象，就需要深度遍历
->
-> Object.defineProperty 在数组的状态下，将数组下标为属性的方式监听的话，性能开销会比较大，所以vue2.x没有实现对数组的动态监听
->
-> vue3.x采用了 Proxy 来劫持整个对象，并返回一个新对象，Proxy不仅可以代理对象，也可以代理数组，还可以代理动态增加的属性
+vue3.x采用了 Proxy 来劫持整个对象，并返回一个新对象，Proxy不仅可以代理对象，也可以代理数组，还可以代理动态增加的属性
 
 ```js
 // 最简单核心的代码  
@@ -176,7 +176,7 @@ A: 生命周期函数在第一的时候执行，数据改变的时候不会再�
 
 
 ### vue 组件化编程
-组件化编程的核心思想应该是关注点分离、单一职责原则和开闭原则。而不是在组件中`ctrl+c和ctrl+v`
+组件化编程的核心思想应该是关注点分离、单一职责原则和开闭原则。而不是粘贴复制
 
 - 关注点分离：vue本身就很好运用了关注点分离，比如将template、script和style三者分开。在组件化编程还是得运用一下这个思想的。组件的各部分要根据其关注点合理地将其分开，这个分开不一定是分开为两个组件，当业务量比较大的时候，这两者会是组件群，在组件群里面再分离，最小的单元应该会是组件。运用关注点分离之后你会发现原来复杂的问题问题一下子变得简单了，更重要的是维护者可以很容易地接手项目。
 - 单一职责原则：很多同学写组件恨不得在一个组件就写完所有东西，生怕多一个组件。单一职责告诉你一个组件，一个函数应该只做一件事。比较官方的说法是一个组件只有一个理由去改动它。独立为一个组件有两种情况：
@@ -187,10 +187,34 @@ A: 生命周期函数在第一的时候执行，数据改变的时候不会再�
 
 
 
-
-Vue里面router-link在电脑上有用，在安卓上没反应怎么解决？
+### vue开发中的坑
+1. Vue里面router-link在电脑上有用，在安卓上没反应怎么解决？
 答：Vue路由在Android机上有问题，babel问题，安装babel polypill插件解决。
-33.Vue2中注册在router-link上事件无效解决方法
+
+2. Vue2中注册在router-link上事件无效解决方法
 答： 使用@click.native。原因：router-link会阻止click事件，.native指直接监听一个原生事件。
-34.RouterLink在IE和Firefox中不起作用（路由不跳转）的问题
+
+3. RouterLink在IE和Firefox中不起作用（路由不跳转）的问题
 答: 方法一：只用a标签，不适用button标签；方法二：使用button标签和Router.navigate方法
+
+
+### vue开发中的坑于感悟
+使用keep-alive包裹的组件/路由，打开一次后created只会执行一次，有两种情况，一、如果要重新渲染部分数据，可以在activated中做处理；二、路由/组件重新重新created，可以使用官方推荐的:key="key" ，然后去改变key的值，组件就会重新挂载了
+beforeRouteEnter中的next函数的执行时间是在组件mounted之后，因此需要在此处处理的数据要注意了
+网页刷新时vuex数据会丢失，需配合localStorage或sessionStorage使用，把必须数据先存后取
+对于权限及不确定路由，可以使用addRoutes()，可以避免抖动
+熟练使用es6的数组map、find、filter等方法，对解构赋值、class继承、promise，及es7中的async和await
+使用computed替代watch，computed依赖于data属性的更改，是有缓存的
+通过props传递的值，不要在子组件去更改。开发中，如果直接更改props，一、基本类型的值会报错，二、引用类型的值不会报错，但是不好去追溯数据的更改，很多人不太注意引用类型，可通过computed或watch去更改
+在data里调用methods的方法，可以在data里定义let self = this，然后在使用self.xx()进行调用
+
+
+**动画**
+如果你需要使用动画，请了解一下 Vue 的过渡系统，它也是 Vue 核心的一部分。你可以在向 DOM 添加元素或从 DOM 中删除元素时应用动画。
+
+你需要创建 CSS 类来定义所需的动画效果，无论是淡入淡出、更改颜色还是你喜欢的其他方式。当向 DOM 中添加元素或从 DOM 中删除元素时，Vue 会检测到这些变更，并在过渡期间添加或删除相应的 CSS 类。
+
+**渐进式 Web 应用程序**
+渐进式 Web 应用程序（PWA）就像普通的 Web 应用程序一样，只是加入了改进的用户体验。例如，PWA 可能包括脱机缓存、服务器端渲染、推送通知等。
+
+大多数 PWA 功能可以通过 Vue CLI 3 插件或使用 Nuxt.js 等框架添加到 Vue 应用程序中，但你仍然需要了解一些关键技术，包括 Web App Manifest 和 ServiceWorker。

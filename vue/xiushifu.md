@@ -18,7 +18,7 @@
 - `.passive` 监听元素滚动事件的时候，相当于给`onscroll`事件添加了 `.lazy`修饰符
 - `.native` 你可能想在某个组件的根元素上监听一个原生事件，可以使用 `v-on`的修饰符 `.native` ,通俗的将就是在父组件中给子组件绑定一个原生的事件，就将子组件变成了普通的HTML标签，不加`.native` 事件时无法触发的（可以理解为该修饰符的作用就是把一个vue组件转化为一个普通的HTML标签，并且该修饰符对普通HTML标签是没有任何作用的。）
 
-```js
+```html
 <template>
   <div class="clastest">
     <basecheck @click.native="outclick"></basecheck>
@@ -41,7 +41,7 @@ export default {
   }
 };
 </script>
-// 上面的方式 不加 .native 的话就不会执行
+<!-- 上面的方式 不加 .native 的话就不会执行 -->
 ```
 
 
@@ -54,25 +54,15 @@ export default {
 
 - `.keyCode` 一些 `onkeyup  onkeydown`事件的时候可以指定某个键才触发
 
-- ```
+```
   //普通键
-  .enter
-  .tab
-  .delete //(捕获“删除”和“退格”键)
-  .space
-  .esc
-  .up
-  .down
-  .left
-  .right
+  .enter   .tab   .delete //(捕获“删除”和“退格”键)
+  .space  .esc  .up  .down  .left  .right  
   //系统修饰键
-  .ctrl
-  .alt
-  .meta
-  .shift
-  ```
+  .ctrl  .alt  .meta  .shift  
+```
 
-  > 可以通过全局 `config.keyCodes` 对象自定义按键修饰符别名
+> 可以通过全局 `config.keyCodes` 对象自定义按键修饰符别名
 
 还可以将系统修饰符和其他键吗连接起来使用 `<input type="text" @keyup.ctrl.67="shot(4)"/>` 同时按下 `ctrl   c`的时候才触发
 

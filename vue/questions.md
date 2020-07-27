@@ -1,28 +1,36 @@
 ## 一些常见问题列表 极客时间视频
 > vue 开发中常见的一些值的思考的问题，底层问题，参考极客时间vue视频的课后习题
 
-### vue 在子组件中修改了父组件传递的`props`，vue会报错，vue是怎么监听这类修改事件的 ??
+#### Q： vue 在子组件中修改了父组件传递的`props`，vue会报错，vue是怎么监听这类修改事件的  ?
 
-### `this.$emit` 的返回值是什么？ 上层组件 `this.$emit` return了一个值，在组件中能不能接收到 ??
+#### Q： `this.$emit` 的返回值是什么？ 上层组件 `this.$emit` return了一个值，在组件中能不能接收到 ?
+    A： 如果在二级菜单中添加导航的参数，然后使用 props 将组件和路由解耦：
 
-如果在二级菜单中添加导航的参数，然后使用 props 将组件和路由解耦：
+#### Q：父组件向子组件传入的props，在子组件中能赋值到 data 中，后续需要修改的话，是直接修改 `this.data` props会跟随改动吗。
+    A： 
 
-父组件向子组件传入的props，在子组件中能赋值到 data 中，后续需要修改的话，是直接修改 `this.data` props会跟随改动吗。
+#### Q: 为什么不推荐使用index作为 v-for 的key值
+    A: 数组中改变了中间的某个元素，列表中它后面的元素的`index`值就变化了，组件`v-for`会对key变化的所有Elements节点都重新渲染，造成没必要的性能开销
 
+#### Q: 组件的事件占用了系统资源，一般在`beforeDestroy`中处理那些操作
+    A： 一般在`beforeDestroy`中会清除定时器，一些元素绑定的事件处理函数解除
 
+#### Q：图片合理的优化方式
+    A： DOM中存在大量图片的时候会导致加载缓慢的情况，
+- 一般开发中会使用 懒加载 的方式加载图片，节点展示的时候才加载图片
+- 小图标通过 SVG 或者字体图标的方式
+- 通过 base64 或者 webp 的方式加载小型图片
+- 能通过cdn加速的大图尽量用cdn
 
+----
 
+#### Q： 相同名称的插槽是合并还是替换(2.6的语法)
+    A: 
 
+#### Q： 数组有哪些方法支持响应式更新，如不支持如何处理，底层原理是怎么实现的（push方法会改变原数组）: 如果数组的方法不会改变原数组
+    A: vue原生不能检测到数组中的一些方法，返回新数组的那些方法， 可以使用 `arr = arr.concat()`
 
-相同名称的插槽是合并还是替换(2.6的语法)
-
-vue中为什么不能使用index来标识DOM
-
-数组有哪些方法支持响应式更新，如不支持如何处理，底层原理是怎么实现的（push方法会改变原数组）: 如果数组的方法不会改变原数组，可以使用 `arr = arr.concat()` 将改变后的数组再赋值给原数组即可
-
-
-
-Vue内部使用Object.defineProperty进行的数据劫持,而这个API无法探测到对象根属性的添加和删除,以及直接给数组下标进行赋值,而理论上这个API也无法探测到数组的一系列方法(push,splice,pop),但是Vue框架修改了数组的原型,使得在调用这些方法修改数据后会执行视图更新的操作，实现代码如下
+Vue2内部使用`Object.defineProperty`进行的数据劫持, 而这个API无法探测到对象属性的添加和删除,以及直接给数组下标进行赋值, 而理论上这个API也无法探测到数组的一系列方法(push,splice,pop),  因为这些方法不会改变原数组，而是会返回新数组, 但是Vue框架修改了数组的原型, 使得在调用这些方法修改数据后会执行视图更新的操作
 ```js
 //源码位置:src/core/observer/array.js
 methodsToPatch.forEach(function (method) {
@@ -50,109 +58,51 @@ methodsToPatch.forEach(function (method) {
     return result
   });
 });
-```
 
-
-```js
-let a = [1,2,3];  // 下面9个方法会修改原数组，在传值的时候传递的是内存指针
+// 下面9个方法会修改原数组，在传值的时候传递的是内存指针
 // ES5:
-a.splice();
-a.sort();
-a.pop();
-a.shift();
-a.push();
-a.unshift();
-a.reverse();
+a.splice();  a.sort();  a.pop();  a.shift();  a.push();  a.unshift();  a.reverse(); 
 // ES6:
-a.copyWithin();
-a.fill();
+a.copyWithin();  a.fill();
 ```
 
+---
+
+#### Q： vue开发中的临时变量使用 ？ 可以使用函数式组件的方式来实现 ？
 
 
-vue开发中的临时变量使用，？？ 可以使用函数式组件的方式来实现 ？？？
-
-vue开发一个电商的倒计时秒杀组件
-
-> ```
-> [Vue warn]: You are using the runtime-only build of Vue where the template compiler is not available. Either pre-compile the templates into render functions, or use the compiler-included build.
-> ```
-
-据错误提示说明：**是项目引入的vue编译版本不对**
-
-解决方案：
-
-1. build/webpack.base.conf.js 并设置vue的alias别名，如下：
-
-```js
-   resolve: {
-     alias: {
-       vue: 'vue/dist/vue.esm.js'
-     }
-    }
-```
-
-2. 打开src/main.js修改Vue对象初始化。 原因是，使用 template属性，需要引入带编译器的完整版的vue.esm.js
-
-   ```js
-   new Vue({
-     el: '#app',
-     router,
-     render: h => h(App)
-   })
-   ```
+#### Q: 页面后退, 数据还原, 滚动条还原，
+    A: 
 
 
-3. 单文件就是个组件的方式 ，然后使用import引入，则不需要完整版的`vue.esm.js`，因为使用`vue-loader`时` *.vue`文件会自动预编译成 JS
-
-
-
-`mapState`, `mapGetters`, `mapActions` 和 `mapMutations` 这些函数的作用和在绑定命名空间的的模块时区别
-
-
-页面后退数据还原，滚动条还原，
-登录超时，获取列表数据，表单提交，
-多台服务器自动化部署，最终后一个个解决了，
+#### Q: 登录超时，获取列表数据，表单提交，
 
 
 1. 如果父组件向子组件传值，根据该值在 mounted 方法中，执行一个操作，后续的，如果该值变化，但是mounted里面的函数不能再执行 ？
 
 
-#### 子组件修改父组件的props ，父组件是怎监测到的
-主要是使用了 `Object.defineProperty()` 的方式，主要思想是一个开关变量来监测某个值如果不是父组件修改的，就会报错，
-
-#### key循环的时候不能使用index作为值
-动态添加的li列表，使用index作为key，然后再删除的时候需要传递当前的index值，很容易引起bug
-
-#### 数组有哪些方法支持响应式更新，底层原理实现
-
-1. 支持的方法： push(), pop(), shift(), unshift(), splice(), sort(), reverse()
-2. 不支持的：filter(), concat(), slice()
-3. 原理同样是使用 `Object.defineProperty` 对数组进行改写
-
-> 不支持的方法可以使用将改变后的数组赋值给原来数组即可以实现响应更新
+#### Q: 子组件修改父组件的props ，父组件是怎监测到的
+    A: 主要是使用了 `Object.defineProperty()` 的方式，主要思想是一个开关变量来监测某个值如果不是父组件修改的，就会报错，
 
 
-#### vuex是通过什么方式提供响应式数据的？
+#### Q: 数组有哪些方法支持响应式更新，底层原理实现
+    A: 1. 支持的方法： push(), pop(), shift(), unshift(), splice(), sort(), reverse()
+      2. 不支持的：filter(), concat(), slice()
+      3. 原理同样是使用 `Object.defineProperty` 对数组进行改写
 
 
-#### SPA的缺点有哪些，如何解决？
-1. 不利于SEO，搜索引擎优化
-2. 首屏渲染时间长
-
-可以使用服务端渲染 SSR 来解决不利于SEO的问题， 渲染时间长可以使用预渲染 Prerendering
-
-Prerendering 适用于 静态站点，不太变动的页面
-
-Nuxt 服务端渲染
+#### Q: vuex是通过什么方式提供响应式数据的？
 
 
+#### Q： SPA的缺点有哪些，如何解决？
+    A： 1. 不利于SEO，搜索引擎优化   2. 首屏渲染时间长
 
-组件部分
-如何声明组件
-如果通过prop 、 event在组件间交互
+    可以使用服务端渲染 SSR 来解决不利于SEO的问题， 渲染时间长可以使用预渲染 Prerendering
 
-组件路由 、 状态管理
+    Nuxt 服务端渲染
+
+---
+
 
 vue项目的部署
 了解将vue集成到完整技术栈中常用设计模式，vue应用程序的数据完整性和安全性
@@ -178,15 +128,3 @@ Vue的框架：构建在 Vue 之上的框架让你无需从头开始实现服务
 2.  Vuetify Vuetify 在一系列 Vue 组件中实现了 Material Design。因此，你可以使用 Material Design 布局和样式快速构建 Vue 应用程序，以及模态、警报、导航栏、分页等小部件。
 3.   NativeScript-Vue  ativeScript 是一个用于在 iOS 和 Android 上使用原生用户界面组件构建应用程序的系统，而 NativeScript-Vue 是一个基于 NativeScript 的框架，提供了 Vue 的语法和组件的使用方式
 
-**插件开发**
-如果要在项目中重用 Vue 功能或为 Vue 生态系统做贡献，可以将功能作为 Vue 插件来开发。
-
-**动画**
-如果你需要使用动画，请了解一下 Vue 的过渡系统，它也是 Vue 核心的一部分。你可以在向 DOM 添加元素或从 DOM 中删除元素时应用动画。
-
-你需要创建 CSS 类来定义所需的动画效果，无论是淡入淡出、更改颜色还是你喜欢的其他方式。当向 DOM 中添加元素或从 DOM 中删除元素时，Vue 会检测到这些变更，并在过渡期间添加或删除相应的 CSS 类。
-
-**渐进式 Web 应用程序**
-渐进式 Web 应用程序（PWA）就像普通的 Web 应用程序一样，只是加入了改进的用户体验。例如，PWA 可能包括脱机缓存、服务器端渲染、推送通知等。
-
-大多数 PWA 功能可以通过 Vue CLI 3 插件或使用 Nuxt.js 等框架添加到 Vue 应用程序中，但你仍然需要了解一些关键技术，包括 Web App Manifest 和 ServiceWorker。

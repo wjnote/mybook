@@ -45,3 +45,29 @@ module:{
 }
 // 上面的use如果写反了，webpack将检查经过babel编译后的文件
 ```
+
+
+#### webpack 开发中的一个错误
+> [Vue warn]: You are using the runtime-only build of Vue where the template compiler is not available. Either pre-compile the templates into render functions, or use the compiler-included build.
+
+据错误提示说明： 是项目引入的vue编译版本不对
+
+解决方案： 
+
+1. `build/webpack.base.conf.js` 并设置vue的alias别名，如下：
+```js
+  resolve: {
+    alias: {
+      vue: 'vue/dist/vue.esm.js'
+    }
+  }
+```
+
+2. 打开src/main.js修改Vue对象初始化。 原因是，使用 template属性，需要引入带编译器的完整版的vue.esm.js
+```js
+  new Vue({
+    el: '#app',
+    router,
+    render: h => h(App)
+  })
+```

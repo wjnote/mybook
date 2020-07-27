@@ -27,3 +27,14 @@
    res.data.length && res.data.forEach();
    res.data.length && fnname();
    ```
+
+4. JS中的获取HTML集合，提供了一个类似数组的列表，这个列表是一个‘假定实时态’，当底层文档对象变化时，它也会自动更新，HTML集合一直保持着和文档的连接，当需要访问信息，例如访问列表的长度时，也会重复执行查询的过程，会导致很慢，优化方式是用一个数组来复制该列表，或者将长度保存为一个局部变量
+
+   ```js
+   var alidivs = document.getElementsByTagName('div')
+   for(var i =0;i< alidivs.length;i++){
+     document.body.appendChild(document.createElment('div'))
+   }   // 这个方法会陷入死循环
+   ```
+
+   

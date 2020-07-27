@@ -7,10 +7,10 @@
 不同的终端，我们面对的屏幕分辨率，DPR，1px, 2x图等一系列问题，现在我们可以通过使用css原生技术来处理
 
 ### 适配终端
-以前的Flexible方案是通过JS来模拟 VW 的特性，现在这个属性已经被大多数浏览器支持，可以直接使用了。 VW 是基于 Viewport 视窗的长度单位，这里的视窗指的就是浏览器可视化区域，window.innerWidth / window.innerHeight 的大小
+以前的Flexible方案是通过JS来模拟 VW 的特性，现在这个属性已经被大多数浏览器支持，可以直接使用了。 VW 是基于 Viewport 视窗的长度单位，这里的视窗指的就是浏览器可视化区域，`window.innerWidth / window.innerHeight` 的大小
 <img src="./imgs/01.png" alt="viewport视图" style="zoom:67%;" />
 
-在css3中和viewport 相关的单位有四个 Vw, Vh, Vmin, Vmax
+在css3中和viewport 相关的单位有四个` Vw, Vh, Vmin, Vmax`
 - Vw: 是viewport width 的简写，1vw 等于视窗宽度的1%
 - Vh: 是viewport height 的简写，1vw 等于视窗宽度的1%
 - vmin: vmin的值是当前 vw和vh中较小的值

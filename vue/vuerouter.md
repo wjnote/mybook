@@ -52,3 +52,44 @@ this.$router.addRoutes(routes);
     alias: '/home'
   }
 ```
+
+
+### [路由全局守卫](https://router.vuejs.org/zh/guide/advanced/navigation-guards.html#全局解析守卫)
+`beforeRouteEnter` 访问this的方式： 因为该钩子在组件实例还没创建的时候调用，所以不能获取组件实例this，可以传递一个回调函数给`next`来访问组件实例，next回调的执行时机在`mounted`后面，所以在实际开发中在次钩子函数中访问实例this的实际意义不大，可以放在组件的`created`或者`mounted`中执行
+
+`beforeRouteLeave` 导航离开组件的时候对应的路由，可以用来提示用户确认是否离开，在代码中主要是要销毁定时器，绑定的事件等
+
+
+###  `<keep-live>`
+
+activated 调用时机，第一次进入缓存路由/组件，在`mounted`后面，`beforeRouteEnter`守卫传给 next 的回调函数之前调用
+
+```
+    beforeMount=> 如果你是从别的路由/组件进来(组件销毁destroyed/或离开缓存deactivated)=>
+    mounted=> activated 进入缓存组件 => 执行 beforeRouteEnter回调
+```
+
+因为组件被缓存了，**再次进入缓存路由/组件时，不会触发这些钩子**：`  beforeCreate created beforeMount mounted `都不会触发。 之后的调用流程是
+```
+    组件销毁destroyed/或离开缓存deactivated => activated 进入当前缓存组件 
+    => 执行 beforeRouteEnter回调       // 组件缓存或销毁，嵌套组件的销毁和缓存也在这里触发
+```
+
+
+### 完整的执行流程中的钩子函数
+将路由导航、`keep-alive`、和组件生命周期钩子结合起来的，触发顺序，假设是从a组件离开，第一次进入b组件：
+
+1. `beforeRouteLeave`:路由组件的组件离开路由前钩子，可取消路由离开。
+2. `beforeEach`: 路由全局前置守卫，可用于登录验证、全局路由loading等。
+3. `beforeEnter`: 路由独享守卫
+4. `beforeRouteEnter`: 路由组件的组件进入路由前钩子。
+5. `beforeResolve`: 路由全局解析守卫
+6. `afterEach`:路由全局后置钩子
+7. `beforeCreate`:组件生命周期，不能访问`this`。
+8. `created`:组件生命周期，可以访问`this`，不能访问dom。
+9. `beforeMount`:组件生命周期
+10. `deactivated`: 离开缓存组件a，或者触发a的`beforeDestroy`和`destroyed`组件销毁钩子。
+11. `mounted`:访问/操作dom。
+12. `activated`:进入缓存组件，进入a的嵌套子组件(如果有的话)。
+13. 执行`beforeRouteEnter`回调函数`next` ,其中可以访问组件实例 this 对象。
+
