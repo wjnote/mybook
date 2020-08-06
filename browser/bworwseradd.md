@@ -6,10 +6,10 @@
 
 2. DOMContentLoaded
 > document.addEventListener("DOMContentLoaded",function(){});
+>
+> 当初始的 HTML 文档被完全加载和解析完成之后，DOMContentLoaded 事件被触发，而无需等待样式表、图像和子框架的完成加载。DOMContentLoaded 事件必须等待其所属script之前的样式表加载解析完成才会触发。
 
-    > 当初始的 HTML 文档被完全加载和解析完成之后，DOMContentLoaded 事件被触发，而无需等待样式表、图像和子框架的完成加载。DOMContentLoaded 事件必须等待其所属script之前的样式表加载解析完成才会触发。
-
-浏览器会对资源进行分析，首先开启下载线程，对所有资源进行优先级排序下载(一般浏览器对同域名下的下载线程限定在6个，超过就只能等待下载，所以一般将资源分布在不同的域名下)，同时，主线程会对文档进行解析
+浏览器会对资源进行分析，首先开启下载线程，对所有资源进行优先级排序下载(一般浏览器对同域名下的下载线程限定在6个，超过就只能等待下载，所以一般将资源分布在不同的域名下， CND服务)，同时，主线程会对文档进行解析
 - 遇到 script 标签，首先阻塞后续内容的解析，同时检查该script是否已经下载下来，已经下载，便执行代码
 - 遇到 link 标签时，不会阻塞后续内容的解析(即是DOM渲染)，检查link标签是否已经下载，已经下载便构建cssdom
 - 遇到DOM标签，执行DOM构建，将该DOM元素添加到文档树中
@@ -42,7 +42,7 @@
 4. 布局render树（layout / reflow），负责各元素尺寸，位置信息
 5. 绘制render树（paint），绘制页面像素信息
 6. 浏览器将各层的信息发送给GPU，GPU将各层合成，显示在页面上
-<img src="img/01.png" alt="页面渲染流程" style="zoom:67%;" />
+<img src="imgs/01.png" alt="页面渲染流程" style="zoom:67%;" />
 
 
 ### html解析构成DOM树
@@ -59,7 +59,7 @@
   </body>
 </html>
 ```
-<img src="img/02.png" alt="页面渲染流程" style="zoom: 80%;" />
+<img src="imgs/02.png" alt="页面渲染流程" style="zoom: 80%;" />
 
 
 ### css规则生成类似的
@@ -70,7 +70,7 @@ span { color: red }
 p span { display: none }
 img { float: right }
 ```
-<img src="img/03.png" alt="页面渲染流程" style="zoom:80%;" />
+<img src="imgs/03.png" alt="页面渲染流程" style="zoom:80%;" />
 
 > css选择器有一个特点： 就是选择器的出现顺序必定和构建DOM树的顺序一致，这是css的设计原则。 即保证选择器在DOM树构建到当前节点时，已经可以准确判断是否匹配，不需要后续节点信息，所以不会出现 '父元素选择器'， 因为父节点会先于子节点构建
 
@@ -83,7 +83,7 @@ css 的渲染过程：
 
 ### 构建渲染树
 将DOM树和CSSDOM构建成渲染树，这时有一些不可见DOM不会被插入渲染树中，如head这种不可见的，以及`display: none;`等
-<img src="img/04.png" alt="页面渲染流程" style="zoom:80%;" />
+<img src="imgs/04.png" alt="页面渲染流程" style="zoom:80%;" />
 
 
 ### 渲染，有了render树，接下来就开始渲染
@@ -92,7 +92,7 @@ css 的渲染过程：
 2. 构建渲染树
 3. 布局，主要定位坐标和大小，是否换行，各种position, overflow, z-index等
 4. 绘制，将图像绘制出来
-<img src="img/05.jpg" alt="页面渲染流程" style="zoom:80%;" />
+<img src="imgs/05.jpg" alt="页面渲染流程" style="zoom:80%;" />
 图中的线与箭头表示js动态修改了DOM和css，导致了重新布局(Layout) 或渲染(Repaint)
 
 ### 回流(Layout)和重绘(Repain)
@@ -105,19 +105,19 @@ css 的渲染过程：
 
 ### 引起回流方式
 ```shell
-1. 页面渲染初始化
-2. DOM结构改变，比如删除了某个节点
-3. render树改变，比如减少了padding值
-4. 窗口 resize
-5. 最复杂的一种： 获取某些属性，会引发回流
-很多浏览器会做优化处理，很多操作队列然后一起处理，但是当你需要获取某些属性的时候，浏览器就会先回流然后返回值
-offset(top/left/width/height)
-scroll(top/left/width/height)
-client(top/left/width/height)
-width, height
-调用 getComputedStyle() / currentStyle
-
-页面书写的时候最好将复杂的元素决定定位脱离文档流，使其不会产生回流
+  1. 页面渲染初始化
+  2. DOM结构改变，比如删除了某个节点
+  3. render树改变，比如减少了padding值
+  4. 窗口 resize
+  5. 最复杂的一种： 获取某些属性，会引发回流
+  offset(top/left/width/height)
+  scroll(top/left/width/height)
+  client(top/left/width/height)
+  width, height
+  调用 getComputedStyle() / currentStyle
+  # 当你需要获取最新的值，浏览器就会先回流然后返回最新的值给你
+  # 很多浏览器会做优化处理，很多操作队列然后一起处理，
+  # 页面书写的时候最好将复杂的元素决定定位脱离文档流，使其不会产生回流
 ```
 
 
@@ -133,12 +133,11 @@ width, height
 ### css的可视化格式模型
 css的可视化格式模式规定了浏览器在页面中如何处理文档树
 ```shell
-包含块
-控制框
-BFC  / IFC
-定位体系
-浮动
-...
+  包含块
+  控制框
+  BFC  / IFC
+  定位体系
+  浮动
 ```
 
 FC 即上下文，它定义框内部的元素渲染规则，比较抽象，不同类型的框参与不同的 FC 类型，**块级框对应BFC，行内框对应IFC**
@@ -161,10 +160,10 @@ BFC 的触发方式
 
 IFC 行内框产生的格式上下文，IFC 规则，主要是行内块的对齐的标准
 ```shell
-在行内格式化上下文中
-框一个接一个地水平排列，起点是包含块的顶部。
-水平方向上的 margin，border 和 padding 在框之间得到保留
-框在垂直方向上可以以不同的方式对齐：它们的顶部或底部对齐，或根据其中文字的基线对齐
+  在行内格式化上下文中
+  框一个接一个地水平排列，起点是包含块的顶部。
+  水平方向上的 margin，border 和 padding 在框之间得到保留
+  框在垂直方向上可以以不同的方式对齐：它们的顶部或底部对齐，或根据其中文字的基线对齐
 ```
 
 1. 行内元素总是会应用IFC渲染规则

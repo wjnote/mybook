@@ -1,25 +1,24 @@
 ### git学习资料
 1. 下载git安装文件 [Git官网](https://git-scm.com/downloads)
 2. 使用之前设置一下用户的信息,在命令行输入,如果使用了global配置，在本机配置一次就行了，之后会自动去读取
-```shell
-// 设置用户信息 如果设置的时候没有后面的参数 默认第一个
-$ git config --local  // 只对某个仓库有效
-$ git config --global // global对当前用户所有仓库有效 **工作中最常用**
-$ git config --system // 对系统所有登录用户有效
-// 如果想查看之前的设置
-$ git config --list --local
-$ git config --list --global
-```
-3. 查看了配置之后，就可以在本地文件夹目录中初始化一个仓库 `git init projectName / git init` ，会出现一个 .git文件夹(默认隐藏)，但是此时所有的文件并没有添加到暂缓区
-
-> 上面两种命令是两种不同的情况，第一个是在全新的文件下初始化项目，第二种是在已经存在文件的文件夹中初始化Git仓库来版本控制，应该开始跟踪这些文件并提交。
+    ```shell
+    # 设置用户信息 如果设置的时候没有后面的参数 默认第一个
+    $ git config --local  // 只对某个仓库有效
+    $ git config --global // global对当前用户所有仓库有效 **工作中最常用**
+    $ git config --system // 对系统所有登录用户有效
+    # 如果想查看之前的设置
+    $ git config --list --local
+    $ git config --list --global
+    ```
+3. 查看了配置之后，就可以在本地文件夹目录中初始化一个仓库 `git init projectName / git init` ，文件夹会出现一个 ` .git `文件夹(默认隐藏)，但是此时所有的文件并没有添加到暂缓区
+  > 上面两种命令是两种不同的情况，第一个是在全新的文件下初始化项目，第二种是在已经存在文件的文件夹中初始化Git仓库来版本控制，应该开始跟踪这些文件并提交。
 
 4. 往本地暂缓区 仓库里添加文件
-  - `git add [filename] `将本地文件先添加到暂存区中，被 git 监控，可以快速添加所有文件 `git add .`
-  - `git commit -m"xxx"` 将刚刚添加的文件添加注释 这样是单个文件添加不同的注释, 文件并没有被托管到GitHub上面
-  - `git commit -a -m"xxx"` 如果是一次性提交所有文件并添加注释, 可以直接将所有文件直接添加注释并添加到暂缓区
-  - `git remote add origin http://url ` 将本地的仓库关联到远程服务器的某个仓库
-  - `git push origin master` 将本地暂缓区的代码上传到服务器，可以选择某个用户上传
+    - `git add [filename] `将本地文件先添加到暂存区中，被 git 监控，可以快速添加所有文件 `git add .`
+    - `git commit -m"xxx"` 将刚刚添加的文件添加注释 这样是单个文件添加不同的注释, 文件并没有被托管到GitHub上面
+    - `git commit -a -m"xxx"` 如果是一次性提交所有文件并添加注释, 可以直接将所有文件直接添加注释并添加到暂缓区
+    - `git remote add origin http://url ` 将本地的仓库关联到远程服务器的某个仓库
+    - `git push origin master` 将本地暂缓区的代码上传到服务器，可以选择某个用户上传
 5. 提交完成之后，`git log` 可以查看提交信息，用户和提交的文件，后面可以配置参数展示形式
 
 
@@ -98,7 +97,7 @@ $ git reset --hard  origin/[name]
 ```
 
 ### git中 comit  tree   blob 的关系
-![commit/tree/blob关系图](../resouce/imgs/git04.png)
+<img src="../resouce/imgs/git04.png" alt="commit/tree/blob关系图" style="zoom: 60%;" />
 
 - 一个commit代表一柯树，表示此刻文件的所有快照
 - 树中也可以包含其他树结构

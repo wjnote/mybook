@@ -2,6 +2,7 @@
 
 ## gitbook 介绍
 * [Introduction](README.md)
+* [使用流程](useway.md)
 
 -----
 * [工作积累](work/README.md)
@@ -10,7 +11,7 @@
     * [开发中常用3](work/work3.md)
     * [权限控制](work/accesscontrol.md)
     * [JS常见的错误类型](work/errorlist.md)
-    * [git](work/git学习资料.md)
+    * [git](work/git.md)
     * [window进程查询](work/windowport.md)
     * [web安全问题](work/safely.md)
     * [图片三种表现方式](work/imgways.md)
@@ -59,6 +60,7 @@
     * [Buffer/Stream/fs](node/stream.md)
     * [babel](node/babel.md)
     * [babel常用插件](node/commonuse.md)
+    * [node进程守护](node/pm2.md)
 * [webpack](webpack/README.md)
     * [webpack-dev-server](webpack/dev.server.md)
     * [webpack多页面构建](webpack/morepage.md)
@@ -74,7 +76,7 @@
     * [mobile-1px](mobile/mobile1px.md)
 * [浏览器如何工作](browser/README.md)
     * [浏览器加载渲染流程](browser/bworwseradd.md)
-    * [http/http2/https](browser/http-networking.md)
+    * [http/http2/https](browser/http-http2-https.md)
     * [浏览器多线程和js单线程](browser/thread.md)
     * [浏览器URL路由](browser/urlrouter.md)
     * [chrome 调试技巧](browser/chromedebug.md)
@@ -85,7 +87,5 @@
     * [测试号使用](wechat/testaccount.md)
 * [map](map/README.md)
     * [GeoJSON](map/geojson.md)
-* [jQuery源码](jquery/README.md)
 * [面试相关](interview/README.md)
     * [面试题采集](interview/question.md)
-

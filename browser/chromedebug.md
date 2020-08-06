@@ -2,15 +2,17 @@
 
 > 本笔记来自掘金小册，汲取了其中常用的记录一下
 
-1. copy()   方法是一个全局方法，可以在 `console` 里面复制你想查看的内容，  `copy($_)    copy($0)`
+1. copy() 方法是一个全局方法，可以在 `console` 里面复制你想查看的内容，  `copy($_)    copy($0)`
 
-2. 在 Elements 面板中， `$0` 是对我们当前选中的HTML节点的引用，可以直接在控制台打印选择的HTML节点， `$1 $2 $3 $4` 表示之前选中的HTML节点(最多4次)
+2. `store as global` (存储为一个全局变量)， **当我们在js代码中打印的时候，不能复制，可以在打印的内容前面的三角形 右键，变为一个全局变量，会自动在控制台打印变量的名字**
 
-3. 在`console`面板中 `$` 就是`document.querySelector` 的别名，`$$` 就是 `document.QuerySelectorAll` 的别名，而且返回的就是一个数组，不是 `node list`
+3. 在 Elements 面板中， `$0` 是对我们当前选中的HTML节点的引用，可以直接在控制台打印选择的HTML节点， `$1 $2 $3 $4` 表示之前选中的HTML节点(最多4次)
 
-4. `$_` 我们在开发中常常打印变量的值，使用 `$_` 表示对上次执行的引用
+4. 在`console`面板中 `$` 就是`document.querySelector` 的别名，`$$` 就是 `document.QuerySelectorAll` 的别名，而且返回的就是一个数组，不是 `node list`
 
-5. **console 默认就被 async 包裹的，可以直接使用 await 方法** Promise 等
+5. `$_` 我们在开发中常常打印变量的值，使用 `$_` 表示对上次执行的引用
+
+6. **console 面板默认就被 async 包裹的，可以直接使用 await 方法** Promise 等
 
    ```js
    response = await fetch('http://jsonplaceholder.typicode.com/todos/1'); 
@@ -19,15 +21,13 @@
    await navigator.storage.estimate(); // storage 系统的 占用数 和 空闲数
    ```
 
-6. **Coditional breakpoints 条件断点**，在添加条件断点的时候，可以使用任何这段代码能获取到的当前作用域的值，当我们循环的时候就可以判断条件进入断点
+7. **Coditional breakpoints 条件断点**，在添加条件断点的时候，可以使用任何这段代码能获取到的当前作用域的值，当我们循环的时候就可以判断条件进入断点
 
    1. 右击行号，选择 `Add conditional breakpoint ...` 添加条件断点
    2. 右击一个已经设置了断点的，选择 `Edit breakpoint`  编辑断点
    3. 输入一个表达式，只有结果值为 true的时候才会进入断点
 
-7. 因为可以设置条件断点，就可以在在sources 里面直接右键添加 `Add conditional breakpoint ...` 就不用再代码中写 `console.log()`
-
-8. `store as global` (存储为一个全局变量)， 当我们在js代码中打印的时候，不能复制，可以在打印的内容前面的三角形 右键，变为一个全局变量，再使用 copy 方法
+8. 因为可以设置条件断点，就可以在在sources 里面直接右键添加 `Add conditional breakpoint ...` 就不用再代码中写 `console.log()`
 
 9. 保存堆栈信息( Stack trace) ， 在出现错误时，可以在错误的打印处，右键 `save as`  将错误的堆栈信息保存下来(适用于团队合作)
 
@@ -47,7 +47,7 @@
 
     ![image-20200506095455455](./imgs/001.png)
 
-14. 我们可以直接看到的 devTools 只是很小的一部分功能，我们可以使用 command 菜单来使用更多功能
+14. 我们可以直接看到的 `devTools` 只是很小的一部分功能，我们可以使用 command 菜单来使用更多功能
 
     - 在Chrome 的控制台 `Ctrl + shift + P` 调出命令行
     - 使用 `DevTools` 的 `dropdown` 下拉选项 `run command`
@@ -143,10 +143,8 @@ devTools 中只是罗列了常用的展示为tab页，其实还有很多隐藏�
 5. **检测代码 coverage**:  可以使用 `coverage`面板来检测页面冗余代码的摘要细节信息，使用该工具可以跟踪当前JS和CSS代码中**那些行正在被执行，并显示未使用字节的百分比**
 
 6. changes : 面板 可以查看你在DevTools中修改的样式内容，我们有时会忘记修改了那些内容，此时可以修改完成之后，使用 `command（ctrl + shift + p）` 命令 `show change` 掉出 `drawer` 中的 changes面板，会将修改的内容全部罗列出来，展示方式和Git类似，方便我们查看修改的全部内容
-
+   
    > DOM 节点的内联样式好像不能显示出来
-
-
 
 
 
