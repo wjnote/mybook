@@ -13,7 +13,7 @@ vue-router 默认的是hash模式，通过更改为 `history`模式可以解决�
 #### 方式二  hashchange 事件
 更改hash不会导致整个页面重新加载，而且可以定位到元素的id或name与之相同的位置(锚点)
 
-`window.location.hash` 可以获取URL中的hash值，通过监听 hash 的状态，来动态修改vue-router的路由
+`window.location.hash` 可以获取URL中的hash值，通过监听 hash 的状态，来动态修改`vue-router`的路由
 
 ```js
 window.addEventListener('hashchange', function(e){

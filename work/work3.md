@@ -15,7 +15,7 @@
 
    ```js
    function defaultImg(){
-     var img = event.srcElement;
+     var img = event.target;
      img.src= ''; 
      img.onerror = null; // 为了防止默认图片地址错误的时候，会一直抖动
    } 
@@ -37,4 +37,53 @@
    }   // 这个方法会陷入死循环
    ```
 
+5. 开发中在一行内容超过时显示省略号很常见，现在需要设置超过2行会在第二行的末尾显示省略号的方式,需要使用到CSS3的内容，其中 `-webkit-line-clamp` 表示需要几行的内容，最好高度就行高的几倍
+
+   ```css
+    overflow:hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /*! autoprefixer: off */
+    -webkit-box-orient: vertical;
+   ```
+   > 开发中会发现 `-webkit-box-orient` 没有效果，需要加上如下的注释  /*! autoprefixer: off */
    
+6. axios请求中作为请求主题被发送的数据，类型必须是 **`string, plain object, ArrayBuffer, ArrayBufferView, URLSearchParams`**
+
+   - 浏览器专属类型： `FormData,  File,  Blob`
+   - Node专属： StreamNode专属： Stream
+
+7. 有时给项目下载包的时候npm运行报错，需要先清除缓存数据 `npm cache clear --force`
+
+8. 如果项目中需要全屏(类似F11的效果) 实现代码
+
+   ```js
+   function fullScreen(){
+     var docElm = document.documentElement;  // 可以选择指定的某个元素，让某个元素全屏
+     if (docElm.requestFullscreen) {
+       docElm.requestFullscreen();
+     } else if (docElm.msRequestFullscreen) {
+       docElm = document.body; //overwrite the element (for IE)
+       docElm.msRequestFullscreen();
+     } else if (docElm.mozRequestFullScreen) {
+       docElm.mozRequestFullScreen();
+     } else if (docElm.webkitRequestFullScreen) {
+       docElm.webkitRequestFullScreen();
+     }
+   };
+   // 退出全屏模式
+   function outFullScreen(){
+     if (document.exitFullscreen) {
+       document.exitFullscreen();
+     } else if (document.msExitFullscreen) {
+       document.msExitFullscreen();
+     } else if (document.mozCancelFullScreen) {
+       document.mozCancelFullScreen();
+     } else if (document.webkitCancelFullScreen) {
+       document.webkitCancelFullScreen();
+     }
+   }
+   ```
+
+   >  全屏效果的实现，如果页面中有echarts图需要在页面改变后重置echarts图

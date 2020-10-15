@@ -18,6 +18,39 @@
 2. 借助HTML5 Blob 实现文本信息文本下载 [Blob对象](https://developer.mozilla.org/zh-CN/docs/Web/API/Blob/Blob)
     我们可以将文本或者JS字符串信息借助Blob转换成二进制，然后作为 `<a>` 元素的 `href` 属性，配合 `download` 属性，实现下载
 
+    > 请求接口的数据格式 responseType: arraybuffer  或者是 blob 格式
+
+    ```js
+    axios.get(`url`, {
+            responseType: 'arraybuffer',
+        }).then(res => {
+            if (res.status == 200) {
+                let blob = new Blob([res.data], {
+              		 // 需要设置 文档格式，否则下载的就是 txt 文件，并乱码    
+                    type: 'application/vnd.ms-excel;charset=utf-8'
+                });
+                let fileName = `name`;
+                // for IE
+                if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                    window.navigator.msSaveOrOpenBlob(blob, fileName);
+                } else {
+                    // for Non-IE
+                    let objectUrl = URL.createObjectURL(blob);
+                    let link = document.createElement("a");
+                    link.href = objectUrl;
+                    link.setAttribute("download", fileName);
+                    document.body.appendChild(link);
+                    link.click();
+                    window.URL.revokeObjectURL(link.href);
+                }
+            } else {
+                // error handler
+            }
+        });
+    ```
+
+    
+
   ```js
   // content指需要下载的文本或字符串内容，filename指下载到系统中的文件名称。
   var funDownLoad = function(content, filename){
@@ -83,3 +116,19 @@
     - 内置文件流接口： Blob 文件流接口定义
     - 内置文件流对象： File (单文件，继承于接口Blob，可以使用Blob的方法) 和 FileList(多文件集合)
     - 内置文件流读取对象： FileReader (单文件读取)
+
+
+## 项目中使用 FormData 来上传
+`FormData` 类型其实是在 `XMLHttpRequest` 2级定义的，它是为序列化以及创建表格格式相同的数据，用于 XHR 进行数据传输
+
+1. 创建一个空对象实例  `let formData = new FormData();`
+    1. 也可以使用页面上的表格来初始化 `formData` 对象 
+
+```js
+let formData = new FormData();
+formData.append('name', blobData);
+let xhr = new XMLHttpRequest();
+xhr.open('POST', url, true);
+xhr.onload = function(){}
+xhr.send(formData)
+```

@@ -16,7 +16,7 @@
 - `.once` 只能用一次，绑定了事件以后只能触发一次
 - `.capture` 修改默认的事件机制，事件触发从包含这个元素的顶层开始往下触发
 - `.passive` 监听元素滚动事件的时候，相当于给`onscroll`事件添加了 `.lazy`修饰符
-- `.native` 你可能想在某个组件的根元素上监听一个原生事件，可以使用 `v-on`的修饰符 `.native` ,通俗的将就是在父组件中给子组件绑定一个原生的事件，就将子组件变成了普通的HTML标签，不加`.native` 事件时无法触发的（可以理解为该修饰符的作用就是把一个vue组件转化为一个普通的HTML标签，并且该修饰符对普通HTML标签是没有任何作用的。）
+- `.native` 你可能想在某个组件的根元素上监听一个原生事件，可以使用 `v-on`的修饰符 `.native` ,通俗的讲就是在父组件中给子组件绑定一个原生的事件，就将子组件变成了普通的HTML标签，不加`.native` 事件时无法触发的（可以理解为该修饰符的作用就是把一个vue组件转化为一个普通的HTML标签，并且该修饰符对普通HTML标签是没有任何作用的。）
 
 ```html
 <template>
@@ -70,7 +70,7 @@ export default {
 
 ### v-bind 修饰符
 
-- `.sync` 有时候我们需要对prop进行双向绑定，可以使用该修饰符。当一个子组件改变了一个 prop 的值时，这个变化也会同步到父组件中所绑定，我们在子组件中使用 `emit` 触发更新的话也是一样的效果，一个语法糖而已。
+- `.sync` 有时候我们需要对prop进行双向绑定，可以使用该修饰符。当一个子组件改变了一个 `prop` 的值时，这个变化也会同步到父组件中所绑定，我们在子组件中使用 `emit` 触发更新的话也是一样的效果，一个语法糖而已。
 
 **主要可以用于几个组件使用同一个父组件的属性值，其他一个会改变该值的情况(例如表单和分页条的数据内容)**
 
@@ -110,7 +110,7 @@ export default {
   在标签里定义的所有属性包括 HTML 属性和自定义属性都会在 attribute 对象里以键值对的形式存在
   ```
 
-  ```vu
+  ```vue
   // 这里 id value style 都属于 property
   // index 属于 attribute
   // id title 等即是属性，也是特性，修改属性，其对应的特性会发生改变，修改特性，属性也会改变
@@ -121,12 +121,37 @@ export default {
 
   从上面的代码可以看出我们如果直接使用`v-bind`绑定，会默认绑定到DOM节点的 attribute 所以为了  **通过自定义属性存储变量，避免暴露数据。**  **防止污染HTML结构**  所以可以使用修饰符
 
-   ```vu
+   ```vue
   <input id="uid" title="title1" value="1" :index.prop="index">
   // input.index === this.index
   // input.attributes.index === undefined
    ```
 
+### .sync修饰符
+`.sync`有时候我们需要对prop进行双向绑定，可以使用该修饰符。当一个子组件改变了一个 `prop`的值时，这个变化也会同步到父组件中所绑定，我们在子组件中使用 `emit` 触发更新的话也是一样的效果，一个语法糖而已。
+
+```js
+<text-document v-bind:title="doc.title" v-on:update:title="doc.title = $event">
+</text-document>
+
+// 可以使用 .sync语法糖简写如下形式
+<text-document v-bind:title.sync="doc.title"></text-document>
+```
+
+```js
+<div id="app"> <login :name.sync="userName"></login></div>
+
+
+let Login = Vue.extend({
+  template: `<div><input v-model="text"></div>`,
+  props:['name'],
+  data(){ return {text:''} },
+  watch:{
+    text(newVal){ this.$emit('update:name', newVal)}
+  },
+})
+```
+**语法糖重点是其中一句代码 this.$emit('update:name', newVal)**
 
 
   - `.camel` 由于html不会区分大小写 `<svg :viewBox="viewBox"></svg>` 渲染的时候就变为全部小写了，不认识`viewbox`导致渲染失败， 使用该修饰符，它就会渲染为驼峰名， *使用字符串模版就没有这个限制*

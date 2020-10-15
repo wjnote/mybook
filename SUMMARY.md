@@ -47,6 +47,7 @@
     * [常见问题列表](vue/questions.md)
     * [常见问题列表-1](vue/questions1.md)
     * [vue修饰符](vue/xiushifu.md)
+    * [vue生命周期](vue/lifecycle.md)
     * [vuex](vue/vuex.md)
     * [vue-router](vue/vuerouter.md)
     * [vue组件间通讯](vue/communication.md)
@@ -65,6 +66,7 @@
     * [webpack-dev-server](webpack/dev.server.md)
     * [webpack多页面构建](webpack/morepage.md)
 * [html/DOM/css](htmldom/README.md)
+    * [视频](htmldom/html5video.md)
     * [动画](htmldom/animation.md)
     * [粘性页脚](htmldom/sticky-footer.md)
     * [css常用居中方式](htmldom/center.md)
@@ -89,3 +91,4 @@
     * [GeoJSON](map/geojson.md)
 * [面试相关](interview/README.md)
     * [面试题采集](interview/question.md)
+

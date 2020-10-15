@@ -1,15 +1,22 @@
 # vue框架
-当实例化一个Vue构造函数，会执行Vue 的init方法，在init方法中主要执行三部分内容，一是初始化环境变量，二是处理vue组件数据，三是解析挂载组件，这三个部分构成了Vue的整个执行过程
 
-在初始化的时候，vue将遍历此对象所有属性采用数据劫持结合发布-订阅模式，并通过 `Object.defineProperty` 做数据劫持把所有的属性变为 `getter/setter`，在数据变动时发布消息给订阅者，触发响应的监听回调，属于上述的第二个部分。在生命周期init 和 created 之间执行，`options.data  $options.props  $options.computed  $options.methods  $options.events  $options.watch` 对方法的处理
+当实例化一个Vue构造函数，会执行 `Vue` 的`init`方法，方法中主要执行三部分内容，这三个部分构成了Vue的整个执行过程
+
+  1. 初始化环境变量
+  2. 处理vue组件数据
+  3. 解析挂载组件
+
+在初始化的时候，vue将遍历此对象所有属性并采用数据劫持结合发布-订阅模式，通过 `Object.defineProperty`做数据劫持把所有的属性变为 `getter/setter`，在数据变动时发布消息给订阅者，触发响应的监听回调，属于上述的第二个部分。在生命周期`init  created` 之间执行。
+
+使用`Vue.use()`引用外部插件的话，则该方法默认会调用插件的`install`方法。引入的组件类型必须为`Function`或者`Object`。  如果是个对象，必须提供`install`方法. 如果是一个函数，会被直接当作install函数执行 
 
 <img src="./imgs/001.png" alt="vue响应式原理" style="zoom:80%;" />
 
-Object.defineProperty 只能劫持对象的属性， vue2.x 需要对每个对象的每个属性进行遍历，是通过递归 + 遍历data对象来实现数据监控的，如果属性也是对象，就需要深度遍历
+`Object.defineProperty` 只能劫持对象的属性， vue2.x 需要对每个对象的每个属性进行遍历，是通过**递归 + 遍历data对象**来实现数据监控的，如果属性也是对象，就需要深度遍历
 
-Object.defineProperty 在数组的状态下，将数组下标为属性的方式监听的话，性能开销会比较大，所以vue2.x没有实现对数组的动态监听
+`Object.defineProperty` 在数组的状态下，将数组下标作为属性的方式监听的话，性能开销会比较大，所以vue2.x没有实现对数组的动态监听
 
-vue3.x采用了 Proxy 来劫持整个对象，并返回一个新对象，Proxy不仅可以代理对象，也可以代理数组，还可以代理动态增加的属性
+`vue3.x`采用了 `Proxy` 来劫持整个对象，并返回一个新对象，Proxy不仅可以代理对象，也可以代理数组，还可以代理动态增加的属性
 
 ```js
 // 最简单核心的代码  
@@ -26,21 +33,12 @@ function defineReactive(obj, key){
 ```
 
 
+每个组件实例（就是组件）都有对应的 `watcher` 对象，会在渲染的过程中把属性记录为依赖，当依赖的setter调用时，就通知`watcher`重新计算，从而使它关联的组件更新，而不是像 `React` 那样更新该组件及其所有子组件
 
-
-
-
-
-**指令的缩写只在其有参数的时候使用**
-
-每个组件实例（就是组件）都有对应的 watcher 对象，会在渲染的过程中把属性记录为依赖，当依赖的setter调用时，就通知`watcher`重新计算，从而使它关联的组件更新，而不是像 `React` 那样更新该组件及其所有子组件
 
 父组件给子组件传参 prop 的时候，如果是非prop特性的值(即在子组件没有申明对应的接受变量) ，则该类的属性会被写到子组件的根元素上面。
 
-因为vue在实例初始化的时候对属性执行了`getter / settter` ，属性必须在data对象上面才能变为属性依赖，在JS中不能将新添加的属性变为响应式的（`Object.observe` 被废弃了）。 
-**vue不允许动态添加根级响应式属性，必须在初始化的时候确定好**
-
-
+### 异步更新队列
 异步更新队列： 在vue中更新DOM并不是同步立马更新的，而是vue开启一个队列，缓冲在同一事件循环中发生的所有数据变化（如果同一个watcher被多次触发，只会推入队列一次），然后在一个事件的 'tick' 中，一次性全部执行更新，在内部使用的是 `Promise.then`,如果想立马使用更新后的数据，就需要触发 `vm.$nextTick()`
 
 ```javascript
@@ -208,7 +206,6 @@ beforeRouteEnter中的next函数的执行时间是在组件mounted之后，因�
 通过props传递的值，不要在子组件去更改。开发中，如果直接更改props，一、基本类型的值会报错，二、引用类型的值不会报错，但是不好去追溯数据的更改，很多人不太注意引用类型，可通过computed或watch去更改
 在data里调用methods的方法，可以在data里定义let self = this，然后在使用self.xx()进行调用
 
-
 **动画**
 如果你需要使用动画，请了解一下 Vue 的过渡系统，它也是 Vue 核心的一部分。你可以在向 DOM 添加元素或从 DOM 中删除元素时应用动画。
 
@@ -218,3 +215,61 @@ beforeRouteEnter中的next函数的执行时间是在组件mounted之后，因�
 渐进式 Web 应用程序（PWA）就像普通的 Web 应用程序一样，只是加入了改进的用户体验。例如，PWA 可能包括脱机缓存、服务器端渲染、推送通知等。
 
 大多数 PWA 功能可以通过 Vue CLI 3 插件或使用 Nuxt.js 等框架添加到 Vue 应用程序中，但你仍然需要了解一些关键技术，包括 Web App Manifest 和 ServiceWorker。
+
+
+
+## Vue组件生命周期
+`beforeDestroy` : 组件销毁之前执行，可以去移除一些 **自定义的事件，实例，intervals等**
+
+
+## watch 响应数据的变化
+在Vue2.0中我们可以使用`watch`来监听数据的变动
+
+常规用法
+  ```js
+  watch:{
+    name(newValue, oldValue){},
+    'info.gzh': {
+      handler(newValue, oldValue){},
+      // 配置immediate会在watch之后立即执行
+      immediate: true
+    },
+    params:{
+      handler(newValue, oldValue){},
+      // 深度监听对象里面的属性 监听对象或者数组内部的属性变动时
+      deep: true 
+    }
+  }
+  ```
+
+   > 数组（一维、多维）的变化不需要通过深度监听，对象数组中对象的属性变化则需要deep深度监听
+
+Vue实例上的 `$watch` 方法 ，例如我们监听的数据是请求接口返回的数据时
+
+   ```js
+    export default{
+      methods:{
+        loadData(){
+          fetch().then(data=>{
+            this.formData = data;
+            this.$watch('formData', ()=>{/* formData 数据发生变化后进入此回调 */}, {deep: true})
+          })
+        }
+      }
+    }
+   ```
+
+监听函数表达式，出了字符串，`$watch` 的第一个参数也可以是函数，当函数的返回值发生变化时触发回调函数
+
+```js
+this.$watch(()=>this.name, ()=>{ /* 函数的返回值发生变化，进入此回调函数 */ })
+```
+
+
+## 使用Vue注意点
+1. 指令的缩写只在其有参数的时候使用
+
+---
+
+##  常用的Vue组件的插件
+ -  [Vuelidate](https://github.com/vuelidate/vuelidate) ： 可以实现form表单的验证

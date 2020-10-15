@@ -11,6 +11,7 @@ document.getElementById('zqt_logout_iframe').contentWindow.location.reload(true)
 
 #### 我们常用的iframe的属性设置
 ```shell
+# 有一部分 常用的属性都是直接设置在 iframe 标签上的
 1.frameborder:是否显示边框，1(yes),0(no)
 
 2.height:框架作为一个普通元素的高度，建议在使用css设置。

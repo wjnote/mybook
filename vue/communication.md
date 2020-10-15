@@ -22,7 +22,39 @@ $emit 绑定一个自定义事件, 当这个语句被执行时, 就会将参数a
 
 > 要注意边界情况，如在#app上拿$parent得到的是new Vue()的实例，在这实例上再拿$parent得到的是undefined，而在最底层的子组件拿$children是个空数组。也要注意得到$parent和$children的值不一样，$children 的值是数组，而$parent是个对象
 
-## 3. provide / inject
+## 3.  .sync 修饰符
+
+`vue@1` 的时候作为双向绑定功能存在，后面`vue@2`被移除了, 后面作为修饰符被重新引入，目前只是作为一个编译时的语法糖存在，被扩展为一个自动更新父组件属性的 `v-on` 监听器
+
+```vue
+<text-document v-bind:name="userName"  v-on:update:name="userName = $event"></text-document>
+<text-document v-bind:name.sync="userName"></text-document>
+
+let Login = Vue.extend({
+	template: `<div> <input v-model="text" /> </div>`,
+	props: ['name'],
+	data(){ return {text: ''}},
+	watch:{ text(newVal){ 
+		this.$emit("update:name", newVal)
+	}}
+})
+
+<div id="app">
+   <login :name.sync="userName"></login>  
+  {{userName}}
+</div>
+new Vue({
+	el: '#app',
+	data:{ userName: ''},
+	components: { Login }
+})
+```
+
+> 上面的代码中  `this.$emit('update:name', newVal)` 表示要更新 name 的值，这样子组件修改了，父组件相应的值也会改变， 使用最上面的2种方式都可以达到效果
+
+
+
+## 4. provide / inject
 
 `provide / inject` 是 `vue2.2.0` 新增的API，就是父组件中通过 `provide` 来提供变量，然后子组件中通过 `inject` 来注入变量
 

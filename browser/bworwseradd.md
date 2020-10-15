@@ -5,7 +5,7 @@
 > window.onload 事件应该仅用于检测一个完全加载的页面，当一个资源及其依赖的资源全部加载完成时，触发load事件
 
 2. DOMContentLoaded
-> document.addEventListener("DOMContentLoaded",function(){});
+> `document.addEventListener("DOMContentLoaded",function(){});`
 >
 > 当初始的 HTML 文档被完全加载和解析完成之后，DOMContentLoaded 事件被触发，而无需等待样式表、图像和子框架的完成加载。DOMContentLoaded 事件必须等待其所属script之前的样式表加载解析完成才会触发。
 
@@ -26,8 +26,8 @@
 4. 主线程继续解析文档，到达 head节点，head里的外部资源一般是外链样式表和JS文件
     - 发现外链css或者Js，如果是外链JS，则停止解析后续内容，等待资源下载，下载完成后立即执行，如果是外链css，继续解析后续内容
 5. 解析到body，body中内容很多，分开讨论
-    - **有DOM元素，外链js：当解析到外链Js的时候，查看是否下载到本地，未下载则js之前的DOM被渲染到页面上，js会阻塞后续DOM构建，等待js下载并执行再解析后续的DOM元素；**
-    - 有dom，外链css： 外连css不会影响后续的DOM解析，但是会影响渲染，即是外链css加载完之前，页面还是白屏；
+    - 有DOM元素，外链js：当解析到外链Js的时候，查看是否下载到本地，未下载则js之前的DOM被渲染到页面上，js会阻塞后续DOM构建，等待js下载并执行再解析后续的DOM元素
+    - 有dom，外链css： 外连css不会影响后续的DOM解析，但是会影响渲染，即是外链css加载完之前，页面还是白屏
     - 有 DOM 元素，外链js，外链css: 外链js和外连css的顺序会影响页面渲染，这点尤为重要，在body中js之前的css未加载完成之前，页面是不会被渲染的，js之前的外链css加载完成之后，JS之前的DOM树和css树合并为render树渲染到页面上
 6. 文档解析完毕，页面重新渲染，当页面引用的所有JS同步代码执行完毕，触发 DOMContentLoaded 事件
 7. HTML 文档中的图片资源，js代码中有异步加载的css,js,图片资源都加载完毕之后触发 load 事件。
