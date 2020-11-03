@@ -87,3 +87,15 @@
    ```
 
    >  全屏效果的实现，如果页面中有echarts图需要在页面改变后重置echarts图
+
+9. 项目中写的大屏显示需要注意的问题，特别是echarts的显示
+    - 适配不同屏幕尽量还是用百分比，至于字体大小或者某些固定大小的元素，可以用rem适配
+    - 布局用可用 百分比、vw.vh 等布局、也可使用flex布局，
+    - 页面大小随屏幕大小而变化，字体按百分比或者rem等设置
+    - 样式也可使用媒体查询
+    - 窗口变化是刷新图表 `window.onresize = function () { chart.resize() }`
+
+10. 我们使用echarts的时候，想让 `legend` 的内容自动使用元素的宽高来铺满的情况下，就可以通过元素的` offsetWidth offsetHeight`来计算，但是要注意的是 `lengend` 即便是设置了上下左右距离为0， 但是还是各有 `5px`的默认距离要减去，如果涉及到自己通过元素的宽高来设置的话，`itemWidth itemGap left top bottom right` 文字的高度就需要显示的设置，如果不显示设置就会有默认的值，导致结果不准确
+    - Math.floor((elemHeght - 10 - legendData.length * 文字的高度) / (legendData.length - 1))
+    - 如果同时图例设置了`itemHeight`  文字设置了`height` 则以值大的为准
+    - 如果lengend图例只有文字, `icon: none` 设置的话，那文字前面还有 **5px** 的距离设置默认值 
