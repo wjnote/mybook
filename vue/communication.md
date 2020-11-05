@@ -34,13 +34,13 @@ let Login = Vue.extend({
 	template: `<div> <input v-model="text" /> </div>`,
 	props: ['name'],
 	data(){ return {text: ''}},
-	watch:{ text(newVal){ 
+	watch:{ text(newVal){
 		this.$emit("update:name", newVal)
 	}}
 })
 
 <div id="app">
-   <login :name.sync="userName"></login>  
+   <login :name.sync="userName"></login>
   {{userName}}
 </div>
 new Vue({
@@ -97,7 +97,7 @@ Vuex 解决了多个视图依赖于同一状态和来自不同视图的行为需
 ## 8. $attrs 与 $listeners
 在 `vue2.4` 中，引入了 `$attrs` `$listeners` ,新增了 `inheritAttrs` 选项，可以实现跨组件传递，虽然会降低代码的可读性，但有时候应该使用
 
-1. 当要抽出某一个通用组件的时候，时常需要对第三方的组件进行包装 ，但包装不应该使原有的一些属性和事件丢失，这时用 `$attrs $liseners` 比较好
+1. 当要抽出某一个通用组件的时候，时常需要对第三方的组件进行包装 ，但包装不应该使原有的一些属性和事件，这时用 `$attrs $liseners` 比较好
 2. 用于透传，有一些参数我当前组件不需要用到，但是我的子组件需要用到，这时用 `$attrs $liseners` 比较好
 
 在 `vue2.4` 之前，父作用域中不作为 `props`(即是在子组件中没有在props中申请的变量)，将会作为普通的html自定义属性添加到子组件的根节点上， 使用 `$attrs` 可以表示父组件传递到子组件的属性，可以直接传递给孙组件

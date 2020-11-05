@@ -33,3 +33,5 @@ export default {
   },
 }
 ```
+
+使用`Vue.use()`引用外部插件的话，则该方法默认会调用插件的`install`方法。引入的组件类型必须为`Function`或者`Object`。  如果是个对象，必须提供`install`方法. 如果是一个函数，会被直接当作install函数执行 

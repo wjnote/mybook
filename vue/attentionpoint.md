@@ -91,7 +91,7 @@ export default{
 ### 7 组件复用意味着组件的生命周期钩子函数不会被调用
 `router-view`是复用的， 新闻列表的时候，只改变id值的情况，就不会刷新，不会执行组件的生命周期函数 `created beforeMounted mounted`
 
-1. 使用watch方法，也是官方推荐的方式，当id值改变时，$route也会相应发生改变，可以通过watch的方法来操作
+1. 使用watch方法，也是官方推荐的方式，当id值改变时，`$route`也会相应发生改变，可以通过watch的方法来操作
     ```js
       watch: {
         '$route':function(to, from){
@@ -114,4 +114,23 @@ export default{
       }
     ```
 
-### 8 在组件中引用其他组件的时候，引用组件的变量名不能和该组件的变量重复，否则会爆栈
+### 8 在组件中引用其他组件的时候，引用组件的变量名不能和该组件的名称重复，否则会爆栈
+
+
+### 9 Vue里面router-link在电脑上有用，在安卓上没反应怎么解决？
+Vue路由在Android机上有问题，babel问题，安装babel polypill插件解决。
+
+### 10 Vue2中注册在router-link上事件无效解决方法
+ 使用@click.native。原因：router-link会阻止click事件，.native指直接监听一个原生事件。
+
+### 11 RouterLink在IE和Firefox中不起作用（路由不跳转）的问题
+方法一：只用a标签，不适用button标签；方法二：使用button标签和Router.navigate方法
+
+
+### vue开发中的坑于感悟
+1. 使用keep-alive包裹的组件/路由，打开一次后created只会执行一次，有两种情况，一、如果要重新渲染部分数据，可以在activated中做处理；二、路由/组件重新重新created，可以使用官方推荐的:key="key" ，然后去改变key的值，组件就会重新挂载了
+2. `beforeRouteEnter`中的next函数的执行时间是在组件mounted之后，因此需要在此处处理的数据要注意了
+3. 网页刷新时`vuex`数据会丢失，需配合`localStorage`或`sessionStorage`使用，数据先存后取
+4. 对于权限及不确定路由，可以使用`addRoutes()`，可以避免抖动
+5. 使用`computed`替代`watch`，`computed`依赖于data属性的更改，是有缓存的
+6. 通过props传递的值，不要在子组件去更改。开发中，如果直接更改props，一、基本类型的值会报错，二、引用类型的值不会报错，但是不好去追溯数据的更改，很多人不太注意引用类型，可通过computed或watch去更改
