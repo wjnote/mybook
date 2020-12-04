@@ -2,6 +2,34 @@
 > vue 开发中常见的一些值的思考的问题，底层问题，参考极客时间vue视频的课后习题
 
 #### Q： vue 在子组件中修改了父组件传递的`props`，vue会报错，vue是怎么监听这类修改事件的  ?
+  A： 子组件不能修改父组件数据的原因是 vue组件是单向数据流，易于检测数据的流动，出现错误可以更加快速定位到错误的位置
+  在`initProps`的时候，在 `defineReactive` 时通过判断是否在开发环境，如果是那在触发 set的时候判断是否此key是处于 `updatingChildren`中被修改的，如果不是，说明修改来自子组件，触发提示
+  ```js
+    // src/core/instance/state.js 源码路径
+    if (process.env.NODE_ENV !== 'production') {
+      var hyphenatedKey = hyphenate(key);
+      if (isReservedAttribute(hyphenatedKey) ||
+          config.isReservedAttr(hyphenatedKey)) {
+        warn(
+          ("\"" + hyphenatedKey + "\" is a reserved attribute and cannot be used as component prop."),
+          vm
+        );
+      }
+      defineReactive$$1(props, key, value, function () {
+        if (!isRoot && !isUpdatingChildComponent) {
+          warn(
+            "Avoid mutating a prop directly since the value will be " +
+            "overwritten whenever the parent component re-renders. " +
+            "Instead, use a data or computed property based on the prop's " +
+            "value. Prop being mutated: \"" + key + "\"",
+            vm
+          );
+        }
+      });
+    }
+  ```
+
+  > 当从子组件修改prop属于基础类型的时候，会触发错误提示，因为基础类型赋值是值拷贝，但是直接将一个非基础类型的赋值到数据再修改该数据，不会触发提示，并且可以修改父组件的数据源
 
 #### Q： `this.$emit` 的返回值是什么？ 上层组件 `this.$emit` return了一个值，在组件中能不能接收到 ?
     A： 如果在二级菜单中添加导航的参数，然后使用 props 将组件和路由解耦：

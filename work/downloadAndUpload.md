@@ -114,21 +114,53 @@
 
 前端做文件上传的时候，需要考虑文件类型以及如何处理文件类型的数据
     - 内置文件流接口： Blob 文件流接口定义
-    - 内置文件流对象： File (单文件，继承于接口Blob，可以使用Blob的方法) 和 FileList(多文件集合)
-    - 内置文件流读取对象： FileReader (单文件读取)
+        - 内置文件流对象： File (单文件，继承于接口Blob，可以使用Blob的方法) 和 FileList(多文件集合)
+        - 内置文件流读取对象： FileReader (单文件读取)
 
 
-## 项目中使用 FormData 来上传
-`FormData` 类型其实是在 `XMLHttpRequest` 2级定义的，它是为序列化以及创建表格格式相同的数据，用于 XHR 进行数据传输
+### 项目中使用 FormData 来上传
+`FormData` 类型其实是在 `XMLHttpRequest` 2级定义的，它是为序列化以及创建表格格式相同的数据，`FormData`对象用以将数据编译为键值对以便用`XMLHttpRequest`来传输。
+
+如果表单 `enctype` 属性设置为`multipart/form-data`,则会使用表单的`submit()`方法来发送数据
+
+需要使用input来上传的话需要设置 `<input class="" type="file" accept="undefined" name="file" multiple="" />`，其中的 multiple设置后就可以使用formdata来上传，当点击上传成功后，刚刚上传的文件内容就保存在`input`标签的`files`属性上，数组的方式保存
 
 1. 创建一个空对象实例  `let formData = new FormData();`
-    1. 也可以使用页面上的表格来初始化 `formData` 对象 
+2. 也可以使用页面上的表格来初始化 `formData` 对象 
 
 ```js
 let formData = new FormData();
 formData.append('name', blobData);
-let xhr = new XMLHttpRequest();
-xhr.open('POST', url, true);
-xhr.onload = function(){}
-xhr.send(formData)
+//  上传图片，问价都是流的形式，需要设置ajax不处理数据，也不设置内容类型
+$.ajax({
+  url: '',
+  type: 'POST',
+  data: formData,
+  cache: false,
+  async: false,
+  processData: false,  // 不处理数据
+  contentType: false,  // 不设置内容类型
+  success: function() {}
+});
 ```
+
+```js
+var formData = new FormData();
+
+formData.append("username", "Groucho");
+formData.append("accountnum", 123456); //数字123456会被立即转换成字符串 "123456"
+
+// HTML 文件类型input，由用户选择 文件是保存在 XXX.files属性上的
+formData.append("userfile", fileInputElement.files[0]);
+
+// JavaScript file-like 对象
+var content = '<a id="a"><b id="b">hey!</b></a>'; // 新文件的正文...
+var blob = new Blob([content], { type: "text/xml"});
+
+formData.append("webmasterfile", blob);
+
+var request = new XMLHttpRequest();
+request.open("POST", "http://foo.com/submitform.php");
+request.send(formData);
+```
+字段 `userfile` 和 `webmasterfile`  都包含一个文件. 字段 "accountnum" 是数字类型，它将被FormData.append()方法转换成字符串类型(FormData 对象的字段类型可以是 Blob, File, 或者 string: 如果它的字段类型不是Blob也不是File，则会被转换成字符串类)。

@@ -4,7 +4,7 @@
 ES6 模块的设计思想是尽量的静态化，使得编译时就能确定模块的依赖关系，以及输入和输出的变量。CommonJS 和 AMD 模块，都只能在运行时确定这些东西。
 
 ## ES6的模块输出 export 命令
-**ES6 模块功能主要由两个命令构成：`export 和 import`。  `export` 命令用于规定模块的对外接口，，`import` 命令用于输入其他模块提供的功能。**
+**ES6 模块功能主要由两个命令构成：`export 和 import`。  `export` 命令用于规定模块的对外接口，，`import` 命令用于输入其他模块提供的功能。export命令规定的是对外的接口，必须与模块内部的变量建立一一对应关系。**
 
 ```js
 export const firstname = 'wujun'
@@ -19,9 +19,9 @@ function v2(){}
 export {v1 as namev1, v1 as namev2, v2 as thorenamev2}
 // 还可以改变暴露出去的名字, v2还可以用不同的名字暴露两次
 
-export 1 // 报错  因为没有指定对外的接口  如果加上 default 则是正确的，因为指定了对外的接口为 default
+export 1 // 报错  因为没有指定对外的接口 
 function f(){}
-export f; // 报错
+export f; // 报错  没有与内部变量建立对应关系  export {f}
 ```
 
 - export 可以对外暴露变量，函数，类class
@@ -31,22 +31,23 @@ export f; // 报错
 
 ## ES6的模块默认输出 `export default` 命令
 `export` 输出方式使的用 `import` 命令的时候，用户需要知道所要加载的变量名或函数名，否则无法加载。为了给用户提供方便，让他们不用阅读文档就能加载模块，就要用到`export default`命令，为模块指定默认输出。
+
 ```js
-export default function fnname(){ console.log('foo') }    // 此时函数名fnname, 在外部是无效的，等同于匿名函数
+// 此时函数名fnname, 在外部是无效的，等同于匿名函数
+export default function fnname(){ console.log('foo') }
 import allname from './moduleName'
 // 加载上面的模块可以指定任意的名字
 
 export function fnname(){}
 import {fnname} from './fnname.js'
 
-// 正确
-export default 42;
+export default 42;// 正确
 
 // 正确
 var a = 1;
 export default a;
 // 错误
-export default var a = 1;    // export default 表示输出一个默认的default变量，所以后面不能跟变量声明语句。
+export default var a = 1;
 
 // 可以同时输入默认方法和其他接口,下面的模块写法
 import _, { each, forEach } from 'lodash';
@@ -56,9 +57,14 @@ export function forEach(){}
 ```
 
 - `export default` 主要用来输入匿名函数也可以用在非匿名函数
+
 - `export default` 一个模块只能有一个默认输出
+
 - `export default` 本质上就是输出一个 `default` 的变量，然后系统允许为它取任意名字
+
 - `export default` 也可以用来输出类。 `export default class{}`
+
+  > export default 表示输出一个默认的default变量，所以后面不能跟变量声明语句。
 
 
 ## ES6的模块加载 import 命令
@@ -72,12 +78,12 @@ import {foo} from 'my_module' //是能够运行的
 ```
 
 - `import` 命令输入的变量是只读的，不允许在加载模块的脚本里面改写接口
-- 如果 `import {a} form './xxxx'` 其中 a是个对象，是可以改写 a 的属性，但是不要在实际中使用，不易查错
+- 如果 `import {a} form './xxxx'` **其中 a是个对象，是可以改写 a 的属性**，但是不要在实际中使用，不易查错
 - `import` 命令具有提升效果，会提升到整个模块的头部，首先执行
 - `import` 命令是在编译阶段运行的，在代码运行之前（提升的原因）
 - 在模块中 `import` 和 require 命令可以同时使用，但是 `import` 命令会最先执行
 - `import` 是静态执行，所以不能使用表达式和变量，这些只有在运行时才能确定结果的语法结构
-- `import` 语句会执行所加载的模块， `import 'lodash'` 是可以的
+- `import` 语句会执行所加载的模块， `import 'lodash'` 仅仅执行代码，没有任何输入
 - 如果多次重复执行加载同一模块，那么只会执行一次
 - 可以实现一个模块的整体加载,采用 * 号的方式，但是开发中不能修改加载的那个对象
 
@@ -131,10 +137,10 @@ export default 40;   // 该行是有效果的，在使用时为 defalut 属性
 
 // index
 import * as test from './childrenModule'
-console.log(test)          // 整个对象, 其中有个 default 属性，值为 40
+console.log(test)   // 整个对象, 其中有个 default 属性，值为 40
 console.log(test.nyname)   // wujun   来自 parentModule 的属性
-test.temp(test.sex)        // man  来自 childrenModule 的属性
-test.showName()            // wujun  来自 childrenModule 的方法，其中使用了 parentModule 的属性
+test.temp(test.sex) // man  来自 childrenModule 的属性
+test.showName()     // wujun  来自 childrenModule 的方法，其中使用了 parentModule 的属性
 ```
 
 ---
@@ -149,19 +155,18 @@ test.showName()            // wujun  来自 childrenModule 的方法，其中使
 
 **另一个差异是因为 CommonJS 加载的是一个对象(即module.exports属性)**，`require` 命令第一次执行的时候就会执行整个脚本，然后在内存中生成一个对象，而ES6模块不是对象，它的对外接口只是一种静态定义，在代码静态解析阶段就会生成
 
-    ```js
-    // CommonJS模块格式的加载原理
-
-    {
-        id: 'modulename',
-        exports: {...},
-        loaded: true,
-        ...
-    }
-    // 这就是Node内部加载模块生成一个对象，该对象的id表示模块的名字，
-    // exports属性就是模块输出的各个接口，loaded表示脚本是否执行完毕，还有其他一些属性，
-    // 只会在第一次加载时运行一次，以后需要用到就会从 exports上取值，就返回第一次运行的结果(缓存)
-    ```
+```js
+// CommonJS模块格式的加载原理
+{
+    id: 'modulename',
+    exports: {...},
+    loaded: true,
+    ...
+}
+// 这就是Node内部加载模块生成一个对象，该对象的id表示模块的名字，
+// exports属性就是模块输出的各个接口，loaded表示脚本是否执行完毕，还有其他一些属性，
+// 只会在第一次加载时运行一次，以后需要用到就会从 exports上取值，就返回第一次运行的结果(缓存)
+```
 
 CommonJS 模块输出的是值的拷贝，也就是说，一旦输出一个值，模块内部的变化就影响不到这个值
 ```js

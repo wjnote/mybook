@@ -1,6 +1,6 @@
-# 编程小技巧3
+# 采坑记录3
 
-1. 当页面中有弹框的时候，需要禁止页面的滚动效果，如果是PC端的可以直接使用css设置，如果是移动端则需要添加事件监听(UC浏览器无效)
+1. 当页面中有弹框的时候，需要禁止页面的滚动效果，如果是PC端的可以直接使用`css`设置，如果是移动端则需要添加事件监听(UC浏览器无效)
 
    ```js
    document.body.parentNode.style.overflow = 'hidden'
@@ -9,6 +9,10 @@
    function bodyScroll(e){e.preventDefault(); e.stopPropagetion()}
    document.addEventListener('touchmove',bodyScroll,false); // 遮罩出现
    document.removeEventListener('touchmove', bodyScroll, false); // 遮罩消失
+   // 或者使用下面的方法 兼容性比较广
+   var i= $(window).scrollTop();
+   $('body .page').css({'position': 'fixed',top: i,left: 0,right:0,bottom: 0})
+   // 弹框消失的时候，在重新设置为 static
    ```
 
 2. 默认图片，在页面中会设置默认的头像
@@ -99,3 +103,31 @@
     - Math.floor((elemHeght - 10 - legendData.length * 文字的高度) / (legendData.length - 1))
     - 如果同时图例设置了`itemHeight`  文字设置了`height` 则以值大的为准
     - 如果lengend图例只有文字, `icon: none` 设置的话，那文字前面还有 **5px** 的距离设置默认值 
+
+11. 在IE中引入`es6.promise.polyfill.js` 文件可以支持 Promise，但是IE中一个页面只能使用一次`Promise.all`， 再使用时就报错。
+
+12. 本地启动`webpack`访问另一个服务器注入的cookie的时候，有跨域限制，可以在请求头设置 `withCredential:true`   但是此时后端的 `Access-Control-Allow-Origin`不能设置为 *  否则请求会被拦截下来 ，此时直接用URL访问是没问题的，
+
+13. 项目的图片名字最好使用英文，不要加 `@` 符号，安全检测的时候会提示`发生电子邮件地址模式`
+
+14. 页面书写的时候会需要form表单禁止自动填充，否则公司检测会报错，`autocomplete="new-password"`，参数在Chrome能生效，但在`Firefox`无效，需要设置 `hidden` ，所以将两者结合起来就可以实现了
+
+    > 文档里说 autocomplete=”off“可以禁止浏览器自动填充，亲测无效
+
+    ```html
+    <input type="password" hidden autocomplete="new-password" /> 
+    ```
+
+15.  数组的`concat`方法，后面添加的类型不同，结果也不同，需要注意直接在方法中添加，数组会被扁平化添加,如果超过一维数组的时候，则只会拆解一层
+
+     ```js
+     var a = [1,2,3,4], b = [3,4,5,['feagr','aa']];
+     var c = a.concat(b); // [1,2,3,4,3,4,5,['feagr','aa']]
+     
+     var d = a.concat(3,4,5,['feagr','aa'])  // [1,2,3,4,3,4,5,'feagr','aa']
+     var e = a.concat(2,3,['fea','feage'],['aaa',['bbb','ccc']])
+     // [ 1, 2, 3, 4, 2, 3, 'fea', 'feage', 'aaa', [ 'bbb', 'ccc' ] ]
+     ```
+
+     
+
