@@ -6,9 +6,10 @@
 
 -----
 * [工作积累](work/README.md)
-    * [开发中常用1](work/work1.md)
-    * [开发中常用2](work/work2.md)
-    * [开发中常用3](work/work3.md)
+    * [踩坑记录1](work/work1.md)
+    * [踩坑记录2](work/work2.md)
+    * [踩坑记录3](work/work3.md)
+    * [踩坑记录4](work/work4.md)
     * [权限控制](work/accesscontrol.md)
     * [JS常见的错误类型](work/errorlist.md)
     * [git](work/git.md)
