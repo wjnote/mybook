@@ -3,9 +3,10 @@
 
 
 ### encodeURI  和  decodeURI
-`encodeURI()`是`JavaScript`中真正用来对URL编码的函数，它着眼于对整个URL进行编码，除了常见的符号以外，对其他的一些在网址中有特殊含义的符号： `; / ? : @ & = + $ , #` 也不进行编码。编码后，它输出符号的 `UTF-8` 形式，并且在每个字节前面加上`%`, 它对应的解码函数是 `decodeURI()`
+`encodeURI()`是`JavaScript`中真正用来对URL编码的函数，它着眼于对整个URL进行编码，除了常见的符号以外，对其他的一些在网址中有特殊含义的符号： `; / ? : @ & = + $ , #` 都不会编码。编码后输出符号的 `UTF-8` 形式，并且在每个字节前面加上`%`, 它对应的解码函数是 `decodeURI()`
 
 **需要注意的是它不对单引号编码**
+
 ```js
 encodeURI('http://www.baidu.com?name=zhang@xiao@jie&order=1')
 // "http://www.baidu.com?name=zhang@xiao@jie&order=1"  和编码之前没有变化
@@ -14,7 +15,7 @@ let url='http://locahost:8080/index.html?time=2019-10-9&title=60元钱测试数�
 
 // URL编码  其中有汉字，就会编码
 let encodeURI_url = encodeURI(url);
-// http://locahost:8080/index.html?time=2019-10-9&title=60%E5%85%83%E9%92%B1%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE
+// ~index.html?time=2019-10-9&title=60%E5%85%83%E9%92%B1%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE
 
 // 解码
 let startStr = decodeURI(encodeURI_url);

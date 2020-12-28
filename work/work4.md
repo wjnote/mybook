@@ -19,3 +19,5 @@
       }
       for(let i of obj){console.log(i)}
     ```
+
+5. 之前项目中下载文件的时候使用`window.loaction.href=''` 的方式，其中有些参数是动态拼接的，所以需要使用js的URL转码，否则IE浏览器会报错。

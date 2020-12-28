@@ -129,7 +129,7 @@ du -ah  # 查看当前文件夹下所有文件的大小(递归查询所有文件
 `ps -ef|grep 1543`  查询上一个命令返回的程序ID就可以知道程序启动的信息和程序启动的位置
 
 ```shell
-服务器 centos 的情况下 后台启动 anywhere
+服务器 centos 的情况下 后台启动 http-server
 首先执行  yum install screen 
 在项目文件夹下输入 screen -S http-server
 输入完这个命令之后，就已经进入screen的一个终端去了  在这个终端里面输入http-server -p端口命令 

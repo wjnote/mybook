@@ -36,11 +36,11 @@ iframe.contentDocument 获取iframe的document对象
 var iframe = document.getElementById("iframe1");
 var iwindow = iframe.contentWindow;
 var idoc = iwindow.document;
-    console.log("window",iwindow);//获取iframe的window对象
-    console.log("document",idoc);  //获取iframe的document
-    console.log("html",idoc.documentElement);//获取iframe的html
-    console.log("head",idoc.head);  //获取head
-    console.log("body",idoc.body);  //获取body
+console.log("window",iwindow);//获取iframe的window对象 js文件的方法内容
+console.log("document",idoc);  //获取iframe的document
+console.log("html",idoc.documentElement);//获取iframe的html
+console.log("head",idoc.head);  //获取head
+console.log("body",idoc.body);  //获取body
 ```
 
 #### 在iframe中获取父级内容
@@ -77,3 +77,51 @@ allowfullscreen: true/false    // 是否允许iframe全屏，默认false
 
 完整的带有所有属性的 iframe 节点
 `<iframe id="google_ads_frame2" name="google_ads_frame2" width="160" height="600" frameborder="0" src="target.html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true"></iframe>`
+
+
+
+#### 项目中如果使用iframe跨域了
+
+1. 无法读取 cookie ， localStorage , indexDB
+2. DOM 无法获取 
+3. ajax 请求无法发送
+
+
+
+例如一个需求是引用别人封装好的一个视频播放器，iframe里面有全屏按钮，点击后需要让页面iframe全屏，收到同源策略的限制，iframe无法告诉页面
+
+**解决办法**
+
+> 使用中间页面
+
+我们可以使用一个与a页面同域下的c页面作为中间页面，b页面加载c页面。c页面调用a页面的方法，从而实现b页面调用a页面方法，由于c页面和a页面是同源的，可以避开跨域问题。
+
+```html
+<!-- c页面就只是一个执行的方法 -->
+<body>
+ <script>
+  window.onload = function () {
+   parent.parent.toggleFullScreen();
+  }
+ </script>
+</body>
+```
+
+
+
+> postmessage
+
+window.postMessage 方法可以安全的实现跨域通信，写明目标窗口的协议、主机地址或端口就可以发信息给它
+
+```html
+parent.postMessage(value, 'http://a.demo.com')
+```
+
+```js
+// A 页面
+window.addEventListener("message", function( event ) {
+  if(evet.origin !== '') return;  // 先判断一下是否来自你想设置的那个域名
+  sonmeFn();
+})
+```
+
