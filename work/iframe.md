@@ -125,3 +125,19 @@ window.addEventListener("message", function( event ) {
 })
 ```
 
+> iframe自适应需要获取高度
+```js
+function calcPageHeight(doc) {
+  var cHeight = Math.max(doc.body.clientHeight, doc.documentElement.clientHeight)
+  var sHeight = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight)
+  var height = Math.max(cHeight, sHeight)
+  return height
+}
+
+var ifr = document.getElementById('framename')
+ifr.onload = function () {
+  var iDoc = ifr.contentDocument || ifr.document || ifr.contentWindow
+  var height = calcPageHeight(iDoc);
+  ifr.style.height = height + 'px'
+}
+```
