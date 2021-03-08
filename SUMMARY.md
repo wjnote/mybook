@@ -63,6 +63,7 @@
     * [vue插件系统](vue/globalvariate.md)
     * [vue地址栏输入URL无效](vue/inputurl.md)
     * [elements使用技巧](vue/elements.md)
+    * [vue实战技巧](vue/skills1.md)
 * [node](node/README.md)
     * [node测试](node/test.md)
     * [Buffer/Stream/fs](node/stream.md)

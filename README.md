@@ -3,14 +3,13 @@
 
 
 ## gitbook 介绍
-* [Introduction](README.md)
-* [使用流程](useway.md)
-
------
 * [工作积累](work/README.md)
-    * [开发中常用1](work/work1.md)
-    * [开发中常用2](work/work2.md)
-    * [开发中常用3](work/work3.md)
+    * [踩坑记录1](work/work1.md)
+    * [踩坑记录2](work/work2.md)
+    * [踩坑记录3](work/work3.md)
+    * [踩坑记录4](work/work4.md)
+    * [跨域方式](work/crossdomain.md)
+    * [前端协议](work/agreement.md)
     * [权限控制](work/accesscontrol.md)
     * [JS常见的错误类型](work/errorlist.md)
     * [git](work/git.md)
@@ -36,7 +35,7 @@
     * [js常用继承，多继承](javascript/extends.md)
     * [js数据加密](javascript/data-encryption.md)
     * [js对URL编码解码](javascript/encode.md)
-    * [js 数组去重](javascript/unique.md)
+    * [js数组去重](javascript/unique.md)
     * [notice](javascript/notice.md)
     * [模块加载](javascript/moduleupload.md)
     * [CMD/AMD/ES module](javascript/cmd_amd.md)
@@ -46,6 +45,8 @@
     * [set结构](javascript/Set遍历操作.md)
     * [.../reset](javascript/扩展运算符…和rest参数.md)
     * [es6解构赋值](javascript/ES6的结构赋值.md)
+    * [深入挖掘js](javascript/basicconcept.md)
+    * [深入挖掘js2](javascript/v8engine.md)
 * [vue框架](vue/README.md)
     * [采坑记录](vue/questions.md)
     * [采坑记录1](vue/questions1.md)
@@ -60,6 +61,7 @@
     * [vue插件系统](vue/globalvariate.md)
     * [vue地址栏输入URL无效](vue/inputurl.md)
     * [elements使用技巧](vue/elements.md)
+    * [vue实战技巧](vue/skills1.md)
 * [node](node/README.md)
     * [node测试](node/test.md)
     * [Buffer/Stream/fs](node/stream.md)

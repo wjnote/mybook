@@ -15,6 +15,8 @@ $emit 绑定一个自定义事件, 当这个语句被执行时, 就会将参数a
 
 > prop 只可以从上一级组件传递到下一级组件（父子组件），即所谓的单向数据流。而且 prop 只读，不可被修改，所有修改都会失效并警告。
 
+如果prop不能直接使用，可以在data中，用props初始化数据，但是父组件数据变化时，该data属性不会改变（基本属性不会改变，引用类型还是会改变的），此时为了更新data属性，就可以使用**计算属性** 或者使用**监听器**
+
 
 ## 2. $children / $parent
 
@@ -30,15 +32,6 @@ $emit 绑定一个自定义事件, 当这个语句被执行时, 就会将参数a
 <text-document v-bind:name="userName"  v-on:update:name="userName = $event"></text-document>
 <text-document v-bind:name.sync="userName"></text-document>
 
-let Login = Vue.extend({
-	template: `<div> <input v-model="text" /> </div>`,
-	props: ['name'],
-	data(){ return {text: ''}},
-	watch:{ text(newVal){
-		this.$emit("update:name", newVal)
-	}}
-})
-
 <div id="app">
    <login :name.sync="userName"></login>
   {{userName}}
@@ -48,9 +41,28 @@ new Vue({
 	data:{ userName: ''},
 	components: { Login }
 })
+
+let Login = Vue.extend({
+	template: `<div> <input v-model="text" /> </div>`,
+	props: ['name'],
+	data(){ return {text: ''}},
+	watch:{ text(newVal){
+		this.$emit("update:name", newVal)
+	}}
+})
+
 ```
 
 > 上面的代码中  `this.$emit('update:name', newVal)` 表示要更新 name 的值，这样子组件修改了，父组件相应的值也会改变， 使用最上面的2种方式都可以达到效果
+
+作为一个语法糖，就是下面方式的简写，`update:myPropName` 其中 `myPropName` 表示要更新的 `prop` 值。
+
+```javascript
+<text-document>
+	v-bind:title="doc.title"
+	v-on:update:title="doc.title=$event"
+</text-document>
+```
 
 
 
