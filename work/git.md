@@ -141,6 +141,10 @@ $ git push origin :test        // 刚提交到远程的test将被删除，但是
 推送远程仓库：$ git push [remoteName] [localBranchName]
 ```
 
+### Git版本历史
+```
+git log --oneline  将历史记录一行一行的显示
+```
 
 ### 本地删除，再从远程拉取
 有时候本地修改失败了，会直接删除文件，然后再从远端从新下载本文件
@@ -197,6 +201,9 @@ doc/*.txt
 doc/**/*.txt
 ```
 
+
+### Git常见报错
+1. unable to access 'https://github.com/wjnote/mybook.git/': OpenSSL SSL_read: Connection was reset, errno 10054
 
 ---
 - [常用Git命令](https://juejin.im/post/5e0f401f6fb9a047f164fc9f)
