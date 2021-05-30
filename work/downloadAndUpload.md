@@ -114,8 +114,8 @@
 
 前端做文件上传的时候，需要考虑文件类型以及如何处理文件类型的数据
     - 内置文件流接口： Blob 文件流接口定义
-        - 内置文件流对象： File (单文件，继承于接口Blob，可以使用Blob的方法) 和 FileList(多文件集合)
-        - 内置文件流读取对象： FileReader (单文件读取)
+    - 内置文件流对象： File (单文件，继承于接口Blob，可以使用Blob的方法) 和 FileList(多文件集合)
+    - 内置文件流读取对象： FileReader (单文件读取)
 
 
 ### 项目中使用 FormData 来上传
@@ -131,7 +131,7 @@
 ```js
 let formData = new FormData();
 formData.append('name', blobData);
-//  上传图片，问价都是流的形式，需要设置ajax不处理数据，也不设置内容类型
+//  上传图片，文件都是流的形式，需要设置ajax不处理数据，也不设置内容类型
 $.ajax({
   url: '',
   type: 'POST',
