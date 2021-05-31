@@ -203,7 +203,8 @@ doc/**/*.txt
 
 
 ### Git常见报错
-1. unable to access 'https://github.com/wjnote/mybook.git/': OpenSSL SSL_read: Connection was reset, errno 10054
+1. `unable to access 'https://github.com/wjnote/mybook.git/': OpenSSL SSL_read: Connection was reset, errno 10054`
+产生原因一般是因为服务器的SSL证书失效，解决办法就是解除 SSL 验证，再提交。  `git config --global http.sslVerify "false"`
 
 ---
 - [常用Git命令](https://juejin.im/post/5e0f401f6fb9a047f164fc9f)
