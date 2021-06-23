@@ -47,13 +47,15 @@ git add .  # 提交工作区所有文件到暂存区
 git add [dir]  # 开始跟踪一个文件(文件目录)
           # / 把已跟踪的文件放到暂存区 / 合并时把有冲突的文件标记为已解决状态
 git add -A  # 表示stages所有文件，最好不要使用'.'
+
+git add -u  工作区所有被Git跟踪的文件添加到暂存区
 ```
 
 > 撤销
 ```shell
 git rm <filename>  # 删除文件,包括工作区，暂存区都删除
 git rm --cached <filename>  # 删除暂存区文件,工作区保留,并且git之后都不再跟踪该文件
-git reset HEAD <filename>  # 取消暂存区已经暂存的文件
+git reset --hard  # 取消暂存区已经暂存的文件
 git checkout --<filename>  # 撤销上一次对文件的操作
 git stash  # 隐藏当前变更，以便能切换分支
 git stash list  # 查看当前所有的隐藏
@@ -101,12 +103,11 @@ git push origin <tag-name>  # 将某一个标签推送到远程仓库中
 git push origin --tags  # 将本地所有标签推送到远程仓库中
 ```
 
-> 分支管理
-
+### 分支管理
 **分支信息：切换到新分支上时 Git 会重置你的工作目录，使其看起来像回到了你在那个分支上最后一次提交的样子，因为采用的文件快照的方式实现**
 
 ```shell
-查看本地分支：$ git branch  ----默认会展示目前工作在那个分支下）
+查看本地分支：$ git branch  ----默认会展示目前工作在那个分支下
 查看远程分支：$ git branch -r
 创建本地分支：$ git branch [name]  ----注意新分支创建后不会自动切换为当前分支
 切换分支：$ git checkout [name]
@@ -146,6 +147,10 @@ $ git push origin :test        // 刚提交到远程的test将被删除，但是
 推送远程仓库：$ git push [remoteName] [localBranchName]
 ```
 
+### Git版本历史
+```
+git log --oneline  将历史记录一行一行的显示
+```
 
 ### 本地删除，再从远程拉取
 有时候本地修改失败了，会直接删除文件，然后再从远端从新下载本文件
@@ -202,6 +207,10 @@ doc/*.txt
 doc/**/*.txt
 ```
 
+
+### Git常见报错
+1. `unable to access 'https://github.com/wjnote/mybook.git/': OpenSSL SSL_read: Connection was reset, errno 10054`
+产生原因一般是因为服务器的SSL证书失效，解决办法就是解除 SSL 验证，再提交。  `git config --global http.sslVerify "false"`
 
 ---
 - [常用Git命令](https://juejin.im/post/5e0f401f6fb9a047f164fc9f)

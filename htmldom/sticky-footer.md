@@ -33,7 +33,7 @@
    .container {
      min-height: 100%;
      height: auto !important;
-     height: 100%; /*IE6不识别min-height*/
+     min-height: 100%; /*IE6不识别min-height*/
    }
    .section {
      padding-bottom: 60px;
