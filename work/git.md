@@ -44,7 +44,7 @@ git clone [proname]  # 从远端克隆一个项目
 > 提交
 ```shell
 git add .  # 提交工作区所有文件到暂存区
-git add [dir]  # 开始跟踪一个文件(文件目录) 
+git add [dir]  # 开始跟踪一个文件(文件目录)
           # / 把已跟踪的文件放到暂存区 / 合并时把有冲突的文件标记为已解决状态
 git add -A  # 表示stages所有文件，最好不要使用'.'
 ```
@@ -61,7 +61,7 @@ git stash list  # 查看当前所有的隐藏
 
 > 更新文件
 ```shell
-git mv [file-old] [file-new]  # 重命名文件，并将已改名文件提交到暂存区 
+git mv [file-old] [file-new]  # 重命名文件，并将已改名文件提交到暂存区
 ```
 
 > 查看信息
@@ -81,10 +81,10 @@ git commit --amend  # 撤销上一次提交的内容
 ```
 
 > 查看信息
-```shell 
+```shell
 git diff --cached  # 比较暂存区和上一个版本的差异
 git diff [filename] --cached  # 指定文件在暂存区和本地仓库的不同
-git log [-p] [-2] # 查看提交历史 
+git log [-p] [-2] # 查看提交历史
               # -p 表示展开每次提交的差异   -2 表示最近的2次提交
 git log --oneline  # 展示git的日志，每次历史变为一行形式展示
 git log --oneline --decorate  # 可以查看各个分支当前所指的对象
@@ -96,7 +96,7 @@ Git 使用的标签有两种类型：**轻量级的（lightweight）和含附注
 
 ```shell
 git tag  # 列出所有的标签
-git tag [tag-name]  # 打一个标签
+git tag [tag-name]  # 打一个标
 git push origin <tag-name>  # 将某一个标签推送到远程仓库中
 git push origin --tags  # 将本地所有标签推送到远程仓库中
 ```
@@ -112,6 +112,12 @@ git push origin --tags  # 将本地所有标签推送到远程仓库中
 切换分支：$ git checkout [name]
 创建新分支并立即切换到新分支：$ git checkout -b [name]
 查看本地远端所有分支： $ git branch -a
+
+git checkout dev origin/dev
+创建本地分支dev，并且和远程origin/dev分支关联，本地dev分支的初始代码和远程的dev分支代码一样
+
+git push origin dev:dev # 这样远程仓库也有一个dev分支了
+
 
 删除分支：$ git branch -d [name]  ---- -d选项只能删除已经参与了合并的分支，
               对于未有合并的分支是无法删除的。如果想强制删除一个分支，可以使用-D选项
