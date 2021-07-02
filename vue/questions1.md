@@ -81,3 +81,5 @@ element.on('tab(twoTabs)', function(elem){
 
 #### Q: 在组件中如果想在元素上绑定 `data-`类型额属性，然后在方法中获取的对应的属性
 ​	   A : 在元素上绑定事件，然后在事件中获取 `e.target.dataset` 就可以获取到所有绑定的`data-` 属性对象
+
+Q: 数组新数据替换旧数据时，Vue不会更新所有的DOM，怎么实现的

@@ -86,7 +86,7 @@ git commit --amend  # 撤销上一次提交的内容
 ```shell 
 git diff --cached  # 比较暂存区和上一个版本的差异
 git diff [filename] --cached  # 指定文件在暂存区和本地仓库的不同
-git log [-p] [-2] # 查看提交历史 
+git log [-p] [-n2] # 查看提交历史 
               # -p 表示展开每次提交的差异   -2 表示最近的2次提交
 git log --oneline  # 展示git的日志，每次历史变为一行形式展示
 git log --oneline --decorate  # 可以查看各个分支当前所指的对象
