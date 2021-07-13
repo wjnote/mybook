@@ -134,3 +134,11 @@ Vue路由在Android机上有问题，babel问题，安装babel polypill插件解
 4. 对于权限及不确定路由，可以使用`addRoutes()`，可以避免抖动
 5. 使用`computed`替代`watch`，`computed`依赖于data属性的更改，是有缓存的
 6. 通过props传递的值，不要在子组件去更改。开发中，如果直接更改props，一、基本类型的值会报错，二、引用类型的值不会报错，但是不好去追溯数据的更改，很多人不太注意引用类型，可通过computed或watch去更改
+
+
+
+
+
+1.实例化vue时参数的合并策略以及规范。
+2.vue通过Vue.extend方法进行组件参数扩展时的参数合并策略。
+3.vue的mixins字段的参数合并方式。

@@ -82,6 +82,7 @@
     * [css语法](htmldom/cssgrammar.md)
     * [flex布局](htmldom/flex.md)
 * [mobile](mobile/README.md)
+	* [移动爬坑记录](mobile/progress.md)
     * [移动适配方案](mobile/shipei.md)
     * [mobile适配](mobile/mobileAdaptive.md)
     * [mobile-1px](mobile/mobile1px.md)
