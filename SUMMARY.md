@@ -94,6 +94,7 @@
     * [浏览器URL路由](browser/urlrouter.md)
     * [chrome 调试技巧](browser/chromedebug.md)
     * [浏览器存储方案](browser/borwserstorage.md)
+    * [JS内存泄漏](browser/memoryleak.md)
 * [微信开发](wechat/readme.md)
     * [小程序登陆鉴权](wechat/loginauthorization.md)
     * [公众号配置](wechat/publicconfig.md)
@@ -102,4 +103,5 @@
     * [GeoJSON](map/geojson.md)
 * [面试相关](interview/README.md)
     * [面试题采集](interview/question.md)
-
+* [其他杂项](other/README.md)
+		* [包管理工具scoop](other/scoop.md)
