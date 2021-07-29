@@ -28,6 +28,10 @@
     - DOM解析和CSS解析是两个并行的进程，所以这也解释了为什么CSS加载不会阻塞DOM的解析。
     - 然而，由于Render Tree是依赖于DOM Tree和CSSOM Tree的，所以他必须等待到CSSOM Tree构建完成，也就是CSS资源加载完成(或者CSS资源加载失败)后，才能开始渲染。因此，CSS加载是会阻塞Dom的渲染的。
     - 由于js可能会操作之前的Dom节点和css样式，因此浏览器会维持html中css和js的顺序。因此，样式表会在后面的js执行前先加载执行完毕。所以css会阻塞后面js的执行。
+    
+8. `history.go()    histroy.back()`的用法和区别，go(-1)返回上一页，原页面表单中的内容会丢失；back() 返回上一页，原页面表单中的内容会保留，  history.go(-1) :后退 + 刷新。    history.back()： 后退
+
+    
 
 每一轮 Event Loop 都会伴随着渲染吗？
 requestAnimationFrame 在哪个阶段执行，在渲染前还是后？在 microTask 的前还是后？

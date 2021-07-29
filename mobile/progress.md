@@ -83,3 +83,26 @@ document.body.addEventListener('touchmove',function(e){
 ```
 
 > 该方法也会把单个元素左右滑动也禁止掉
+
+#### transform 属性影响 position: fixed 
+
+css规范中有规定：如果元素的 transform 值不为 none，则该元素会生成包含块和层叠上下文。CSS Transforms Module Level 1 不只在手机上，电脑上也一样。除了 fixed 元素会受影响之外，z-index（层叠上下文）值也会受影响。绝对定位元素等和包含块有关的属性都会受到影响。当然如果 transform 元素的 display 值为 inline 时又会有所不同。最简单的解决方法就是 transform 元素内部不能有 absolute、fixed 元素.
+
+
+
+#### 移动开发不同手机弹出数字键盘问题
+
+1. `type=tel`  ios 和 Android的键盘表现差不多
+
+2. `type=number` ios下不是九宫格键盘，输入不方便，并且在旧版Android在输入框后面会有个无用的小尾巴，可以使用`webkit`私有的伪元素fix掉
+
+   ```css
+   input[type=number]::-webkit-inner-spin-button,  
+   input[type=number]::-webkit-outer-spin-button { 
+           -webkit-appearance: none; 
+           appearance: none; 
+           margin: 0; 
+   }
+   ```
+
+3. `pattern` 属性： pattern 用于验证表单输入的内容，在输入框加上pattern可以让前端的验证更加高效，属性值要用正则表达式 `<input type='number' pattern='[0-9]*' />` 输入框只能输入数字

@@ -1,6 +1,6 @@
-# node
+## node
 
-之所以说 Node.js 是单线程，就是因为在接受任务的时候是单线程的，它无需进程/线程切换上下文的成本，非常高效，但它在执行具体任务的时候是多线程的。因为CPU是多核的，
+之所以说 Node.js 是单线程，就是因为在接受任务的时候是单线程的，它无需进程/线程切换上下文的成本，非常高效，但它在执行具体任务的时候是多线程的。因为CPU是多核的
 
 ### node中的全局变量
 
@@ -19,7 +19,7 @@ C:\Users\Administrator> node
 
 
 
-
+### node内存设置
 
 用node来启动项目的前端项目的时候，有时候会提示 JavaScript堆内存不足，`Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory`  在node中通过 JavaScript使用内存时只能使用部分的内存(64位系统下约为1.4G，32位系统下约为1.7G)，如果`webpack`项目比较大的时候就会超过V8对node默认的内存限制大小，解决办法可以使用 
 
