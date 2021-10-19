@@ -1,9 +1,8 @@
 ## Retina 下1px的解决方案
 当逻辑像素是 1px 时，在 DPR 为 2 的 设备上显示为 2px 的物理像素, 在 DPR 为 3 的 设备上显示为 3px 的物理像素
 
-1. 利用CSS的伪元素 `::after + transform `进行缩放，因为伪元素 `::after  ::before` 是独立与当前元素的，可以对其单独缩放而不影响元素本身，下面的这种方式只是针对 `dpr=2`的高清屏
+1. 利用CSS的伪元素 `::after + transform `进行缩放，因为伪元素 `::after  ::before` 是独立与当前元素的，可以对其单独缩放而不影响元素本身，下面的这种方式只是针对 `dpr=2`的高清屏,**这种方式也是一些开源的库使用的方式**
 
-> 这种方式也是一些开源的库使用的方式
 ```html
   <div class="cell border1px"></div>
 
@@ -93,20 +92,25 @@
 ```
 
 
+
 ### 出了上面两种常用的方式还有其他方案
+
 1. 使用图片来模拟1px边框，兼容性最好，灵活性最差，不能改变颜色，长度
 
 2. `viewport` JS可以通过动态的根据设备的 dpr 来改变页面的 meta来正常显示，但是这种只使用一开始就这样设置，会导致页面所有的像素都改变，此时页面的宽度为`750px: iphone6`
-```js
-const dpr = window.devicePixelRatio;
-const meta = document.createElement('meta')
-meta.setAttribute('name','viewport')
-meta.setAttribute('content', `width=device-width, user-scalable=no, initial-scale=${1/dpr}, maximum-scale=${1/dpr}, minimum-scale=${1/dpr}`) // 动态初始缩放、最大缩放、最小缩放比例
-```
-> 但是在国内某些手机上的 device-width 会存在一些误差，导致页面的展示和我们预想的不一致
 
+   ```js
+   const dpr = window.devicePixelRatio;
+   const meta = document.createElement('meta')
+   meta.setAttribute('name','viewport')
+   // 动态初始缩放、最大缩放、最小缩放比例
+   meta.setAttribute('content', `width=device-width, user-scalable=no, initial-scale=${1/dpr}, maximum-scale=${1/dpr}, minimum-scale=${1/dpr}`) 
+   ```
+
+   >  但是在国内某些手机上的 device-width 会存在一些误差，导致页面的展示和我们预想的不一致
 3. [PostCSS Write SVG](https://github.com/jonathantneal/postcss-write-svg)
-我们可以使用postcss插件来完成1px的效果，安装可以查看Github用法（我尝试了一下好像在css文件可以成功，但是在less文件是失败了）
+   我们可以使用postcss插件来完成1px的效果，安装可以查看Github用法（我尝试了一下好像在css文件可以成功，但是在less文件是失败了）
+
 ```less
 // 可以使用 border-image 来实现1px边框
 @svg 1px-border {

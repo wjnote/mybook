@@ -31,9 +31,85 @@
     
 8. `history.go()    histroy.back()`的用法和区别，go(-1)返回上一页，原页面表单中的内容会丢失；back() 返回上一页，原页面表单中的内容会保留，  history.go(-1) :后退 + 刷新。    history.back()： 后退
 
-    
+9. HTML5页面搜索的时候，可以将输入法的回车键变为搜索按钮直接搜索，注意下面的form表单需要添加 action 这个属性 才能实现效果
 
-每一轮 Event Loop 都会伴随着渲染吗？
-requestAnimationFrame 在哪个阶段执行，在渲染前还是后？在 microTask 的前还是后？
-requestIdleCallback 在哪个阶段执行？如何去执行？在渲染前还是后？在 microTask 的前还是后？
-resize、scroll 这些事件是何时去派发的。
+    ```html
+    <form action="javascript:return true;" >
+     <input type="search" id="searchval" placeholder="搜索事项名称" />
+     <input type="text" style="display: none" />
+    </form>
+    ```
+
+    ```js
+    $('#searchval').on('keydown', function (e) {
+      var value = $('#searchval').val().trim();
+      var len = value.length;
+      if (e.keyCode == 13) {
+        getInfo(value);
+      } else if (e.keyCode == 8 && len > 0) {
+        var newValue = value.substring(0, len - 1);
+        $('#searchval').val(newValue);
+      }
+    });
+    // 监听键盘输入的keycode判断输入的键 之前开发的时候有个问题： 输入法的回车键不起效果
+    ```
+
+10. iphoneX 等手机顶部刘海两侧的内容会出现遮挡，开发中可以设置安全区域，填充危险区域，危险区域不做操作和内容展示
+
+    1. 将页面的`<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">`  将`viewport-fit`设置为`cover`
+
+    2. 增加适配层 使用 `safe area inset` 变量
+
+        ```less
+        /* 适配iphoneX 顶部填充  */
+        @supports(top: env(safe-area-inset-top)){
+          body, .header{
+            padding-top: constant(safe-area-inset-top, 40px);
+            padding-top: env(safe-area-inset-top, 40px);
+            padding-top: var(safe-area-inset-top, 40px);
+          }
+        }
+        /* 判断iphonex 将footer的填充 */
+        @supports(bottom: env(safe-area-inset-bottom)){
+          body,.footer{
+            padding-bottom: constant(safe-area-inset-bottom, 20px)
+            padding-bottom: env(safe-area-inset-bottom, 20px)
+            padding-bottom: var(safe-area-inset-bottom, 20px)
+          }
+        }
+        ```
+
+    3. > `safe-area-inset-*`由四个定义了视口边缘内矩形的 `top`, `right`, `bottom` 和 `left` 的环境变量组成，这样可以安全地放入内容，而不会有被非矩形的显示切断的风险。对于矩形视口，例如普通的笔记本电脑显示器，其值等于零。
+
+11. Android手机中，点击输入框会弹出键盘，将页面样式错乱，键盘收起时，未恢复本来页面样式，因为输入法弹出后页面的高度变化了，导致可视区域变小，解决办法主要是通过监听页面的高度变化
+
+     ```javascript
+     // 记录原来的视口高度
+     const originaHeight = document.body.clientHeight || document.documentElement.clientHeight;
+     window.onresize = function(){
+       var resizeHeight = document.documentElement.clientHeight || document.body.clientHeight;
+       if(resizeHeight < originalHeight ){
+         // 恢复内容区域高度
+         // const container = document.getElementById("container")
+         // 例如 container.style.height = originalHeight;
+       }
+     }
+     ```
+
+12. 键盘不能回落问题在微信H5开发中比较常见， 兼容原理，1. 判断版本类型，  2. 更改滚动的可视区域
+
+     ```js
+     // window.scrollTo(x-coord, y-coord)，其中window.scrollTo(0, clientHeight)恢复成原来的视口
+     // 判断是否是微信浏览器
+     const isWechat = window.navigator.userAgent.match(/MicroMessenger\/([\d\.]+)/i);
+     if (!isWechat) return;
+     const wechatVersion = wechatInfo[1];
+     const version = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+     
+      // 如果设备类型为iOS 12+ 和wechat 6.7.4+，恢复成原来的视口
+     if (+wechatVersion.replace(/\./g, '') >= 674 && +version[1] >= 12) {
+       window.scrollTo(0, Math.max(document.body.clientHeight, document.documentElement.clientHeight));
+     }
+     ```
+
+13. 

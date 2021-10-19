@@ -93,3 +93,35 @@ activated 调用时机，第一次进入缓存路由/组件，在`mounted`后面
 12. `activated`:进入缓存组件，进入a的嵌套子组件(如果有的话)。
 13. 执行`beforeRouteEnter`回调函数`next` ,其中可以访问组件实例 this 对象。
 
+
+
+### vue路由实现
+
+hash模式 ，history 模式 ， abstract模式
+
+
+
+**hash模式的特点**
+
+1. 就是指URL后面的#后面的字符，请求的时候不会被包含到HTTP中，只会携带#之前的内容，每次改变hash不会从新请求加载页面
+2. hash 改变会触发 hashchange 事件
+3. hash 改变会被浏览器记录，浏览器的前进和后退都能使用
+4. hash 模式能兼容到IE8
+
+
+
+**history 模式的特点**
+
+1. 页面请求时会带上整个连接，所以需要后台做相应处理，不然会返回404
+2. <img src="./imgs/history-ajax.png" alt="" style="zoom:100%;" />
+3. history 只能兼容到 IE10
+
+
+
+> history 模式我们去掉了 # 号，但是有个问题，就是刷新操作，刷新的时候是请求了后台服务器，所以需要服务器配置路径，否则会404，在hash模式下，路由是修改# 后面的内容，请求的时候不会携带到后台，所以不会出问题
+
+
+
+**abstract模式**
+
+适用于所有的JavaScript环境，例如服务器端和node.js ，如果没有浏览器API，路由将强制进入此模式

@@ -1,6 +1,7 @@
 ### git 学习资料
 
 1. 下载 git 安装文件 [Git 官网](https://git-scm.com/downloads)
+
 2. 使用之前设置一下用户的信息,在命令行输入,如果使用了 global 配置，在本机配置一次就行了，之后会自动去读取
 
    ```shell
@@ -18,12 +19,16 @@
 
    > 上面两种命令是两种不同的情况，第一个是在全新的文件下初始化项目，第二种是在已经存在文件的文件夹中初始化 Git 仓库来版本控制，应该开始跟踪这些文件并提交。
 
+   
+
 4. 往本地暂缓区 仓库里添加文件
+
    - `git add [filename] `将本地文件先添加到暂存区中，被 git 监控，可以快速添加所有文件 `git add .`
    - `git commit -m"xxx"` 将刚刚添加的文件添加注释 这样是单个文件添加不同的注释, 文件并没有被托管到 GitHub 上面
    - `git commit -a -m"xxx"` 如果是一次性提交所有文件并添加注释, 可以直接将所有文件直接添加注释并添加到暂缓区
    - `git remote add origin http://url ` 将本地的仓库关联到远程服务器的某个仓库
    - `git push origin master` 将本地暂缓区的代码上传到服务器，可以选择某个用户上传
+
 5. 提交完成之后，`git log` 可以查看提交信息，用户和提交的文件，后面可以配置参数展示形式
 
 ### git 主要涉及的几个关键点
@@ -147,6 +152,8 @@ $ git push origin :test        // 刚提交到远程的test将被删除，但是
 
 > 我从 master 分支创建了一个 issue5560 分支，做了一些修改后，使用 git push origin master 提交，但是显示的结果却是'Everything up-to-date'，发生问题的原因是 git push origin master 在没有 track 远程分支的本地分支中默认提交的 master 分支，因为 master 分支默认指向了 origin master 分支，这里要使用 git push origin issue5560：master 就可以把 issue5560 推送到远程的 master 分支了。
 
+
+
 ### 远程仓库上的操作命令
 
 ```shell
@@ -232,3 +239,11 @@ doc/**/*.txt
 ---
 
 - [常用 Git 命令](https://juejin.im/post/5e0f401f6fb9a047f164fc9f)
+
+
+
+
+
+
+
+这是添加在window分支上的内容

@@ -24,6 +24,9 @@ gitbook ls-remote # 列出远程可用的gitbook版本
 gitbook fetch 标签/版本号  # 安装对应的gitbook版本
 gitbook update  # 更新到gitbook的最新版本
 gitbook uninstall 2.0.1  # 卸载对应的gitbook版本
+
+# 页面中使用img本地图片的使用方式
+<img src="./imgs/XXXX.png" alt="" style="zoom:100%;" />
 ```
 
 
@@ -96,7 +99,6 @@ GitBook 插件本质上和 Node.js 包一样，因此其安装也分为全局和
 - favicon : 浏览器标签栏的favicon图标,在 pluginsConfig 配置中配置具体的图标路径
 - simple-page-toc : 生成本页目录,需要在文章中插入标签
 - ad ： 在每个页面顶部和底部添加广告或任何自定义内容。
-
 
 ---
 

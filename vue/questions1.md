@@ -83,3 +83,9 @@ element.on('tab(twoTabs)', function(elem){
 ​	   A : 在元素上绑定事件，然后在事件中获取 `e.target.dataset` 就可以获取到所有绑定的`data-` 属性对象
 
 Q: 数组新数据替换旧数据时，Vue不会更新所有的DOM，怎么实现的
+
+
+
+Q: select元素如果`v-model` 表达式的初始值没有匹配任何选项，select元素将被渲染为未选中状态，在iOS中，会使用户无法选择第一个选项，因为在此情况下，iOS不会触发 change 事件，
+
+A: 可以在option的第一个设置默认提示内容 `<option disabled value="">Please select one</option>`

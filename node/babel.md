@@ -1,4 +1,5 @@
-## babel
+
+
 - [babel官网](https://babeljs.io/docs/en/)
 - [babel中文网站](https://www.babeljs.cn/docs/)
 - [babel7升级内容](https://www.w3ctech.com/topic/2150)
@@ -95,6 +96,7 @@ babel可以转化一些新的特性，但是对于新的内置函数（Promise�
     > 此方案有点是简单，可以一次性解决所有兼容问题，缺点是一次性引入了ES6+的所有polyfill，打包体积变大，在现代浏览器会造成浪费资源，其次污染了全局对象，已经被抛弃了
 
 2.  **项目中推荐使用preset-env来按需引入polyfill**
+
 ```js
 module.exports ={
   presets: [
@@ -115,39 +117,46 @@ require('core-js/modules/es6.string.iterator');
 require('core-js/modules/es6.array.from')
 var a = Array.from([1]);
 ```
-    - corejs 是一个给低版本的浏览器提供接口的库，也是polyfill功能实现的核心，此处指定引入的版本，需要下载响应的版本 `yarn add core-js@2`
+```shell
+corejs 是一个给低版本的浏览器提供接口的库，也是polyfill功能实现的核心，此处指定引入的版本，需要下载响应的版本 `yarn add core-js@2`
 
-    > 此方案适合应用级的开发，babel会根据指定的浏览器兼容列表自动引入所有所需的polyfill
+此方案适合应用级的开发，babel会根据指定的浏览器兼容列表自动引入所有所需的polyfill
+```
 
 3. **`plugin-transform-runtime`也提供了一种runtime的polyfill**
+
+   1. 这里的 corejs 和 presets 里设置的 corejs 是不同的，这个地方指定了一个叫做`runtime-corejs`的版本，使用时也需要安装对应的包 `yarn add @babel/runtime-corejs2`
+
+   2. 这种不会污染全局变量,比较适合类库的开发
+
+   3. 除了实例上的方法`(Array.prototype.includes)` 这样的，其他的内置函数`(Promise,Set,Map)`,静态方法`(Array.from, Object.assign)` 都可以采用这种形式
+
+   4. `plugin-transfrom-runtime`提供的`runtime`形式的polyfill都是这种形式
+
+      
+
 ```js
-  module.exports = {
-    plugins: [
-      ['@babel/plugin-transform-runtime'], {
-        corejs: 2
-      }
-    ]
-  }
+module.exports = {
+  plugins: [
+    ['@babel/plugin-transform-runtime'], {
+      corejs: 2
+    }
+  ]
+}
 
-  const a = Array.from([1]);
-  // babel编译后的结果
-  var _interopRequireDefault = require("@babel/runtime-corejs2/helpers/interopRequireDefault")
-  var _from = _interopRequireDefault(require("@babel/runtime-corejs2/core-js/array/from"));
-  var a = (0, _from['default'])([1]);
-  // 此方法并没有改变Array.from 而是创建了一个_from来模拟，这样不会污染全局变量
+const a = Array.from([1]);
+// babel编译后的结果
+var _interopRequireDefault = require("@babel/runtime-corejs2/helpers/interopRequireDefault")
+var _from = _interopRequireDefault(require("@babel/runtime-corejs2/core-js/array/from"));
+var a = (0, _from['default'])([1]);
+// 此方法并没有改变Array.from 而是创建了一个_from来模拟，这样不会污染全局变量
 ```
-    1. 这里的 corejs 和 presets 里设置的 corejs 是不同的，这个地方指定了一个叫做`runtime-corejs`的版本，使用时也需要安装对应的包 `yarn add @babel/runtime-corejs2`
-    2. 这种不会污染全局变量,比较适合类库的开发
-    3. 除了实力上的方法(Array.prototype.includes) 这样的，其他的内置函数(Promise,Set,Map),静态方法(Array.from, Object.assign) 都可以采用这种形式
-    4. `plugin-transfrom-runtime`提供的`runtime`形式的polyfill都是这种形式
-
 
 ---
-### babel配置文件
+### babel 配置文件
 我们现在主要有三种方式来配置babel的使用 `.babelrc  .babelrc.js  babel.config.js`
 
 前两个配置主要是针对文件夹的，即配置文件所在的文件夹及其子文件夹都会运用这个规则，下层配置会覆盖上层配置， 而`babel.config.js`是针对整个项目的，一个项目只有一个放在根目录下面
-
 
 注意1：.babelrc文件放置在项目根目录和babel.config.js效果一致，如果两种类型的配置文件都存在，.babelrc会覆盖babel.config.js的配置。
 注意2：在package.json里面写配置还是创建配置文件都没有什么区别，看个人习惯。react官方脚手架create-react-app创建的react项目babel配置是写在package.json里面的，而vue官方脚手架@vue/cli创建的vue项目，则是通过babel.config.js设置。

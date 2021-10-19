@@ -106,3 +106,38 @@ css规范中有规定：如果元素的 transform 值不为 none，则该元素�
    ```
 
 3. `pattern` 属性： pattern 用于验证表单输入的内容，在输入框加上pattern可以让前端的验证更加高效，属性值要用正则表达式 `<input type='number' pattern='[0-9]*' />` 输入框只能输入数字
+
+
+
+#### 移动手机input手机键盘显示搜索按键
+
+在移动端在输入完成要显示搜索需要满足下面几项 
+
+1.  `input  type='search'`
+2.  放在form中，并且form有action属性 `<form action='.'><input type='search'/> </form>`
+
+如果页面中不设置搜索按钮，而是点击键盘中的搜索时就自动搜索，可以监听输入框的回车事件，比如在 `keypress` 事件监听中，获取 `keyCode` 是否为回车，同时是放在`form`中，点击搜索页面会自动刷新的，我们可以加一个隐藏的`input`来解决，或者使用iframe来解决页面刷新的问题
+
+```html
+<form action='.'>
+  <input id="searchbtn" type="search" />
+  <input type="text" style="display:none; " />
+</form>
+
+<form  action='.' target="framfile" id="form1">
+  <input type="search" placeholder="请输入内容">
+  <iframe name="framfile" style="display: none;" frameborder="0"></iframe>
+</form>
+<!-- 将form的target属性导向到iframe的name上面，这样页面地址就没有改变页面也不会刷新 -->
+```
+
+设置`type=search` 的输入框在获取焦点的时候，默认右边会出现一个小叉叉，删除输入的全部内容，不同浏览器样式不同，这个可以设置css去掉
+
+```css
+input[type='search']::-webkit-search-cancel-button{
+  -webkit-appearance: none;
+}
+```
+
+
+

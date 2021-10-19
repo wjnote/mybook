@@ -14,16 +14,20 @@
   "plugins": [
     "-sharing",
     "splitter",
-    "expandable-chapters-small",
-    "github",
-    "github-buttons",
-    "sharing-plus",
+    "expandable-chapters-small",  // 可扩展导航章节
     "favicon",
-    "back-to-top-button"
+    "back-to-top-button",
+    "simple-page-toc",  // 生成本页目录
+    "page-toc-button"  //  悬浮目录
   ],
   "pluginsConfig": {
-    "github": {
-      "url": "https://github.com/wjnote"
+    "simple-page-toc": {
+        "maxDepth": 3,
+        "skipFirstH1": true
+    },
+    "page-toc-button": {
+      "maxTocDepth": 2,
+      "minTocSize": 2
     },
     "github-buttons": {
       "buttons": [{
