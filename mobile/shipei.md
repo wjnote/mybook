@@ -98,3 +98,64 @@ require('postcss-px-to-viewport')({
   doc.addEventListener('DOMContentLoaded', recalc, false);
 })(document, window);
 ```
+
+
+
+### 适配iphoneX
+
+ihonex 的出现，产生了刘海屏这样的效果，开发移动端有增加了新的难度，为了保证页面的显示效果，我们必须把页面限制在安全范围内，但是不影响整体的效果
+
+#### viewport-fit 
+
+`viewport-fit` 是专门为了适配ihoneX而诞生的一个属性，它用于限制网页如何在安全区域内展示，是`meta`中的`viewport` 的一个属性值，
+
+1. contain  可视窗口完全包含网页内容
+2. cover  网页内容完全覆盖可视窗口
+3. 默认情况下设置为auto  效果和 contain 相同
+
+我们要将顶部和底部合理的摆放在安全区域内，`iOS11`新增了2个css函数 `env  constant` 用于设定安全区域和边界的距离，函数的内部可以是四个常量
+
+- safe-area-inset-left   安全区域距离左边边界的距离
+- safe-area-inset-right   安全区域距离右边边界的距离
+- safe-area-inset-top   安全区域距离上边边界的距离
+- safe-area-inset-bottom   安全区域距离底部边界的距离
+
+**必须要设置了viewport-fit后才能使用这两个函数**
+
+`<meta name="viewport" content="viewport-fit=cover">`
+
+`constant` 在`iOS < 11.2` 的版本中生效   `env` 在`iOS >= 11.2` 版本中生效，我们在设置的时候需要2个都设置
+
+```css
+body{
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+```
+
+
+
+
+
+### 横屏适配
+
+很多视口我们都要对横屏和竖屏显示不同的布局，所以我们需要检测不同场景设定不同的样式，我们一般是设置了屏幕不能旋转
+
+`JavaScript`检测横屏，可以通过`window.orientation` 来获取屏幕旋转的方向
+
+```js
+window.addEventListener('resize', ()=>{
+  if(window.orientation === 180 || window.orientataion===0){
+    // 正常方向或屏幕旋转180读     竖屏
+  }
+  if(window.orientation === 90 || window.orientation === -90){
+    // 屏幕旋转90度   横屏
+  }
+})
+```
+
+```css
+@media screen and (orientation: portrait){ /* 竖屏 */}
+@media screen and (orientation: landscape){ /* 横屏 */}
+```
+

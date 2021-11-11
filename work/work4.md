@@ -112,4 +112,24 @@
      }
      ```
 
-13. 
+13. 函数本身的作用域，**函数本身也是一个值，也有自己的作用域，它的作用域和变量一样，就是其申明时所在的作用域，与其运行时所在的作用域无关;** **函数执行时所在的作用域，是定义时的作用域，而不是调用时所在的作用域。**
+
+     ```js
+     var a = 1;  var x =function(){console.log(a)}
+      function fn(){
+       var a =2;
+       x();
+     }
+     fn()   // 1
+    
+    var m =function(){
+  console.log(b)
+    }
+    function y(m){
+      var b = 2;
+      m();
+    }
+    y(m) // ReferenceError: b is not defined
+     ```
+    
+     
